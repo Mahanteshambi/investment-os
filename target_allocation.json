@@ -1,0 +1,60 @@
+{
+  "_comment": "Target asset allocation for Mahantesh's Investment OS. Edit these % values to adjust strategy. Rebalance tolerance is ±5% per bucket.",
+  "monthly_budget_inr": 400000,
+  "rebalance_tolerance_pct": 5,
+  "last_updated": "2026-04-16",
+
+  "allocation": [
+    {
+      "bucket": "Indian Equity — Large Cap",
+      "target_pct": 40,
+      "monthly_inr": 160000,
+      "rationale": "Core of portfolio. Nifty 50 index gives broad market exposure. Low cost, liquid, tax-efficient after 1 year (LTCG ₹1.25L exempt).",
+      "instruments": ["NSE:NIFTYBEES", "NSE:SETFNIF50"]
+    },
+    {
+      "bucket": "Indian Equity — Mid & Small Cap",
+      "target_pct": 15,
+      "monthly_inr": 60000,
+      "rationale": "Higher growth potential over 5-10yr horizon. Compensated by higher volatility. Acceptable given 30% drawdown tolerance.",
+      "instruments": ["NSE:JUNIORBEES", "NSE:MOM100"]
+    },
+    {
+      "bucket": "Sectoral ETFs (Rotation)",
+      "target_pct": 15,
+      "monthly_inr": 60000,
+      "rationale": "Sector rotation based on FII/DII flows and fundamental analysis. Changes monthly based on SKILL-04 output.",
+      "instruments": ["NSE:BANKBEES", "NSE:ITBEES", "NSE:PHARMABEES", "NSE:CPSEETF", "NSE:PSUBNKBEES"],
+      "active_sector": "BANKBEES",
+      "_note": "Updated monthly by SKILL-04 sector-rotation-analyst"
+    },
+    {
+      "bucket": "Gold",
+      "target_pct": 15,
+      "monthly_inr": 60000,
+      "rationale": "Hedge against INR depreciation, equity drawdowns, and geopolitical risk. Gold has negative correlation with equities in stress events.",
+      "instruments": ["NSE:GOLDBEES"]
+    },
+    {
+      "bucket": "International Equity",
+      "target_pct": 10,
+      "monthly_inr": 40000,
+      "rationale": "Geographic diversification. US tech exposure. Hedge against India-specific risks. 10% is RBI LRS-compliant without complication.",
+      "instruments": ["NSE:ICICIB22"],
+      "_note": "ICICIB22 tracks Nasdaq 100. For direct US stocks use Vested account."
+    },
+    {
+      "bucket": "Debt / Liquid",
+      "target_pct": 5,
+      "monthly_inr": 20000,
+      "rationale": "Emergency buffer within investable portfolio. Liquid ETF earns ~6-7% with daily liquidity. Not the same as emergency fund.",
+      "instruments": ["NSE:LIQUIDBEES", "NSE:LIQUIDCASE"]
+    }
+  ],
+
+  "excluded_from_allocation": {
+    "_comment": "These existing assets are NOT included in the ₹4L/month allocation. They are tracked separately.",
+    "assets": ["FD", "PPF", "PF", "Savings Account", "RD"],
+    "reason": "Long-duration, illiquid, or guaranteed-return instruments. Tracked in Google Drive sheet. FDs redirected to equity allocation at maturity."
+  }
+}

@@ -1,0 +1,124 @@
+{
+  "_comment": "Whitelist of instruments Claude is allowed to buy. Any order outside this list requires explicit Mahantesh approval. All are NSE-listed ETFs — liquid, low-cost, CNC only.",
+  "last_updated": "2026-04-16",
+
+  "instruments": [
+    {
+      "symbol": "NSE:NIFTYBEES",
+      "token": 2707457,
+      "name": "Nippon India ETF Nifty 50 BeES",
+      "bucket": "Indian Equity — Large Cap",
+      "expense_ratio_pct": 0.04,
+      "tracks": "Nifty 50",
+      "approved": true
+    },
+    {
+      "symbol": "NSE:SETFNIF50",
+      "token": 2605057,
+      "name": "SBI ETF Nifty 50",
+      "bucket": "Indian Equity — Large Cap",
+      "expense_ratio_pct": 0.07,
+      "tracks": "Nifty 50",
+      "approved": true
+    },
+    {
+      "symbol": "NSE:JUNIORBEES",
+      "token": 2800385,
+      "name": "Nippon India ETF Nifty Next 50",
+      "bucket": "Indian Equity — Mid & Small Cap",
+      "expense_ratio_pct": 0.19,
+      "tracks": "Nifty Next 50",
+      "approved": true
+    },
+    {
+      "symbol": "NSE:MOM100",
+      "token": 5484289,
+      "name": "Nippon India ETF Nifty 100 Equal Weight",
+      "bucket": "Indian Equity — Mid & Small Cap",
+      "expense_ratio_pct": 0.35,
+      "tracks": "Nifty 100 Equal Weight",
+      "approved": true
+    },
+    {
+      "symbol": "NSE:BANKBEES",
+      "token": 2928385,
+      "name": "Nippon India ETF Bank BeES",
+      "bucket": "Sectoral — Banking",
+      "expense_ratio_pct": 0.18,
+      "tracks": "Nifty Bank",
+      "approved": true
+    },
+    {
+      "symbol": "NSE:ITBEES",
+      "token": 4885505,
+      "name": "Nippon India ETF Nifty IT",
+      "bucket": "Sectoral — IT",
+      "expense_ratio_pct": 0.15,
+      "tracks": "Nifty IT",
+      "approved": true
+    },
+    {
+      "symbol": "NSE:PHARMABEES",
+      "token": 1273089,
+      "name": "Nippon India ETF Nifty Pharma",
+      "bucket": "Sectoral — Pharma",
+      "expense_ratio_pct": 0.37,
+      "tracks": "Nifty Pharma",
+      "approved": true
+    },
+    {
+      "symbol": "NSE:CPSEETF",
+      "token": 595969,
+      "name": "Nippon India ETF CPSE",
+      "bucket": "Sectoral — PSU / CPSE",
+      "expense_ratio_pct": 0.01,
+      "tracks": "Nifty CPSE",
+      "approved": true
+    },
+    {
+      "symbol": "NSE:PSUBNKBEES",
+      "token": 3848193,
+      "name": "Nippon India ETF PSU Bank BeES",
+      "bucket": "Sectoral — PSU Banking",
+      "expense_ratio_pct": 0.49,
+      "tracks": "Nifty PSU Bank",
+      "approved": true
+    },
+    {
+      "symbol": "NSE:GOLDBEES",
+      "token": 3693569,
+      "name": "Nippon India ETF Gold BeES",
+      "bucket": "Gold",
+      "expense_ratio_pct": 0.82,
+      "tracks": "Domestic gold price",
+      "approved": true
+    },
+    {
+      "symbol": "NSE:ICICIB22",
+      "token": 133633,
+      "name": "ICICI Prudential Nasdaq 100 ETF",
+      "bucket": "International Equity",
+      "expense_ratio_pct": 0.35,
+      "tracks": "Nasdaq 100",
+      "approved": true
+    },
+    {
+      "symbol": "NSE:LIQUIDBEES",
+      "token": 2815745,
+      "name": "Nippon India ETF Liquid BeES",
+      "bucket": "Debt / Liquid",
+      "expense_ratio_pct": 0.69,
+      "tracks": "Tri-Party Repo overnight rate",
+      "approved": true,
+      "_note": "Pays daily dividend as units. Good for parking cash."
+    }
+  ],
+
+  "requires_approval_before_buying": [
+    "Any individual stock (not an ETF)",
+    "Any F&O instrument",
+    "Any instrument not in this list",
+    "Any instrument with AUM < ₹500 crore",
+    "Any ETF with expense ratio > 1%"
+  ]
+}

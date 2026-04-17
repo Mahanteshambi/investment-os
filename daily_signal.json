@@ -1,0 +1,210 @@
+{
+  "date": "2026-04-17",
+  "generated_at": "08:00 MYT",
+  "data_as_of": "16-Apr-2026",
+
+  "fii_net_crore": 382.36,
+  "dii_net_crore": -3427.75,
+  "fii_stance": "BUYER",
+  "dii_stance": "SELLER",
+  "fii_stance_change": "FII BUYER for 2nd day (+382 Cr after +666 Cr on Apr 15). DII heavy seller -3427 Cr (profit booking).",
+
+  "global_signal": "RISK-ON",
+  "global_signal_reason": "FII sustained buying two days straight. All ETFs above 20DMA. Nasdaq proxy (ICICIB22) at monthly highs. DII selling = institutional profit booking, not panic signal.",
+
+  "instrument_analysis": {
+    "NIFTYBEES": {
+      "ltp": 273.95,
+      "month_open": 257.45,
+      "dip_score_pct": -6.41,
+      "dma_20": 264.0,
+      "momentum": "BULLISH",
+      "volume_ratio": 0.69,
+      "signal": "BUY",
+      "signal_reason": "Final 8 days — mandatory deployment. Price +6.4% from month open, above DMA20. No dip, deploying to pace."
+    },
+    "GOLDBEES": {
+      "ltp": 125.61,
+      "month_open": 123.37,
+      "dip_score_pct": -1.82,
+      "dma_20": 121.59,
+      "momentum": "BULLISH",
+      "volume_ratio": null,
+      "signal": "BUY",
+      "signal_reason": "Gold trending up. Best relative value among ETFs today (only -1.82% from month open). BULLISH above DMA20."
+    },
+    "JUNIORBEES": {
+      "ltp": 746.16,
+      "month_open": 669.66,
+      "dip_score_pct": -11.41,
+      "dma_20": 693.8,
+      "momentum": "BULLISH",
+      "volume_ratio": null,
+      "signal": "BUY",
+      "signal_reason": "Strong mid-cap rally +11.4% from month open. Well above DMA20. Final week deployment."
+    },
+    "BANKBEES": {
+      "ltp": 577.58,
+      "month_open": 533.42,
+      "dip_score_pct": -8.29,
+      "dma_20": 553.5,
+      "momentum": "BULLISH",
+      "volume_ratio": null,
+      "signal": "BUY",
+      "signal_reason": "Active sector (BANKBEES, assumed score 6 = half allocation). FII buying favours banking. BULLISH."
+    },
+    "ICICIB22": {
+      "ltp": 123.88,
+      "month_open": 116.65,
+      "dip_score_pct": -6.20,
+      "dma_20": 118.28,
+      "momentum": "BULLISH",
+      "volume_ratio": null,
+      "signal": "BUY",
+      "signal_reason": "Nasdaq proxy at monthly high. US tech recovering. BULLISH above DMA20."
+    },
+    "LIQUIDBEES": {
+      "ltp": 1000.0,
+      "month_open": 1000.0,
+      "dip_score_pct": 0,
+      "dma_20": 1000.0,
+      "momentum": "STABLE",
+      "signal": "BUY",
+      "signal_reason": "Debt floor allocation — deploy minimum."
+    }
+  },
+
+  "sector_allocation_rule": "half",
+  "sector_allocation_reason": "sector_rotation.json not found — defaulting BANKBEES score 6. Half allocation: ₹30,000/month BANKBEES + ₹30,000 redirected to NIFTYBEES.",
+
+  "buy_recommendations": [
+    {
+      "rank": 1,
+      "symbol": "NSE:NIFTYBEES",
+      "units": 88,
+      "gtt_trigger_price": 272.60,
+      "gtt_limit_price": 276.70,
+      "est_total_inr": 23989,
+      "platform": "Zerodha Kite (CNC)",
+      "bucket": "Large Cap",
+      "signal": "BUY",
+      "why": "Final 8 days full deployment. Includes ₹30K/month sector redirect. FII buying. BULLISH."
+    },
+    {
+      "rank": 2,
+      "symbol": "NSE:GOLDBEES",
+      "units": 60,
+      "gtt_trigger_price": 124.98,
+      "gtt_limit_price": 126.85,
+      "est_total_inr": 7499,
+      "platform": "Zerodha Kite (CNC)",
+      "bucket": "Gold",
+      "signal": "BUY",
+      "why": "Best relative value today (-1.82% from month open). Risk-on, gold still near highs."
+    },
+    {
+      "rank": 3,
+      "symbol": "NSE:JUNIORBEES",
+      "units": 10,
+      "gtt_trigger_price": 742.43,
+      "gtt_limit_price": 753.57,
+      "est_total_inr": 7424,
+      "platform": "Zerodha Kite (CNC)",
+      "bucket": "Mid/Small Cap",
+      "signal": "BUY",
+      "why": "Strong uptrend. Final week deployment."
+    },
+    {
+      "rank": 4,
+      "symbol": "NSE:BANKBEES",
+      "units": 7,
+      "gtt_trigger_price": 574.69,
+      "gtt_limit_price": 583.31,
+      "est_total_inr": 4023,
+      "platform": "Zerodha Kite (CNC)",
+      "bucket": "Sector (Banking)",
+      "signal": "BUY",
+      "why": "Half-bucket (score 6 assumed). FII flows favour banking sector."
+    },
+    {
+      "rank": 5,
+      "symbol": "NSE:ICICIB22",
+      "units": 20,
+      "gtt_trigger_price": 123.26,
+      "gtt_limit_price": 125.11,
+      "est_total_inr": 2465,
+      "platform": "Zerodha Kite (CNC)",
+      "bucket": "International",
+      "signal": "BUY",
+      "why": "Nasdaq proxy recovering. Deploy half of international bucket here."
+    },
+    {
+      "rank": 6,
+      "symbol": "NSE:LIQUIDBEES",
+      "units": 2,
+      "gtt_trigger_price": 995.00,
+      "gtt_limit_price": 1009.93,
+      "est_total_inr": 1990,
+      "platform": "Zerodha Kite (CNC)",
+      "bucket": "Debt/Liquid",
+      "signal": "BUY",
+      "why": "Debt floor minimum deployment."
+    },
+    {
+      "rank": 7,
+      "symbol": "Motilal Oswal Nasdaq 100 FoF",
+      "units": null,
+      "gtt_trigger_price": null,
+      "gtt_limit_price": null,
+      "est_total_inr": 2500,
+      "platform": "Zerodha Coin (manual)",
+      "bucket": "International",
+      "signal": "BUY",
+      "why": "Second half of international bucket via Coin MF."
+    }
+  ],
+
+  "hold_list": [
+    { "symbol": "NSE:ITBEES", "reason": "Not in active allocation. Held (1500 units +7.8%). Hold." },
+    { "symbol": "NSE:PHARMABEES", "reason": "Not in active allocation. Held (2000 units -0.1%). Hold." },
+    { "symbol": "NSE:MOM100", "reason": "Not in active allocation this month." }
+  ],
+
+  "exit_alerts": [],
+
+  "trailing_stop_updates": [
+    {
+      "symbol": "NSE:TMCV",
+      "action": "RATCHET",
+      "old_stop": 400,
+      "new_stop": 407,
+      "reason": "New high 442 (prev peak 435.2). New stop = 442 * 0.92 = 406.6 → 407. Update GTT sell order.",
+      "gtt_sell_trigger": 407,
+      "gtt_sell_limit": 399,
+      "tax_note": "TMCV held since ~260. LTCG applies (>1yr holding assumed). Gain ~69.5%."
+    }
+  ],
+
+  "trailing_stops_status": [
+    { "symbol": "AXISBANK", "entry": 755, "peak": 1355.5, "stop": 1247, "current": 1349.6, "pnl_pct": 78.8, "distance_pct": 7.6, "status": "SAFE" },
+    { "symbol": "ICICIBANK", "entry": 731, "peak": 1348.1, "stop": 1240, "current": 1345.5, "pnl_pct": 84.1, "distance_pct": 7.8, "status": "SAFE" },
+    { "symbol": "RELIANCE", "entry": 962.32, "peak": 1344.25, "stop": 1237, "current": 1343.3, "pnl_pct": 39.6, "distance_pct": 7.9, "status": "SAFE" },
+    { "symbol": "TMCV", "entry": 260.76, "peak": 442, "stop": 407, "current": 442, "pnl_pct": 69.5, "distance_pct": 7.9, "status": "SAFE — STOP RATCHETED UP" }
+  ],
+
+  "budget_status": {
+    "total_budget_inr": 400000,
+    "deployed_inr": 0,
+    "remaining_inr": 400000,
+    "today_recommendation_kite_inr": 47390,
+    "today_recommendation_coin_inr": 2500,
+    "today_recommendation_total_inr": 49890,
+    "daily_target_inr": 50000,
+    "trading_days_remaining": 8,
+    "pace": "BEHIND",
+    "pace_note": "0% deployed with 8 days left. Final week — deploy ₹50,000/day to complete April budget.",
+    "kite_cash_available_inr": 254534,
+    "kite_cash_covers_days": 5,
+    "kite_cash_warning": "Kite ₹254,534 covers ~5 days (₹45K/day). Transfer ₹95,000+ to Kite for final 3 days (Apr 23-30)."
+  }
+}

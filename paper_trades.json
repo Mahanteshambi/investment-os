@@ -1,0 +1,221 @@
+{
+  "account": {
+    "broker": "Zerodha Kite (Paper Trading Simulation)",
+    "user_id": "[KITE_ACCOUNT_ID]",
+    "simulated_capital": 54534.70,
+    "available_capital": 49520.82,
+    "deployed_capital": 5013.88,
+    "currency": "INR"
+  },
+
+  "last_analysis_run": "2026-04-13",
+  "data_sources": {
+    "fii_dii": "NSE India API (nseindia.com/api/fiidiiTradeReact)",
+    "price_history": "Zerodha Kite Historical Data API",
+    "live_prices": "Zerodha Kite LTP API"
+  },
+
+  "todays_market_signal": {
+    "date": "2026-04-13",
+    "fii_net_crore": -1983.18,
+    "dii_net_crore": 2432.30,
+    "combined_net_crore": 449.12,
+    "fii_stance": "SELLER",
+    "dii_stance": "BUYER",
+    "market_mood": "DII absorbing FII selling — cautious but domestic buying support present"
+  },
+
+  "instrument_analysis": [
+    {
+      "symbol": "NSE:GOLDBEES",
+      "name": "Nippon India ETF Nifty 50 BeES",
+      "type": "Gold ETF",
+      "instrument_token": 3693569,
+      "signal": "STRONG BUY",
+      "confidence": "HIGH",
+      "reasons": [
+        "Consistent uptrend: +3.86% over 14 trading days (119.29 → 123.89)",
+        "Volume spike today: 66.5M units — highest in entire 14-day period, signals institutional accumulation",
+        "Safe haven demand rising while FII selling equities",
+        "Gold acting as hedge against market uncertainty"
+      ],
+      "price_history_14d": {
+        "start": 119.29,
+        "low": 117.53,
+        "high": 124.39,
+        "current_ltp": 123.76
+      },
+      "action": "BUY"
+    },
+    {
+      "symbol": "NSE:BANKBEES",
+      "name": "Nippon India ETF Bank BeES",
+      "type": "Sectoral ETF (Banking)",
+      "instrument_token": 2928385,
+      "signal": "MODERATE BUY",
+      "confidence": "MEDIUM",
+      "reasons": [
+        "Strong recovery from lows: +10% from 520.90 (Mar 30) to 573 today",
+        "High volume on Apr 8 (3.26M vs avg 1.5M) — DII accumulation event",
+        "DII net buyers today supports banking sector",
+        "Headwind: FII still net sellers, may create short-term dips"
+      ],
+      "price_history_14d": {
+        "start": 553.29,
+        "low": 520.90,
+        "high": 575.71,
+        "current_ltp": 572.79
+      },
+      "action": "BUY"
+    },
+    {
+      "symbol": "NSE:NIFTYBEES",
+      "name": "Nippon India ETF Nifty 50 BeES",
+      "type": "Index ETF (Nifty 50)",
+      "instrument_token": 2707457,
+      "signal": "WATCH",
+      "confidence": "LOW",
+      "reasons": [
+        "Price recovering (+6.5% from low) but FII still net sellers",
+        "Need 3 consecutive days of FII net buying before triggering",
+        "DII buying is positive but insufficient alone for long-term signal",
+        "Wait for confirmation"
+      ],
+      "price_history_14d": {
+        "start": 264.06,
+        "low": 253.44,
+        "high": 271.95,
+        "current_ltp": 269.52
+      },
+      "action": "HOLD — monitor FII streak"
+    }
+  ],
+
+  "active_positions": [
+    {
+      "id": "PT-001",
+      "symbol": "NSE:GOLDBEES",
+      "type": "PAPER TRADE",
+      "order_type": "MARKET",
+      "product": "CNC",
+      "side": "BUY",
+      "quantity": 22,
+      "entry_price": 123.76,
+      "total_cost": 2722.72,
+      "entry_date": "2026-04-13",
+      "current_ltp": 123.76,
+      "unrealised_pnl": 0.00,
+      "unrealised_pnl_pct": "0.00%",
+      "rules": {
+        "FLOOR": {
+          "description": "Stop loss — sell all if price drops to floor",
+          "trigger_price": 115.10,
+          "calculated_as": "Entry 123.76 - 7% = 115.10",
+          "order_type": "GTT SL",
+          "status": "ACTIVE"
+        },
+        "TRAILING_FLOOR": {
+          "description": "Move stop loss up once price rises 10%; then ratchet every 5% climb",
+          "activates_at": 136.14,
+          "calculated_as": "Entry 123.76 + 10% = 136.14",
+          "current_stop": 115.10,
+          "floor_never_goes_down": true,
+          "status": "MONITORING"
+        },
+        "LADDER_IN": [
+          {
+            "trigger_price": 118.00,
+            "buy_quantity": 11,
+            "description": "Buy 11 more units if gold dips to 118"
+          },
+          {
+            "trigger_price": 113.00,
+            "buy_quantity": 11,
+            "description": "Buy 11 more units if gold dips to 113"
+          }
+        ]
+      }
+    },
+    {
+      "id": "PT-002",
+      "symbol": "NSE:BANKBEES",
+      "type": "PAPER TRADE",
+      "order_type": "MARKET",
+      "product": "CNC",
+      "side": "BUY",
+      "quantity": 4,
+      "entry_price": 572.79,
+      "total_cost": 2291.16,
+      "entry_date": "2026-04-13",
+      "current_ltp": 572.79,
+      "unrealised_pnl": 0.00,
+      "unrealised_pnl_pct": "0.00%",
+      "rules": {
+        "FLOOR": {
+          "description": "Stop loss — sell all if price drops to floor",
+          "trigger_price": 532.69,
+          "calculated_as": "Entry 572.79 - 7% = 532.69",
+          "order_type": "GTT SL",
+          "status": "ACTIVE"
+        },
+        "TRAILING_FLOOR": {
+          "description": "Move stop loss up once price rises 10%; then ratchet every 5% climb",
+          "activates_at": 630.07,
+          "calculated_as": "Entry 572.79 + 10% = 630.07",
+          "current_stop": 532.69,
+          "floor_never_goes_down": true,
+          "status": "MONITORING"
+        },
+        "LADDER_IN": [
+          {
+            "trigger_price": 545.00,
+            "buy_quantity": 2,
+            "description": "Buy 2 more units if BankBees dips to 545"
+          },
+          {
+            "trigger_price": 520.00,
+            "buy_quantity": 2,
+            "description": "Buy 2 more units if BankBees dips to 520"
+          }
+        ]
+      }
+    }
+  ],
+
+  "watchlist": [
+    {
+      "symbol": "NSE:NIFTYBEES",
+      "reason": "Waiting for FII net buying streak of 3+ consecutive days",
+      "fii_consecutive_buy_days": 0,
+      "trigger_at": 3
+    }
+  ],
+
+  "closed_positions": [],
+
+  "trade_log": [
+    {
+      "timestamp": "2026-04-13T16:00:00+05:30",
+      "action": "ANALYSIS_RUN",
+      "note": "Dry run #1 — paper trades simulated. FII net seller (-1983 Cr), DII net buyer (+2432 Cr). Signals generated: GOLDBEES (Strong Buy), BANKBEES (Moderate Buy), NIFTYBEES (Watch)."
+    },
+    {
+      "timestamp": "2026-04-13T16:00:01+05:30",
+      "action": "PAPER_BUY",
+      "symbol": "NSE:GOLDBEES",
+      "quantity": 22,
+      "price": 123.76,
+      "value": 2722.72,
+      "note": "Simulated. Not live. Awaiting user confirmation to go live."
+    },
+    {
+      "timestamp": "2026-04-13T16:00:02+05:30",
+      "action": "PAPER_BUY",
+      "symbol": "NSE:BANKBEES",
+      "quantity": 4,
+      "price": 572.79,
+      "value": 2291.16,
+      "note": "Simulated. Not live. Awaiting user confirmation to go live."
+    }
+  ]
+}
