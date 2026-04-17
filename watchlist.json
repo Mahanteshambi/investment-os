@@ -1,0 +1,23 @@
+{
+  "_comment": "Instruments monitored weekly by SKILL-02. Populated from approved_instruments.json. Updated by SKILL-04 when sector rotation changes.",
+  "last_updated": "2026-04-17",
+
+  "core_always_watch": [
+    { "symbol": "NSE:NIFTYBEES", "token": 2707457, "bucket": "Large Cap", "priority": 1 },
+    { "symbol": "NSE:GOLDBEES",  "token": 3693569, "bucket": "Gold",      "priority": 1 },
+    { "symbol": "NSE:JUNIORBEES","token": 2800385, "bucket": "Mid Cap",   "priority": 2 },
+    { "symbol": "NSE:ICICIB22",  "token": 133633,  "bucket": "Intl",      "priority": 2 }
+  ],
+
+  "sector_rotation_watch": [
+    { "symbol": "NSE:BANKBEES",   "token": 2928385, "sector": "Banking", "current_score": 5.6, "decision": "HOLD" },
+    { "symbol": "NSE:ITBEES",     "token": 4885505, "sector": "IT",      "current_score": 2.9, "decision": "AVOID — STOP NEW BUYS" },
+    { "symbol": "NSE:PHARMABEES", "token": 1273089, "sector": "Pharma",  "current_score": 7.9, "decision": "BUY (backup)" },
+    { "symbol": "NSE:CPSEETF",    "token": 595969,  "sector": "PSU",     "current_score": 7.8, "decision": "BUY (backup)" },
+    { "symbol": "NSE:PSUBNKBEES", "token": 3848193, "sector": "PSU Bank","current_score": 8.4, "decision": "BUY — ACTIVE SECTOR" },
+    { "symbol": "NSE:MOM100",     "token": 5484289, "sector": "Momentum","current_score": null, "decision": "NOT SCORED" }
+  ],
+
+  "active_sector_etf": "NSE:PSUBNKBEES",
+  "_note": "Updated 2026-04-17 by SKILL-04. Rotated FROM BANKBEES TO PSUBNKBEES for April 2026."
+}

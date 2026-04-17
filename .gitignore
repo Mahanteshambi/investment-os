@@ -1,0 +1,9 @@
+# Local Claude settings (machine-specific permissions)
+.claude/
+
+# macOS
+.DS_Store
+
+# Sensitive runtime data (optional — remove lines below if you want these tracked)
+# paper_trades.json
+# portfolio_state.json

@@ -1,0 +1,136 @@
+{
+  "_comment": "Master state file. Updated by SKILL-01 on 2026-04-16.",
+  "last_updated": "2026-04-16",
+  "mode": "advisory",
+
+  "monthly_budget": {
+    "total_inr": 400000,
+    "month": "2026-04",
+    "deployed_inr": 0,
+    "remaining_inr": 400000,
+    "trading_days_total": 20,
+    "trading_days_elapsed": 12,
+    "trading_days_remaining": 8,
+    "daily_pacing_target_inr": 50000,
+    "full_deploy_deadline": "2026-04-30",
+    "pace_status": "BEHIND — deploy ₹50,000/day across all platforms for 8 remaining days",
+    "bucket_deployed": {
+      "large_cap_inr": 0,
+      "mid_small_inr": 0,
+      "sector_inr": 0,
+      "gold_inr": 0,
+      "international_inr": 0,
+      "debt_liquid_inr": 0
+    },
+    "bucket_target_inr": {
+      "large_cap_inr": 160000,
+      "mid_small_inr": 60000,
+      "sector_inr": 60000,
+      "gold_inr": 60000,
+      "international_inr": 40000,
+      "debt_liquid_inr": 20000
+    }
+  },
+
+  "kite_account": {
+    "user_id": "YZ7150",
+    "available_cash_inr": 254534.70,
+    "holdings_value_inr": 463419,
+    "total_equity_inr": 717954,
+    "last_synced": "2026-04-16"
+  },
+
+  "overall_portfolio": {
+    "_note": "All assets, all platforms. Mahantesh + Shilpa combined.",
+    "total_invested_inr": 4465044,
+    "total_current_inr": 5005528,
+    "total_pnl_inr": 540484,
+    "total_pnl_pct": 12.1,
+    "mahantesh_investable_inr": 1761837,
+    "shilpa_investable_inr": 2107279,
+    "combined_investable_inr": 3869116,
+    "locked_assets_inr": 4145518,
+    "last_synced": "2026-04-16"
+  },
+
+  "allocation_snapshot": {
+    "_note": "Mahantesh investable portfolio only (₹17.6L). Excludes FD, PPF, PF, Savings.",
+    "total_investable_inr": 1761837,
+    "large_cap_etf_inr": 73918,
+    "large_cap_etf_pct": 4.2,
+    "mid_small_etf_inr": 84941,
+    "mid_small_etf_pct": 4.8,
+    "sectoral_etf_inr": 98210,
+    "sectoral_etf_pct": 5.6,
+    "gold_etf_inr": 87542,
+    "gold_etf_pct": 5.0,
+    "international_inr": 187608,
+    "international_pct": 10.7,
+    "debt_liquid_inr": 2000,
+    "debt_liquid_pct": 0.1,
+    "active_mf_coin_groww_inr": 856276,
+    "active_mf_pct": 48.6,
+    "individual_stocks_kite_inr": 116808,
+    "individual_stocks_pct": 6.6,
+    "kite_cash_inr": 254534,
+    "kite_cash_pct": 14.4
+  },
+
+  "kite_holdings_detail": [
+    { "symbol": "NIFTYBEES", "qty": 270, "avg": 262.75, "ltp": 273.77, "value": 73918, "pnl_pct": 4.2, "bucket": "Large Cap ETF", "trailing_stop": null },
+    { "symbol": "JUNIORBEES", "qty": 115, "avg": 696.29, "ltp": 738.62, "value": 84941, "pnl_pct": 6.1, "bucket": "Mid/Small ETF", "trailing_stop": null },
+    { "symbol": "ITBEES", "qty": 1500, "avg": 32.23, "ltp": 34.74, "value": 52110, "pnl_pct": 7.8, "bucket": "Sectoral ETF - IT", "trailing_stop": null },
+    { "symbol": "PHARMABEES", "qty": 2000, "avg": 23.07, "ltp": 23.05, "value": 46100, "pnl_pct": -0.1, "bucket": "Sectoral ETF - Pharma", "trailing_stop": null },
+    { "symbol": "GOLDBEES", "qty": 700, "avg": 116.96, "ltp": 125.06, "value": 87542, "pnl_pct": 6.9, "bucket": "Gold ETF", "trailing_stop": null },
+    { "symbol": "LIQUIDBEES", "qty": 2, "avg": 542.06, "ltp": 1000.01, "value": 2000, "pnl_pct": 84.5, "bucket": "Debt/Liquid ETF", "trailing_stop": null },
+    { "symbol": "AXISBANK", "qty": 10, "avg": 755.00, "ltp": 1355.5, "value": 13555, "pnl_pct": 79.5, "bucket": "Individual Stock - Banking", "trailing_stop": 1247 },
+    { "symbol": "ICICIBANK", "qty": 10, "avg": 731.00, "ltp": 1348.1, "value": 13481, "pnl_pct": 84.4, "bucket": "Individual Stock - Banking", "trailing_stop": 1240 },
+    { "symbol": "HDFCBANK", "qty": 16, "avg": 841.00, "ltp": 809.9, "value": 12958, "pnl_pct": -3.7, "bucket": "Individual Stock - Banking", "trailing_stop": null },
+    { "symbol": "KOTAKBANK", "qty": 40, "avg": 348.65, "ltp": 382.4, "value": 15296, "pnl_pct": 9.7, "bucket": "Individual Stock - Banking", "trailing_stop": null },
+    { "symbol": "HINDUNILVR", "qty": 6, "avg": 2479.00, "ltp": 2157.6, "value": 12946, "pnl_pct": -12.9, "bucket": "Individual Stock - FMCG", "trailing_stop": null },
+    { "symbol": "RELIANCE", "qty": 22, "avg": 962.32, "ltp": 1344.25, "value": 29574, "pnl_pct": 39.7, "bucket": "Individual Stock - Diversified", "trailing_stop": 1237 },
+    { "symbol": "TMCV", "qty": 43, "avg": 260.76, "ltp": 435.2, "value": 18714, "pnl_pct": 66.9, "bucket": "Individual Stock - Auto/CV", "trailing_stop": 400 },
+    { "symbol": "TVSMNCRPS", "qty": 28, "avg": 0, "ltp": 10.14, "value": 284, "pnl_pct": null, "bucket": "Bond/Preference Share", "trailing_stop": null }
+  ],
+
+  "trailing_stops": {
+    "_note": "Set at -8% from current price for positions with >15% gain. Ratchet up as price rises.",
+    "positions": [
+      { "symbol": "AXISBANK", "entry": 755, "peak": 1355.5, "stop": 1247, "current": 1355.5, "pnl_pct": 79.5, "status": "ACTIVE - monitor" },
+      { "symbol": "ICICIBANK", "entry": 731, "peak": 1348.1, "stop": 1240, "current": 1348.1, "pnl_pct": 84.4, "status": "ACTIVE - monitor" },
+      { "symbol": "RELIANCE", "entry": 962.32, "peak": 1344.25, "stop": 1237, "current": 1344.25, "pnl_pct": 39.7, "status": "ACTIVE - monitor" },
+      { "symbol": "TMCV", "entry": 260.76, "peak": 435.2, "stop": 400, "current": 435.2, "pnl_pct": 66.9, "status": "ACTIVE - monitor" }
+    ]
+  },
+
+  "signals": {
+    "fii_stance": "SELLER",
+    "dii_stance": "BUYER",
+    "last_fii_net_crore": -1983.18,
+    "last_dii_net_crore": 2432.30,
+    "active_sector_etf": "NSE:BANKBEES",
+    "active_sector_score": null,
+    "dip_candidates": ["NSE:GOLDBEES", "NSE:BANKBEES", "NSE:NIFTYBEES"],
+    "signal_date": "2026-04-13"
+  },
+
+  "fd_calendar": {
+    "fds": [
+      { "bank": "HDFC", "amount_inr": 1000000, "maturity_date": "unknown - update from bank", "redirect_to": "Large Cap ETF (NIFTYBEES)" },
+      { "bank": "ICICI", "amount_inr": 500000, "maturity_date": "unknown - update from bank", "redirect_to": "Large Cap ETF (NIFTYBEES)" },
+      { "bank": "IDFC", "amount_inr": 50000, "maturity_date": "unknown - update from bank", "redirect_to": "Debt/Liquid ETF (LIQUIDBEES)" }
+    ]
+  },
+
+  "execution_log": {
+    "confirmations": []
+  },
+
+  "scheduled_tasks": {
+    "daily_morning_brief": "ACTIVE — weekdays 8:00 AM",
+    "sector_rotation": "ACTIVE — 1st of month 8:00 AM (next: May 1)",
+    "quarterly_rebalancer": "ACTIVE — Jan/Apr/Jul/Oct 1st (next: Jul 1)",
+    "portfolio_dashboard": "ACTIVE — every Sunday 9:00 AM (next: Apr 19)",
+    "annual_tax_agent": "ACTIVE — 15th March (next: Mar 2027)"
+  }
+}

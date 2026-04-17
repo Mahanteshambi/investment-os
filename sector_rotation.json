@@ -1,0 +1,193 @@
+{
+  "month": "2026-04",
+  "generated_date": "2026-04-17",
+  "active_sector_etf": "NSE:PSUBNKBEES",
+  "active_sector_score": 8.4,
+  "active_sector_allocation": "full",
+  "scores": [
+    {
+      "sector": "PSU Banking",
+      "etf": "NSE:PSUBNKBEES",
+      "token": 3848193,
+      "current_price": 98.11,
+      "technical_score": 9.0,
+      "fundamental_score": 10.0,
+      "fii_dii_score": 6.0,
+      "composite_score": 8.4,
+      "decision": "BUY",
+      "monthly_allocation_inr": 60000,
+      "technical_detail": {
+        "price_vs_200dma": "ABOVE (200dma ~91) +3",
+        "price_vs_50dma": "ABOVE (50dma ~95) +2",
+        "rsi14": 61.1,
+        "rsi_signal": "BULLISH +2",
+        "52w_high": 109.87,
+        "52w_low": 75.21,
+        "52w_position_pct": 66,
+        "52w_quartile": "mid +2",
+        "vol_ratio_20d_60d": 0.91,
+        "vol_signal": "+1"
+      },
+      "fundamental_detail": "PE ~0.9x book (deeply undervalued). NPA cleanup done. Improving profits. Rate-cut tailwind. Govt capital support.",
+      "fii_dii_detail": "DII net buyers. FII cautious but not selling aggressively. Domestic flows dominant.",
+      "notes": "NEW ACTIVE SECTOR. Rotating from BANKBEES. Strong turnaround story — PSU banks at multi-year profitability highs. RBI rate cuts directly boost NIM. Govt ownership = capital support."
+    },
+    {
+      "sector": "Pharma",
+      "etf": "NSE:PHARMABEES",
+      "token": 1273089,
+      "current_price": 23.05,
+      "technical_score": 8.5,
+      "fundamental_score": 8.0,
+      "fii_dii_score": 7.0,
+      "composite_score": 7.9,
+      "decision": "BUY",
+      "monthly_allocation_inr": 0,
+      "technical_detail": {
+        "price_vs_200dma": "ABOVE (200dma ~22.9) +3",
+        "price_vs_50dma": "ABOVE (50dma ~22.87) +2",
+        "rsi14": 56.3,
+        "rsi_signal": "NEUTRAL +1",
+        "52w_high": 24.60,
+        "52w_low": 21.52,
+        "52w_position_pct": 50,
+        "52w_quartile": "mid +2",
+        "vol_ratio_20d_60d": 1.2,
+        "vol_signal": "+1"
+      },
+      "fundamental_detail": "Strong US FDA pipeline, PLI scheme tailwind. Defensive sector — outperforms in uncertainty. Fair valuation ~22x.",
+      "fii_dii_detail": "FII net buyers in pharma. Defensive rotation ongoing.",
+      "notes": "Strong #2 score. Active sector allocation goes to PSUBNKBEES (higher score). Existing PHARMABEES holding (2000 units) is fine — HOLD. No new sector allocation this month but if PSUBNKBEES falters, pharma is backup."
+    },
+    {
+      "sector": "PSU/CPSE",
+      "etf": "NSE:CPSEETF",
+      "token": 595969,
+      "current_price": 105.02,
+      "technical_score": 9.0,
+      "fundamental_score": 8.0,
+      "fii_dii_score": 6.0,
+      "composite_score": 7.8,
+      "decision": "BUY",
+      "monthly_allocation_inr": 0,
+      "technical_detail": {
+        "price_vs_200dma": "ABOVE (200dma ~95) +3",
+        "price_vs_50dma": "ABOVE (50dma ~101) +2",
+        "rsi14": 83.1,
+        "rsi_signal": "BULLISH +2",
+        "52w_high": 105.02,
+        "52w_low": 87.46,
+        "52w_position_pct": 100,
+        "52w_quartile": "top +3",
+        "vol_ratio_20d_60d": 0.68,
+        "vol_signal": "+0 (60d inflated by Jan spike)"
+      },
+      "fundamental_detail": "Govt capex ongoing. National Infra Pipeline. Very cheap PE ~10-12x. Stable earnings.",
+      "fii_dii_detail": "Domestic DII buyers dominant. FII neutral.",
+      "notes": "Strong #3. At 52-week high. CPSEETF has approved instruments list. Could be added to watchlist for next month if PSUBNKBEES falters."
+    },
+    {
+      "sector": "Banking",
+      "etf": "NSE:BANKBEES",
+      "token": 2928385,
+      "current_price": 579.79,
+      "technical_score": 5.0,
+      "fundamental_score": 7.0,
+      "fii_dii_score": 5.0,
+      "composite_score": 5.6,
+      "decision": "HOLD",
+      "monthly_allocation_inr": 30000,
+      "technical_detail": {
+        "price_vs_200dma": "BELOW (200dma ~590) -3",
+        "price_vs_50dma": "BELOW (50dma ~585) -2",
+        "rsi14": 67.1,
+        "rsi_signal": "BULLISH +2",
+        "52w_high": 635.86,
+        "52w_low": 520.90,
+        "52w_position_pct": 51,
+        "52w_quartile": "mid +2",
+        "vol_ratio_20d_60d": 1.75,
+        "vol_signal": "ACCUMULATION +2"
+      },
+      "fundamental_detail": "Rate cuts are tailwind. Credit growth moderating. Fair PE ~14x. Near-term headwinds from NIM compression during rate cut cycle.",
+      "fii_dii_detail": "Mixed. FII cautious overall. DII buying on dips. Volume accumulation in April encouraging.",
+      "notes": "PREVIOUS ACTIVE SECTOR. Score 5.6 = HOLD. Deploy ₹30,000 (half allocation); redirect ₹30,000 to Large Cap. High volume accumulation (1.75x) and strong RSI suggests recovery possible. Monitor for upgrade next month."
+    },
+    {
+      "sector": "IT",
+      "etf": "NSE:ITBEES",
+      "token": 4885505,
+      "current_price": 34.74,
+      "technical_score": 2.0,
+      "fundamental_score": 4.0,
+      "fii_dii_score": 3.0,
+      "composite_score": 2.9,
+      "decision": "AVOID",
+      "monthly_allocation_inr": 0,
+      "technical_detail": {
+        "price_vs_200dma": "BELOW (200dma ~38) -3",
+        "price_vs_50dma": "BELOW (50dma ~35) -2",
+        "rsi14": 70.9,
+        "rsi_signal": "BULLISH +2 (bounce from oversold)",
+        "52w_high": 43.43,
+        "52w_low": 31.99,
+        "52w_position_pct": 24,
+        "52w_quartile": "bottom -1",
+        "vol_ratio_20d_60d": 0.6,
+        "vol_signal": "DISTRIBUTION +0 (60d inflated by Feb crash volumes)"
+      },
+      "fundamental_detail": "US tariffs + DOGE cuts = severe headwind for Indian IT revenues. USD weakness reduces INR earnings. Declining earnings trend.",
+      "fii_dii_detail": "FII net sellers in IT. Sector under institutional distribution.",
+      "notes": "AVOID — score 2.9 below 4 for first observed month. STOP NEW BUYS immediately. Existing holding 1500 units at 32.23 (current +7.8%). No trailing stop triggered yet (gain <15%). MONITOR: if score stays below 4 next month = recommend exit with trailing stop."
+    }
+  ],
+  "previous_month_sector": "NSE:BANKBEES",
+  "rotation_happened": true,
+  "exit_alerts": [
+    {
+      "symbol": "ITBEES",
+      "alert_type": "SCORE_BELOW_4_FIRST_MONTH",
+      "score": 2.9,
+      "action": "STOP NEW BUYS immediately",
+      "existing_holding": "1500 units @ avg 32.23, current 34.74, +7.8%",
+      "trailing_stop": null,
+      "note": "Score below 4 for first time (first run data). Need 2 consecutive months to trigger full exit recommendation. Monitor closely. If Apr score stays below 4 → add trailing stop and prepare exit."
+    },
+    {
+      "symbol": "BANKBEES",
+      "alert_type": "ROTATION_OUT",
+      "score": 5.6,
+      "action": "Reduce to HOLD allocation (₹30,000 instead of ₹60,000)",
+      "note": "Score dropped to HOLD range. No full exit — banking fundamentals intact. Redirect ₹30,000 savings to Large Cap (NIFTYBEES)."
+    }
+  ],
+  "market_context": {
+    "benchmark_niftybees": {
+      "current": 273.77,
+      "approx_200dma": 278,
+      "signal": "Recovering from Mar lows (253.44). Below 200-DMA but RSI improving."
+    },
+    "gold_goldbees": {
+      "current": 125.06,
+      "signal": "Strong uptrend — risk-OFF. Gold at multi-year highs. Supports defensive sector allocation."
+    },
+    "global_icicib22": {
+      "current": 123.87,
+      "signal": "Recovering from Jan spike (146) and Feb crash (118). Nasdaq volatile — tariff uncertainty persists."
+    },
+    "fii_dii_apr16": {
+      "fii_net_crore": 382.36,
+      "dii_net_crore": -3427.75,
+      "note": "Apr 16 FII turned net buyer (382cr) but DII unusual net seller (3427cr). Single-day reversal — monitor trend. Monthly April FII remains net seller."
+    }
+  },
+  "gtt_orders_for_active_sector": {
+    "instrument": "NSE:PSUBNKBEES",
+    "current_price": 98.11,
+    "gtt_trigger_price": 97.62,
+    "gtt_limit_price": 99.09,
+    "quantity_suggested": 613,
+    "approx_amount_inr": 60000,
+    "note": "GTT trigger = 0.5% below Apr 15 close (98.11). Limit = 1.5% above trigger. CNC delivery. Adjust qty based on exact price at execution."
+  }
+}
