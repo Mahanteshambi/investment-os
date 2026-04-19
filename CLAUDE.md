@@ -29,10 +29,12 @@ I am the **investment brain**. Mahantesh is the **executor**.
 
 Every time a new session starts in this project, I must:
 
-1. Read `portfolio_state.json` — budget tracker, month progress, trailing stops
-2. Read `daily_signal.json` — latest recommendations (if exists)
-3. Read `sector_rotation.json` — current active sector and scores (if exists)
-4. Print a 5-line context brief:
+1. Read `portfolio_state.json` — budget tracker, month progress, trailing stops, FD calendar
+2. Call `mcp__kite__get_holdings` + `mcp__kite__get_margins` — live Kite positions and cash (NOT from static file)
+3. Read Google Drive sheet (id: `[google_sheet_id from user_config.json]`) — non-Kite assets (MF/Coin, Vested/US, FD, PPF, PF, Savings). Mahantesh updates this manually after executions.
+4. Read `daily_signal.json` — latest recommendations (if exists)
+5. Read `sector_rotation.json` — current active sector and scores (if exists)
+6. Print a 5-line context brief:
    ```
    Date: [today] | Days left in month: [X] | Budget remaining: ₹X.XXL of ₹4L
    FII/DII: [stance] | Active sector: [ETF name] (score: X/10)
@@ -155,10 +157,15 @@ These are execution tools — Mahantesh executes, not Claude.
 | `watchlist.json` | Instruments monitored daily | SKILL-01 / SKILL-04 |
 | `daily_signal.json` | Today's buy/sell/hold recommendations | SKILL-02 every 8 AM |
 | `sector_rotation.json` | Monthly sector scores + active sector | SKILL-04 1st of month |
-| `portfolio_state.json` | Budget tracker, trailing stops, allocation snapshot | SKILL-06 + execution confirmations |
+| `portfolio_state.json` | Budget tracker, trailing stops, FD calendar, execution log | SKILL-06 + execution confirmations |
 | `paper_trades.json` | Full execution log (confirmed by Mahantesh) | Execution confirmations |
 | `rebalancing_report.json` | Quarterly drift report | SKILL-05 quarterly |
 | `tax_report.json` | Annual LTCG + harvesting report | SKILL-07 March |
+
+### Data Source Rules
+- **Kite holdings + cash** → always fetch live via `mcp__kite__get_holdings` + `mcp__kite__get_margins`. Never use stale static values.
+- **Non-Kite assets** (MF/Coin, Vested/US stocks, FD, PPF, PF, Savings) → read from Google Drive sheet `[google_sheet_id from user_config.json]`. Mahantesh updates after each execution.
+- **Budget tracking + trailing stops** → `portfolio_state.json` is source of truth (Kite has no concept of these).
 
 ---
 
@@ -202,7 +209,7 @@ Read this for rebalancing, tax analysis, and portfolio-wide allocation checks.
 
 ## Current Status
 
-- **Phase:** Foundation complete. SKILL-01 not yet run.
-- **Kite balance:** ₹54,534
+- **Phase:** Foundation complete. SKILL-01 run.
+- **Kite balance:** Fetch live via `mcp__kite__get_margins` each session.
 - **Mode:** Advisory (Claude recommends, Mahantesh executes)
-- **Scheduled tasks:** Being created — see `portfolio_state.json` for status
+- **Scheduled tasks:** All active — see `portfolio_state.json` for schedule
