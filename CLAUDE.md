@@ -97,6 +97,38 @@ Every time a new session starts in this project, I must:
 - Always flag LTCG implications when recommending sells above ₹1.25L gains
 - If Kite session error → immediately prompt Mahantesh to re-login via `mcp__kite__login`
 
+### FD Maturity → STP Rule
+- When an FD matures, do NOT deploy lump sum into equity at once
+- Recommend: park proceeds in LIQUIDBEES on Kite, then STP (Systematic Transfer Plan) into equity ETFs over 6 months
+- Monthly STP amount = FD proceeds / 6
+- Allocate per bucket targets (40% Large Cap, 15% Mid/Small, etc.)
+- Always mention this rule when flagging upcoming FD maturities
+
+### Macro Signals to Track Every Brief (4 Key Numbers)
+These four numbers drive gold, Indian equities, FII flows, and the rupee simultaneously:
+
+1. **DXY (US Dollar Index)** — fetch via Yahoo Finance API
+   - DXY < 100: bullish for gold, India, emerging markets (FII inflows expected)
+   - DXY > 100: headwind for India, gold under pressure
+   - API: `curl -s "https://query1.finance.yahoo.com/v8/finance/chart/DX-Y.NYB?interval=1d&range=5d"`
+
+2. **India-US 10yr Bond Yield Spread** — fetch both yields
+   - US 10yr: `curl -s "https://query1.finance.yahoo.com/v8/finance/chart/%5ETNX?interval=1d&range=5d"`
+   - India 10yr: use RBI/CCIL published rate (~7% currently)
+   - Spread zones: >4% = FII buying aggressively | 3-4% = comfortable | 2-3% = FII cautious (current) | <2% = danger/exodus
+   - Current spread ~2.7% → FII cautious zone
+
+3. **Brent Crude Oil ($/barrel)** — fetch via Yahoo Finance
+   - API: `curl -s "https://query1.finance.yahoo.com/v8/finance/chart/BZ%3DF?interval=1d&range=5d"`
+   - Threshold: below $85-90 = rupee stable, CAD manageable | above $90 = rupee pressure, inflation risk
+   - Flag in brief if oil crosses $90
+
+4. **Indian Market Valuation (3 sub-metrics)**
+   - Nifty PE (~20): use with caution — methodology changed April 2021 (standalone → consolidated earnings); not directly comparable to pre-2021 history
+   - CAPE ratio: India currently ~33 vs historical avg ~25 → elevated. Historically: CAPE 17-21 = 15% annualised 5yr return; CAPE 33 = ~14.7% (5yr), ~11.75% (10yr)
+   - ICICI Pru Equity Valuation Index (EVI): check monthly at iciciprumf.com. Zones: <100 = accumulate | 100-130 = neutral | >130 = move incremental money to debt | >160 = book profits
+   - Summary: India not a screaming buy but not overheated — suitable for systematic investing, not lumpsum aggression
+
 ---
 
 ## Execution Confirmation Protocol

@@ -1,25 +1,27 @@
 {
   "_comment": "Master state file. Holdings/cash = live from Kite MCP. Non-Kite assets = Google Drive sheet [google_sheet_id from user_config.json]. This file tracks: budget, trailing stops, FD calendar, execution log.",
-  "last_updated": "2026-04-18",
+  "last_updated": "2026-04-20",
   "mode": "advisory",
 
   "monthly_budget": {
     "total_inr": 400000,
     "month": "2026-04",
-    "deployed_inr": 0,
-    "remaining_inr": 400000,
+    "deployed_inr": 246104,
+    "_deployed_note": "Estimated from Kite cash change: ₹254,534 (Apr 16) → ₹8,430 (Apr 20). T+1 confirmed purchases: NIFTYBEES+88, JUNIORBEES+10, BANKBEES×7, ICICIB22×40 (~₹40,694). ₹205,410 gap unexplained — Mahantesh to confirm if other purchases or withdrawal.",
+    "remaining_inr": 153896,
     "trading_days_total": 20,
-    "trading_days_elapsed": 12,
-    "trading_days_remaining": 8,
-    "daily_pacing_target_inr": 50000,
+    "trading_days_elapsed": 13,
+    "trading_days_remaining": 7,
+    "daily_pacing_target_inr": 21985,
     "full_deploy_deadline": "2026-04-30",
-    "pace_status": "BEHIND — deploy ₹50,000/day across all platforms for 8 remaining days",
+    "pace_status": "ON TRACK — ₹21,985/day for 7 remaining days to deploy ₹1.54L",
     "bucket_deployed": {
-      "large_cap_inr": 0,
-      "mid_small_inr": 0,
-      "sector_inr": 0,
+      "_note": "Approximate, based on T+1 purchases confirmed. Mahantesh to confirm full deployment per bucket.",
+      "large_cap_inr": 24178,
+      "mid_small_inr": 7486,
+      "sector_inr": 4055,
       "gold_inr": 0,
-      "international_inr": 0,
+      "international_inr": 4975,
       "debt_liquid_inr": 0
     },
     "bucket_target_inr": {
@@ -32,33 +34,80 @@
     }
   },
 
-  "trailing_stops": {
-    "_note": "Set at -8% from peak for positions with >15% gain. Ratchet up every 5% gain. Current price always fetched live from Kite.",
+  "kite_account": {
+    "_synced": "2026-04-20 via SKILL-06",
+    "user_id": "[KITE_ACCOUNT_ID]",
+    "available_cash_inr": 8429.80,
+    "holdings_value_inr": 508789,
+    "total_equity_inr": 517219
+  },
+
+  "kite_holdings_snapshot": {
+    "_synced": "2026-04-20",
     "positions": [
-      { "symbol": "AXISBANK", "entry": 755, "peak": 1355.5, "stop": 1247, "pnl_pct_at_peak": 79.5, "status": "ACTIVE" },
-      { "symbol": "ICICIBANK", "entry": 731, "peak": 1348.1, "stop": 1240, "pnl_pct_at_peak": 84.4, "status": "ACTIVE" },
-      { "symbol": "RELIANCE", "entry": 962.32, "peak": 1344.25, "stop": 1237, "pnl_pct_at_peak": 39.7, "status": "ACTIVE" },
-      { "symbol": "TMCV", "entry": 260.76, "peak": 435.2, "stop": 400, "pnl_pct_at_peak": 66.9, "status": "ACTIVE" }
+      { "symbol": "NIFTYBEES",  "qty_settled": 270, "qty_t1": 88,  "total_qty": 358, "avg_inr": 265.70, "ltp_inr": 276.00, "value_inr": 98808,  "pnl_inr": 3687,   "pnl_pct": 3.9,   "bucket": "Large Cap ETF",        "ltcg_eligible": "Yes (settled 270)" },
+      { "symbol": "JUNIORBEES", "qty_settled": 115, "qty_t1": 10,  "total_qty": 125, "avg_inr": 700.48, "ltp_inr": 757.97, "value_inr": 94746,  "pnl_inr": 7187,   "pnl_pct": 8.2,   "bucket": "Mid/Small ETF",         "ltcg_eligible": "Yes (settled 115)" },
+      { "symbol": "ITBEES",     "qty_settled": 1500,"qty_t1": 0,   "total_qty": 1500,"avg_inr": 32.23,  "ltp_inr": 35.10,  "value_inr": 52650,  "pnl_inr": 4305,   "pnl_pct": 8.9,   "bucket": "Sectoral ETF - IT",     "ltcg_eligible": "Yes" },
+      { "symbol": "PHARMABEES", "qty_settled": 2000,"qty_t1": 0,   "total_qty": 2000,"avg_inr": 23.07,  "ltp_inr": 23.15,  "value_inr": 46300,  "pnl_inr": 160,    "pnl_pct": 0.3,   "bucket": "Sectoral ETF - Pharma", "ltcg_eligible": "Yes" },
+      { "symbol": "BANKBEES",   "qty_settled": 0,   "qty_t1": 7,   "total_qty": 7,   "avg_inr": 579.26, "ltp_inr": 583.20, "value_inr": 4082,   "pnl_inr": 28,     "pnl_pct": 0.7,   "bucket": "Sectoral ETF - Banking","ltcg_eligible": "No (new Apr 19)" },
+      { "symbol": "GOLDBEES",   "qty_settled": 700, "qty_t1": 0,   "total_qty": 700, "avg_inr": 116.96, "ltp_inr": 124.78, "value_inr": 87346,  "pnl_inr": 5471,   "pnl_pct": 6.7,   "bucket": "Gold ETF",              "ltcg_eligible": "Yes" },
+      { "symbol": "LIQUIDBEES", "qty_settled": 2,   "qty_t1": 0,   "total_qty": 2,   "avg_inr": 542.06, "ltp_inr": 1000.01,"value_inr": 2000,   "pnl_inr": 916,    "pnl_pct": null,  "bucket": "Debt/Liquid ETF",       "ltcg_eligible": "Yes", "_note": "Gain is income distribution, not capital appreciation" },
+      { "symbol": "ICICIB22",   "qty_settled": 0,   "qty_t1": 40,  "total_qty": 40,  "avg_inr": 124.37, "ltp_inr": 125.39, "value_inr": 5016,   "pnl_inr": 41,     "pnl_pct": 0.8,   "bucket": "International ETF",     "ltcg_eligible": "No (new Apr 19)" },
+      { "symbol": "AXISBANK",   "qty_settled": 10,  "qty_t1": 0,   "total_qty": 10,  "avg_inr": 755.00, "ltp_inr": 1359.15,"value_inr": 13592,  "pnl_inr": 6042,   "pnl_pct": 80.0,  "bucket": "Stock - Banking",       "ltcg_eligible": "Yes" },
+      { "symbol": "ICICIBANK",  "qty_settled": 10,  "qty_t1": 0,   "total_qty": 10,  "avg_inr": 731.00, "ltp_inr": 1347.50,"value_inr": 13475,  "pnl_inr": 6165,   "pnl_pct": 84.3,  "bucket": "Stock - Banking",       "ltcg_eligible": "Yes" },
+      { "symbol": "HDFCBANK",   "qty_settled": 16,  "qty_t1": 0,   "total_qty": 16,  "avg_inr": 841.00, "ltp_inr": 800.00, "value_inr": 12800,  "pnl_inr": -656,   "pnl_pct": -4.9,  "bucket": "Stock - Banking",       "ltcg_eligible": "Yes" },
+      { "symbol": "KOTAKBANK",  "qty_settled": 40,  "qty_t1": 0,   "total_qty": 40,  "avg_inr": 348.65, "ltp_inr": 383.35, "value_inr": 15334,  "pnl_inr": 1388,   "pnl_pct": 9.9,   "bucket": "Stock - Banking",       "ltcg_eligible": "Yes" },
+      { "symbol": "HINDUNILVR", "qty_settled": 6,   "qty_t1": 0,   "total_qty": 6,   "avg_inr": 2479.00,"ltp_inr": 2241.10,"value_inr": 13447,  "pnl_inr": -1427,  "pnl_pct": -9.6,  "bucket": "Stock - FMCG",          "ltcg_eligible": "Yes" },
+      { "symbol": "RELIANCE",   "qty_settled": 22,  "qty_t1": 0,   "total_qty": 22,  "avg_inr": 962.32, "ltp_inr": 1365.10,"value_inr": 30032,  "pnl_inr": 8861,   "pnl_pct": 41.8,  "bucket": "Stock - Diversified",   "ltcg_eligible": "Yes" },
+      { "symbol": "TMCV",       "qty_settled": 43,  "qty_t1": 0,   "total_qty": 43,  "avg_inr": 260.76, "ltp_inr": 439.00, "value_inr": 18877,  "pnl_inr": 7665,   "pnl_pct": 68.3,  "bucket": "Stock - Auto/CV",       "ltcg_eligible": "Yes" },
+      { "symbol": "TVSMNCRPS",  "qty_settled": 28,  "qty_t1": 0,   "total_qty": 28,  "avg_inr": 0,      "ltp_inr": 10.14,  "value_inr": 284,    "pnl_inr": 284,    "pnl_pct": null,  "bucket": "Bond/Pref Share",       "ltcg_eligible": "Yes" }
+    ],
+    "total_holdings_value_inr": 508789,
+    "total_pnl_inr": 50117
+  },
+
+  "trailing_stops": {
+    "_note": "Set at -8% from peak for positions with >15% gain. Ratchet up every 5% gain. Updated by SKILL-06 weekly.",
+    "positions": [
+      { "symbol": "AXISBANK",  "entry": 755,    "peak": 1359.15, "stop": 1250, "current_ltp": 1359.15, "pnl_pct": 80.0,  "buffer_pct": 8.0, "status": "ACTIVE — ratcheted Apr 20" },
+      { "symbol": "ICICIBANK", "entry": 731,    "peak": 1348.10, "stop": 1240, "current_ltp": 1347.50, "pnl_pct": 84.3,  "buffer_pct": 8.7, "status": "ACTIVE" },
+      { "symbol": "RELIANCE",  "entry": 962.32, "peak": 1365.10, "stop": 1256, "current_ltp": 1365.10, "pnl_pct": 41.8,  "buffer_pct": 8.0, "status": "ACTIVE — ratcheted Apr 20" },
+      { "symbol": "TMCV",      "entry": 260.76, "peak": 439.00,  "stop": 404,  "current_ltp": 439.00,  "pnl_pct": 68.3,  "buffer_pct": 8.0, "status": "ACTIVE — ratcheted Apr 20" }
     ]
   },
 
   "signals": {
-    "_note": "Updated daily by SKILL-02. FII/DII from NSE API.",
+    "_note": "Updated daily by SKILL-02. FII/DII from NSE API. Macro from Yahoo Finance.",
     "fii_stance": "SELLER",
     "dii_stance": "BUYER",
     "last_fii_net_crore": -1983.18,
     "last_dii_net_crore": 2432.30,
     "active_sector_etf": "NSE:PSUBNKBEES",
     "active_sector_score": 8.4,
-    "signal_date": "2026-04-17"
+    "signal_date": "2026-04-17",
+    "macro": {
+      "_note": "DXY/US10yr/Oil fetched live by SKILL-02. India10yr updated manually when RBI changes rate.",
+      "dxy": null,
+      "dxy_signal": "fetch live",
+      "us_10yr_yield_pct": null,
+      "india_10yr_yield_pct": 7.0,
+      "yield_spread_pct": null,
+      "yield_spread_zone": "2-3% = FII CAUTIOUS (as of Apr 2026)",
+      "brent_crude_usd": null,
+      "oil_signal": "fetch live",
+      "cape_ratio": 33,
+      "cape_avg": 25,
+      "cape_signal": "ELEVATED — favour value/quality, not high-PE growth",
+      "evi_zone": "NEUTRAL (market recovered from sub-100 in early Apr 2026)"
+    }
   },
 
   "fd_calendar": {
-    "_note": "Mahantesh to update maturity dates from bank portals. Claude reads this for tax + rebalancing planning.",
+    "_note": "ACTION REQUIRED: Mahantesh to update maturity dates from bank portals (HDFC NetBanking, ICICI iMobile, IDFC First app).",
     "fds": [
-      { "bank": "HDFC", "amount_inr": 1000000, "maturity_date": "unknown - update from bank", "redirect_to": "Large Cap ETF (NIFTYBEES)" },
-      { "bank": "ICICI", "amount_inr": 500000, "maturity_date": "unknown - update from bank", "redirect_to": "Large Cap ETF (NIFTYBEES)" },
-      { "bank": "IDFC", "amount_inr": 50000, "maturity_date": "unknown - update from bank", "redirect_to": "Debt/Liquid ETF (LIQUIDBEES)" }
+      { "bank": "HDFC",  "amount_inr": 1000000, "maturity_date": "UNKNOWN — update required", "redirect_to": "Large Cap ETF (NIFTYBEES)" },
+      { "bank": "ICICI", "amount_inr": 500000,  "maturity_date": "UNKNOWN — update required", "redirect_to": "Large Cap ETF (NIFTYBEES)" },
+      { "bank": "IDFC",  "amount_inr": 50000,   "maturity_date": "UNKNOWN — update required", "redirect_to": "Debt/Liquid ETF (LIQUIDBEES)" }
     ]
   },
 
@@ -71,7 +120,7 @@
     "daily_morning_brief": "ACTIVE — weekdays 8:00 AM MYT",
     "sector_rotation": "ACTIVE — 1st of month 8:00 AM MYT (next: May 1)",
     "quarterly_rebalancer": "ACTIVE — Jan/Apr/Jul/Oct 1st (next: Jul 1)",
-    "portfolio_dashboard": "ACTIVE — every Sunday 9:00 AM MYT (next: Apr 19)",
+    "portfolio_dashboard": "ACTIVE — every Sunday 9:00 AM MYT (next: Apr 26)",
     "annual_tax_agent": "ACTIVE — 15th March (next: Mar 2027)"
   }
 }
