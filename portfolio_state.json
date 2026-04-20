@@ -111,8 +111,27 @@
     ]
   },
 
+  "weekly_snapshots": {
+    "_note": "Appended every Sunday by SKILL-06. Rolling 52 weeks. Used for XIRR approximation and P&L trend.",
+    "_xirr_note": "XIRR = annualised return from cashflow series. Each snapshot is a data point: (date, portfolio_value). Deployments from paper_trades.json are the cashflows.",
+    "max_entries": 52,
+    "on_overflow": "drop oldest entry",
+    "snapshots": [
+      {
+        "date": "2026-04-20",
+        "kite_holdings_value_inr": 508789,
+        "kite_cash_inr": 8429.80,
+        "total_kite_inr": 517219,
+        "deployed_this_month_inr": 246104,
+        "trailing_stops_active": 4,
+        "pnl_inr": 50117,
+        "note": "First SKILL-06 run. Non-Kite values in Google Drive sheet."
+      }
+    ]
+  },
+
   "execution_log": {
-    "_note": "Mahantesh confirms executions here. Format: 'Executed: INSTRUMENT QTY units @ ₹PRICE'",
+    "_note": "Mahantesh confirms non-Kite executions here. Kite GTT placements logged automatically by Claude after 'confirm'.",
     "confirmations": []
   },
 
