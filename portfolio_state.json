@@ -1,6 +1,6 @@
 {
   "_comment": "Master state file. Holdings/cash = live from Kite MCP. Non-Kite assets = Google Drive sheet [google_sheet_id from user_config.json]. This file tracks: budget, trailing stops, FD calendar, execution log.",
-  "last_updated": "2026-04-20",
+  "last_updated": "2026-04-22",
   "mode": "advisory",
 
   "monthly_budget": {
@@ -11,10 +11,10 @@
     "remaining_inr": 153896,
     "trading_days_total": 20,
     "trading_days_elapsed": 13,
-    "trading_days_remaining": 7,
-    "daily_pacing_target_inr": 21985,
+    "trading_days_remaining": 6,
+    "daily_pacing_target_inr": 18456,
     "full_deploy_deadline": "2026-04-30",
-    "pace_status": "ON TRACK — ₹21,985/day for 7 remaining days to deploy ₹1.54L",
+    "pace_status": "ON TRACK — ₹18,456/day for 6 remaining days to deploy ₹1.08L (after today's ₹21K GTTs)",
     "bucket_deployed": {
       "_note": "Approximate, based on T+1 purchases confirmed. Mahantesh to confirm full deployment per bucket.",
       "large_cap_inr": 24178,
@@ -69,10 +69,10 @@
   "trailing_stops": {
     "_note": "Set at -8% from peak for positions with >15% gain. Ratchet up every 5% gain. Updated by SKILL-06 weekly.",
     "positions": [
-      { "symbol": "AXISBANK",  "entry": 755,    "peak": 1359.15, "stop": 1250, "current_ltp": 1359.15, "pnl_pct": 80.0,  "buffer_pct": 8.0, "status": "ACTIVE — ratcheted Apr 20" },
-      { "symbol": "ICICIBANK", "entry": 731,    "peak": 1348.10, "stop": 1240, "current_ltp": 1347.50, "pnl_pct": 84.3,  "buffer_pct": 8.7, "status": "ACTIVE" },
-      { "symbol": "RELIANCE",  "entry": 962.32, "peak": 1365.10, "stop": 1256, "current_ltp": 1365.10, "pnl_pct": 41.8,  "buffer_pct": 8.0, "status": "ACTIVE — ratcheted Apr 20" },
-      { "symbol": "TMCV",      "entry": 260.76, "peak": 439.00,  "stop": 404,  "current_ltp": 439.00,  "pnl_pct": 68.3,  "buffer_pct": 8.0, "status": "ACTIVE — ratcheted Apr 20" }
+      { "symbol": "AXISBANK",  "entry": 755,    "peak": 1377.7,  "stop": 1268, "gtt_id": 316059662, "current_ltp": 1377.7,  "pnl_pct": 82.5,  "buffer_pct": 7.97, "status": "ACTIVE — ratcheted Apr 22" },
+      { "symbol": "ICICIBANK", "entry": 731,    "peak": 1388.4,  "stop": 1278, "gtt_id": 316059663, "current_ltp": 1388.4,  "pnl_pct": 89.9,  "buffer_pct": 7.95, "status": "ACTIVE — ratcheted Apr 22" },
+      { "symbol": "RELIANCE",  "entry": 962.32, "peak": 1365.10, "stop": 1256, "gtt_id": 316059664, "current_ltp": 1353.3,  "pnl_pct": 40.6,  "buffer_pct": 7.17, "status": "ACTIVE — GTT corrected Apr 22" },
+      { "symbol": "TMCV",      "entry": 260.76, "peak": 442.55,  "stop": 408,  "gtt_id": 316059666, "current_ltp": 442.55,  "pnl_pct": 69.7,  "buffer_pct": 7.81, "status": "ACTIVE — ratcheted Apr 22" }
     ]
   },
 
@@ -80,21 +80,21 @@
     "_note": "Updated daily by SKILL-02. FII/DII from NSE API. Macro from Yahoo Finance.",
     "fii_stance": "SELLER",
     "dii_stance": "BUYER",
-    "last_fii_net_crore": -1983.18,
-    "last_dii_net_crore": 2432.30,
+    "last_fii_net_crore": -1918.99,
+    "last_dii_net_crore": 2221.27,
     "active_sector_etf": "NSE:PSUBNKBEES",
     "active_sector_score": 8.4,
-    "signal_date": "2026-04-17",
+    "signal_date": "2026-04-22",
     "macro": {
       "_note": "DXY/US10yr/Oil fetched live by SKILL-02. India10yr updated manually when RBI changes rate.",
-      "dxy": null,
-      "dxy_signal": "fetch live",
-      "us_10yr_yield_pct": null,
+      "dxy": 98.41,
+      "dxy_signal": "BULLISH — below 100",
+      "us_10yr_yield_pct": 4.292,
       "india_10yr_yield_pct": 7.0,
-      "yield_spread_pct": null,
+      "yield_spread_pct": 2.71,
       "yield_spread_zone": "2-3% = FII CAUTIOUS (as of Apr 2026)",
-      "brent_crude_usd": null,
-      "oil_signal": "fetch live",
+      "brent_crude_usd": 93.93,
+      "oil_signal": "⚠ ABOVE $90 — PRESSURE",
       "cape_ratio": 33,
       "cape_avg": 25,
       "cape_signal": "ELEVATED — favour value/quality, not high-PE growth",
