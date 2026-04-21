@@ -4,15 +4,15 @@
 
   "current": {
     "date": "2026-04-20",
-    "generated_at": "2026-04-20T08:00:00+08:00",
+    "generated_at": "2026-04-20T08:45:00+08:00",
     "next_market_open": "2026-04-21 11:45 MYT (Monday)",
-    "data_as_of": "2026-04-17 (last trading day, Apr 18-20 market closed)",
+    "data_as_of": "2026-04-17 (last trading day)",
 
     "fii_net_crore": 683.20,
     "dii_net_crore": -4721.48,
     "fii_stance": "BUYER",
     "dii_stance": "SELLER",
-    "note_fii_dii": "FII net buyer +683Cr on Apr 17 (2nd+ consecutive buying day). DII net seller -4721Cr — heavy profit-booking after sharp rally from Mar lows. Not a panic signal.",
+    "note_fii_dii": "FII net buyer +683Cr on Apr 17 (2nd+ consecutive buying day). DII net seller -4721Cr — heavy profit-booking after sharp rally. Not panic. Monthly FII trend turning positive.",
 
     "macro": {
       "dxy": null,
@@ -24,45 +24,61 @@
     },
 
     "global_signal": "CAUTIOUSLY RISK-ON",
-    "global_signal_reason": "FII sustained buying is the dominant signal. Market recovered +8.8% from Mar 30 low.",
+    "global_signal_reason": "FII sustained buying 2+ days. Market +8.8% from Mar 30 lows. Gold at multi-year highs. PSU banks accumulating (vol 1.34x). DII selling = institutional profit-booking, not distribution.",
 
     "instrument_analysis": {
-      "NIFTYBEES":   { "ltp": 275.87, "dip_score_pct": -7.16, "momentum": "BULLISH", "signal": "DEPLOY",       "volume_ratio": 0.71 },
-      "GOLDBEES":    { "ltp": 124.80, "dip_score_pct": -1.16, "momentum": "BULLISH", "signal": "URGENT BUY",   "volume_ratio": 0.71 },
-      "JUNIORBEES":  { "ltp": 757.60, "dip_score_pct": -13.13,"momentum": "BULLISH", "signal": "DEPLOY",       "volume_ratio": 0.83 },
-      "PSUBNKBEES":  { "ltp": 98.49,  "dip_score_pct": -7.93, "momentum": "BULLISH", "signal": "STRONG BUY",   "volume_ratio": 1.34 },
-      "ICICIB22":    { "ltp": 125.15, "dip_score_pct": -7.28, "momentum": "BULLISH", "signal": "DEPLOY",       "volume_ratio": 0.88 },
-      "BANKBEES":    { "ltp": 582.85, "dip_score_pct": -9.27, "momentum": "BULLISH", "signal": "HOLD",         "volume_ratio": null },
-      "ITBEES":      { "ltp": 35.09,  "dip_score_pct": -6.62, "momentum": "RECOVERING", "signal": "AVOID",    "volume_ratio": null },
-      "PHARMABEES":  { "ltp": 23.12,  "dip_score_pct": -3.72, "momentum": "BULLISH", "signal": "HOLD",         "volume_ratio": null },
-      "LIQUIDBEES":  { "ltp": 1000.0, "dip_score_pct": null,  "momentum": null,       "signal": "BUY",          "volume_ratio": null }
+      "NIFTYBEES":  { "month_open": 257.45, "ltp": 275.87, "dip_score_pct": -7.16, "dma_20": 264.76, "dma_200_approx": 278.0, "momentum": "BULLISH", "volume_ratio": 0.71, "signal": "DEPLOY" },
+      "GOLDBEES":   { "month_open": 123.37, "ltp": 124.80, "dip_score_pct": -1.16, "dma_20": 122.08, "momentum": "BULLISH", "volume_ratio": 0.71, "signal": "URGENT BUY" },
+      "JUNIORBEES": { "month_open": 669.66, "ltp": 757.60, "dip_score_pct": -13.13,"dma_20": 697.32, "momentum": "BULLISH", "volume_ratio": 0.83, "signal": "DEPLOY" },
+      "PSUBNKBEES": { "month_open": 91.26,  "ltp": 98.49,  "dip_score_pct": -7.93, "dma_20": 94.44,  "dma_200_approx": 91.0, "momentum": "BULLISH", "volume_ratio": 1.34, "signal": "STRONG BUY" },
+      "ICICIB22":   { "month_open": 116.65, "ltp": 125.15, "dip_score_pct": -7.28, "dma_20": 118.65, "momentum": "BULLISH", "volume_ratio": 0.88, "signal": "DEPLOY" },
+      "BANKBEES":   { "month_open": 533.42, "ltp": 582.85, "dip_score_pct": -9.27, "dma_20": 555.61, "momentum": "BULLISH", "volume_ratio": null, "signal": "HOLD" },
+      "ITBEES":     { "month_open": 32.91,  "ltp": 35.09,  "dip_score_pct": -6.62, "dma_20": 33.39,  "dma_200_approx": 38.0, "momentum": "RECOVERING (below 200-DMA)", "volume_ratio": null, "signal": "AVOID — month 1 of sub-4 watch" },
+      "PHARMABEES": { "month_open": 22.29,  "ltp": 23.12,  "dip_score_pct": -3.72, "dma_20": 22.85,  "momentum": "BULLISH", "volume_ratio": null, "signal": "HOLD" },
+      "LIQUIDBEES": { "ltp": 1000.0, "momentum": "STABLE", "signal": "BUY" }
     },
 
     "buy_recommendations": [
-      { "rank": 1, "symbol": "NSE:NIFTYBEES",  "signal": "DEPLOY",      "qty": 32, "trigger_price": 274.50, "limit_price": 278.60, "est_total_inr": 8808,  "bucket": "Large Cap",    "platform": "Kite GTT" },
-      { "rank": 2, "symbol": "NSE:GOLDBEES",   "signal": "URGENT BUY",  "qty": 53, "trigger_price": 124.20, "limit_price": 126.10, "est_total_inr": 6614,  "bucket": "Gold",         "platform": "Kite GTT" },
-      { "rank": 3, "symbol": "NSE:PSUBNKBEES", "signal": "STRONG BUY",  "qty": 31, "trigger_price": 98.00,  "limit_price": 99.47,  "est_total_inr": 3053,  "bucket": "Sector",       "platform": "Kite GTT" },
-      { "rank": 4, "symbol": "NSE:JUNIORBEES", "signal": "DEPLOY",      "qty": 4,  "trigger_price": 754.40, "limit_price": 765.70, "est_total_inr": 3030,  "bucket": "Mid/Small",    "platform": "Kite GTT" },
-      { "rank": 5, "symbol": "NSE:ICICIB22",   "signal": "DEPLOY",      "qty": 5,  "trigger_price": 124.52, "limit_price": 126.39, "est_total_inr": 626,   "bucket": "International","platform": "Kite GTT" },
-      { "rank": 6, "symbol": "NSE:LIQUIDBEES", "signal": "BUY",         "qty": 1,  "trigger_price": 995.00, "limit_price": 1010.00,"est_total_inr": 1000,  "bucket": "Debt/Liquid",  "platform": "Kite GTT" }
+      { "rank": 1, "symbol": "NSE:NIFTYBEES",  "signal": "DEPLOY",     "qty": 32, "trigger_price": 274.50, "limit_price": 278.60, "est_total_inr": 8808,  "bucket": "Large Cap (40%)",       "platform": "Kite CNC GTT" },
+      { "rank": 2, "symbol": "NSE:GOLDBEES",   "signal": "URGENT BUY", "qty": 50, "trigger_price": 124.20, "limit_price": 126.10, "est_total_inr": 6210,  "bucket": "Gold (15%) — 0% Apr",  "platform": "Kite CNC GTT" },
+      { "rank": 3, "symbol": "NSE:PSUBNKBEES", "signal": "STRONG BUY", "qty": 34, "trigger_price": 98.00,  "limit_price": 99.47,  "est_total_inr": 3332,  "bucket": "Sector (15%) — active", "platform": "Kite CNC GTT" },
+      { "rank": 4, "symbol": "NSE:JUNIORBEES", "signal": "DEPLOY",     "qty": 4,  "trigger_price": 754.40, "limit_price": 765.70, "est_total_inr": 3018,  "bucket": "Mid/Small (15%)",       "platform": "Kite CNC GTT" },
+      { "rank": 5, "symbol": "NSE:ICICIB22",   "signal": "DEPLOY",     "qty": 17, "trigger_price": 124.52, "limit_price": 126.39, "est_total_inr": 2117,  "bucket": "International (10%)",   "platform": "Kite CNC GTT" },
+      { "rank": 6, "symbol": "NSE:LIQUIDBEES", "signal": "BUY",        "qty": 2,  "trigger_price": 995.00, "limit_price": 1010.00,"est_total_inr": 1990,  "bucket": "Debt/Liquid (5%)",      "platform": "Kite CNC GTT" }
     ],
 
     "hold_list": ["BANKBEES","PHARMABEES","AXISBANK","ICICIBANK","RELIANCE","TMCV","KOTAKBANK","HDFCBANK","HINDUNILVR"],
     "exit_alerts": [],
 
     "trailing_stop_status": [
-      { "symbol": "AXISBANK",  "stop": 1250, "current": 1359.10, "buffer_pct": 8.0,  "status": "SAFE" },
-      { "symbol": "ICICIBANK", "stop": 1240, "current": 1346.80, "buffer_pct": 7.9,  "status": "SAFE" },
-      { "symbol": "RELIANCE",  "stop": 1256, "current": 1365.00, "buffer_pct": 7.97, "status": "SAFE" },
-      { "symbol": "TMCV",      "stop": 404,  "current": 439.10,  "buffer_pct": 7.97, "status": "SAFE" }
+      { "symbol": "AXISBANK",  "entry": 755,    "peak": 1359.15, "stop": 1250, "current": 1359.10, "pnl_pct": 80.0, "buffer_pct": 8.0,  "status": "SAFE" },
+      { "symbol": "ICICIBANK", "entry": 731,    "peak": 1348.10, "stop": 1240, "current": 1346.80, "pnl_pct": 84.3, "buffer_pct": 7.9,  "status": "SAFE" },
+      { "symbol": "RELIANCE",  "entry": 962.32, "peak": 1365.10, "stop": 1256, "current": 1365.00, "pnl_pct": 41.8, "buffer_pct": 7.97, "status": "SAFE" },
+      { "symbol": "TMCV",      "entry": 260.76, "peak": 439.00,  "stop": 404,  "current": 439.10,  "pnl_pct": 68.3, "buffer_pct": 7.97, "status": "SAFE" }
     ],
 
+    "kite_holdings_derived": {
+      "_note": "Cost basis computed from live get_holdings. All buys confirmed Kite-only.",
+      "_april_note": "GOLDBEES avg ₹116.96 < Apr open ₹123.37 → pre-April purchase. April gold deployed = ₹0.",
+      "niftybees_cost": 95121, "juniorbees_cost": 87560, "goldbees_cost": 81874,
+      "psubnkbees_cost": 0, "bankbees_cost": 4055, "icicib22_cost": 4975,
+      "liquidbees_cost": 1084, "pharmabees_cost": 46140, "itbees_cost": 48345,
+      "total_etf_cost": 369154, "total_stock_cost": 89520, "grand_total_kite_cost": 458674
+    },
+
     "budget_status": {
-      "deployed_inr": 246104, "remaining_inr": 153896,
-      "trading_days_remaining": 7, "daily_target_inr": 21985,
-      "today_gtts_inr": 23131, "pace": "BEHIND",
-      "kite_cash_inr": 8429.80,
-      "critical_alert": "Kite cash ₹8,429 insufficient. TRANSFER ₹1,50,000+ before Monday 11:45 AM MYT."
+      "total_budget_inr": 400000,
+      "deployed_inr": 246104,
+      "deployed_source": "Kite cash flow: ₹254,534 (Apr 16) → ₹8,430 (Apr 20) = ₹246,104 spent",
+      "remaining_inr": 153896,
+      "trading_days_remaining": 7,
+      "daily_target_inr": 21985,
+      "today_gtts_inr": 25475,
+      "pace": "BEHIND — but funded and catching up",
+      "kite_cash_api_inr": 8429.80,
+      "kite_cash_effective_inr": 208429.80,
+      "kite_cash_note": "₹2,00,000 transferred by user — API shows ₹8,429 (pending weekend settlement). Effective ₹2,08,429. FULLY FUNDED for remaining ₹1,53,896.",
+      "bucket_gaps_note": "₹2,05,410 of Apr cash outflow is in settled holdings — bucket_deployed understated. Mahantesh to confirm Apr 1-16 purchases to reconcile per-bucket tracking."
     },
 
     "sector_allocation_rule": "full",
@@ -85,9 +101,10 @@
       "below4_sectors": ["ITBEES"],
       "niftybees_ltp": 275.87,
       "goldbees_ltp": 124.80,
-      "total_gtt_inr": 23131,
+      "total_gtt_inr": 25475,
       "budget_remaining_inr": 153896,
-      "pace": "BEHIND"
+      "kite_cash_effective": 208429,
+      "pace": "FUNDED — catching up"
     }
   ],
 
