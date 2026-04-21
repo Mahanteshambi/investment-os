@@ -195,6 +195,27 @@
 
   "trade_log": [
     {
+      "timestamp": "2026-04-22T04:59:00+05:30",
+      "action": "GTT_PLACED_REAL",
+      "session": "SKILL-02 Apr 22 | Confirmed by Mahantesh",
+      "buy_gtts": [
+        { "gtt_id": 316059656, "symbol": "NSE:NIFTYBEES",  "qty": 31, "trigger": 276.24, "limit": 280.38, "est_inr": 8563,  "bucket": "Large Cap" },
+        { "gtt_id": 316059657, "symbol": "NSE:GOLDBEES",   "qty": 25, "trigger": 124.59, "limit": 126.46, "est_inr": 3115,  "bucket": "Gold" },
+        { "gtt_id": 316059658, "symbol": "NSE:PSUBNKBEES", "qty": 32, "trigger": 99.66,  "limit": 101.15, "est_inr": 3189,  "bucket": "Sector" },
+        { "gtt_id": 316059659, "symbol": "NSE:JUNIORBEES", "qty": 4,  "trigger": 758.79, "limit": 770.17, "est_inr": 3035,  "bucket": "Mid/Small" },
+        { "gtt_id": 316059660, "symbol": "NSE:ICICIB22",   "qty": 17, "trigger": 124.93, "limit": 126.80, "est_inr": 2124,  "bucket": "International" },
+        { "gtt_id": 315882294, "symbol": "NSE:LIQUIDBEES", "qty": 1,  "trigger": 994.99, "limit": 1009.92,"est_inr": 995,   "bucket": "Debt/Liquid", "note": "kept from Apr 21" }
+      ],
+      "sell_gtts_trailing_stops": [
+        { "gtt_id": 316059662, "symbol": "NSE:AXISBANK",  "qty": 10, "trigger": 1268, "limit": 1255, "peak": 1377.7, "note": "ratcheted from ₹1247" },
+        { "gtt_id": 316059663, "symbol": "NSE:ICICIBANK", "qty": 10, "trigger": 1278, "limit": 1265, "peak": 1388.4, "note": "ratcheted from ₹1248" },
+        { "gtt_id": 316059664, "symbol": "NSE:RELIANCE",  "qty": 22, "trigger": 1256, "limit": 1244, "peak": 1365.1, "note": "corrected GTT from ₹1237 to match portfolio_state" },
+        { "gtt_id": 316059666, "symbol": "NSE:TMCV",      "qty": 43, "trigger": 408,  "limit": 404,  "peak": 442.55, "note": "ratcheted from ₹407" }
+      ],
+      "total_buy_queued_inr": 21021,
+      "note": "All GTTs live on Kite. Buy GTTs fire if price touches trigger. Sell GTTs protect trailing gains."
+    },
+    {
       "timestamp": "2026-04-13T16:00:00+05:30",
       "action": "ANALYSIS_RUN",
       "note": "Dry run #1 — paper trades simulated. FII net seller (-1983 Cr), DII net buyer (+2432 Cr). Signals generated: GOLDBEES (Strong Buy), BANKBEES (Moderate Buy), NIFTYBEES (Watch)."
