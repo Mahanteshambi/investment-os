@@ -6,15 +6,15 @@
   "monthly_budget": {
     "total_inr": 400000,
     "month": "2026-04",
-    "deployed_inr": 246104,
-    "_deployed_note": "Estimated from Kite cash change: ₹254,534 (Apr 16) → ₹8,430 (Apr 20). T+1 confirmed purchases: NIFTYBEES+88, JUNIORBEES+10, BANKBEES×7, ICICIB22×40 (~₹40,694). ₹205,410 gap unexplained — Mahantesh to confirm if other purchases or withdrawal.",
-    "remaining_inr": 153896,
+    "deployed_inr": 278807,
+    "_deployed_note": "₹270,807 through Apr 22 T1 settlements + ~₹8,000 Apr 22 GTT executions (Mahantesh confirmed). Apr 23 GTTs queued ₹20,992 — not counted until triggered.",
+    "remaining_inr": 121193,
     "trading_days_total": 20,
-    "trading_days_elapsed": 13,
-    "trading_days_remaining": 6,
-    "daily_pacing_target_inr": 18456,
+    "trading_days_elapsed": 14,
+    "trading_days_remaining": 5,
+    "daily_pacing_target_inr": 20199,
     "full_deploy_deadline": "2026-04-30",
-    "pace_status": "ON TRACK — ₹18,456/day for 6 remaining days to deploy ₹1.08L (after today's ₹21K GTTs)",
+    "pace_status": "ON TRACK — ₹20,199/day for 5 remaining days (Apr 24-30). Apr 23 GTTs active.",
     "bucket_deployed": {
       "_note": "Approximate, based on T+1 purchases confirmed. Mahantesh to confirm full deployment per bucket.",
       "large_cap_inr": 24178,
@@ -69,10 +69,10 @@
   "trailing_stops": {
     "_note": "Set at -8% from peak for positions with >15% gain. Ratchet up every 5% gain. Updated by SKILL-06 weekly.",
     "positions": [
-      { "symbol": "AXISBANK",  "entry": 755,    "peak": 1379.6,  "stop": 1269, "gtt_id": 316059662, "current_ltp": 1379.6,  "pnl_pct": 82.7,  "buffer_pct": 8.01, "status": "ACTIVE — peak updated Apr 23, minor stop ratchet 1268→1269" },
-      { "symbol": "ICICIBANK", "entry": 731,    "peak": 1388.4,  "stop": 1278, "gtt_id": 316059663, "current_ltp": 1367.6,  "pnl_pct": 87.1,  "buffer_pct": 6.55, "status": "⚠ WATCH — price below peak, buffer tightening Apr 23" },
-      { "symbol": "RELIANCE",  "entry": 962.32, "peak": 1365.10, "stop": 1256, "gtt_id": 316059664, "current_ltp": 1362.1,  "pnl_pct": 41.5,  "buffer_pct": 7.79, "status": "ACTIVE — Apr 23" },
-      { "symbol": "TMCV",      "entry": 260.76, "peak": 447.8,   "stop": 412,  "gtt_id": 316059666, "current_ltp": 447.8,   "pnl_pct": 71.7,  "buffer_pct": 8.02, "status": "ACTIVE — peak hit 447.8 Apr 23, stop must update 408→412 (⚠ pending confirmation)" }
+      { "symbol": "AXISBANK",  "entry": 755,    "peak": 1379.6,  "stop": 1269, "gtt_id": 316237772, "current_ltp": 1379.6,  "pnl_pct": 82.7,  "buffer_pct": 8.01, "status": "ACTIVE — ratcheted Apr 23 (1268→1269, GTT replaced)" },
+      { "symbol": "ICICIBANK", "entry": 731,    "peak": 1388.4,  "stop": 1278, "gtt_id": 316059663, "current_ltp": 1367.6,  "pnl_pct": 87.1,  "buffer_pct": 6.55, "status": "⚠ WATCH — price below peak, buffer tightening" },
+      { "symbol": "RELIANCE",  "entry": 962.32, "peak": 1365.10, "stop": 1256, "gtt_id": 316059664, "current_ltp": 1362.1,  "pnl_pct": 41.5,  "buffer_pct": 7.79, "status": "ACTIVE" },
+      { "symbol": "TMCV",      "entry": 260.76, "peak": 447.8,   "stop": 412,  "gtt_id": 316237771, "current_ltp": 447.8,   "pnl_pct": 71.7,  "buffer_pct": 8.02, "status": "ACTIVE — ratcheted Apr 23 (408→412, GTT replaced)" }
     ]
   },
 
