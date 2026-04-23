@@ -3,143 +3,140 @@
   "_history_purpose": "FII/DII trend, macro trend (DXY/oil/yield), signal pattern, budget pace tracking",
 
   "current": {
-    "date": "2026-04-22",
-    "generated_at": "2026-04-22T08:00:00+08:00",
-    "next_market_open": "2026-04-22 11:45 MYT (Wednesday)",
-    "data_as_of": "2026-04-21 (last trading day)",
+    "date": "2026-04-23",
+    "generated_at": "2026-04-23T08:00:00+08:00",
+    "next_market_open": "2026-04-23 11:45 MYT (Thursday)",
+    "data_as_of": "2026-04-22 (last trading day)",
 
-    "fii_net_crore": -1918.99,
-    "dii_net_crore": 2221.27,
+    "fii_net_crore": -2078.36,
+    "dii_net_crore": -1048.17,
     "fii_stance": "SELLER",
-    "dii_stance": "BUYER",
-    "note_fii_dii": "FII broke 2-day buying streak on Apr 21. Sold ₹1919 Cr — likely profit-booking after ~9% Apr rally. DII strong counter-buy ₹2221 Cr. Market absorbed selling; NIFTYBEES still +0.88% on the day.",
+    "dii_stance": "SELLER",
+    "note_fii_dii": "BOTH FII AND DII SELLING on Apr 22 — first double-red day. FII sold ₹2078 Cr, DII sold ₹1048 Cr. Likely cause: quarterly earnings caution + global tariff noise. DII turn bearish is unusual — watch if this continues. NIFTYBEES fell 0.72% on Apr 22. ITBEES -3.63% with 2.6x normal volume = institutional exit in progress.",
 
     "macro": {
+      "_note": "Yahoo Finance geo-blocked on Apr 23. Using Apr 22 last known values. Update manually if major moves.",
       "dxy": 98.41,
-      "dxy_5d": [98.22, 98.10, 98.05, 98.41],
-      "dxy_signal": "BULLISH — below 100. Slight uptick today but structural tailwind for India/Gold intact.",
+      "dxy_5d": [98.22, 98.10, 98.05, 98.41, 98.41],
+      "dxy_signal": "BULLISH — below 100. Structural tailwind for India/Gold intact.",
       "us_10yr_pct": 4.292,
-      "us_10yr_5d": [4.282, 4.309, 4.246, 4.250, 4.292],
       "india_10yr_yield_pct": 7.0,
       "yield_spread_pct": 2.71,
       "yield_spread_zone": "2-3% = FII CAUTIOUS — spread stable, not narrowing further",
       "brent_crude_usd": 93.93,
-      "brent_5d": [99.39, 90.38, 95.48, 93.93],
-      "oil_signal": "⚠ ABOVE $90 — PRESSURE. Volatile: hit $99 Mon, crashed to $90 Tue, bounced to $94. Watch weekly close.",
+      "oil_signal": "⚠ ABOVE $90 — PRESSURE. Volatile week. Watch for close below $90.",
       "cape_ratio": 33,
       "cape_avg": 25,
       "cape_signal": "ELEVATED — favour systematic, not lumpsum aggression",
       "evi_zone": "NEUTRAL — check iciciprumf.com monthly"
     },
 
-    "global_signal": "NEUTRAL-BULLISH",
-    "global_signal_reason": "DXY below 100 supports India/Gold. FII paused buying (profit-booking). DII absorbing supply. Oil above $90 is a risk but domestic flows remain constructive. Final week of month — deploy per pacing rules regardless of dip.",
+    "global_signal": "NEUTRAL-BEARISH",
+    "global_signal_reason": "Both FII+DII sold on Apr 22 — unusual double-red. ITBEES institutional exit at 2.6x volume. DXY below 100 still structurally bullish. Final week of month — continue deploying per rules but expect some near-term volatility.",
 
     "instrument_analysis": {
-      "NIFTYBEES":  {
-        "month_open": 257.45, "ltp": 277.63, "prev_close": 275.21,
-        "dip_score_pct": -7.84, "dma_20_approx": 267.0, "momentum": "BULLISH",
-        "signal": "DEPLOY (final week)", "day_change_pct": 0.88
+      "NIFTYBEES": {
+        "month_open": 257.45, "ltp": 275.64, "prev_close": 275.64,
+        "dip_score_pct": -7.07, "dma_18": 267.09, "momentum": "BULLISH",
+        "signal": "DEPLOY (final week) — ⚠ GTT MISSED yesterday, place TODAY",
+        "apr22_change_pct": -0.72, "volume_note": "normal"
       },
-      "GOLDBEES":   {
-        "month_open": 123.37, "ltp": 125.22, "prev_close": 125.00,
-        "dip_score_pct": -1.50, "dma_20_approx": 123.5, "momentum": "BULLISH",
-        "signal": "DEPLOY — Gold bucket severely under-deployed", "day_change_pct": 0.18
+      "GOLDBEES": {
+        "month_open": 123.37, "ltp": 124.99, "prev_close": 124.99,
+        "dip_score_pct": -1.31, "dma_18": 122.64, "momentum": "BULLISH",
+        "signal": "DEPLOY — gold bucket key. Keep existing GTT 316059657.",
+        "apr22_change_pct": -0.18
       },
       "JUNIORBEES": {
-        "month_open": 669.66, "ltp": 762.61, "prev_close": 756.55,
-        "dip_score_pct": -13.88, "dma_20_approx": 705.0, "momentum": "BULLISH",
-        "signal": "DEPLOY (final week)", "day_change_pct": 0.72
+        "month_open": 669.66, "ltp": 768.27, "prev_close": 768.27,
+        "dip_score_pct": -14.73, "dma_20_approx": 705.0, "momentum": "BULLISH",
+        "signal": "DEPLOY (final week) — cancel stale GTT 316059659",
+        "apr22_change_pct": 0.74
       },
       "PSUBNKBEES": {
-        "month_open": 91.26, "ltp": 100.16, "prev_close": 99.31,
-        "dip_score_pct": -9.75, "dma_20_approx": 95.5, "momentum": "BULLISH",
-        "signal": "STRONG BUY — active sector score 8.4", "day_change_pct": 0.84
+        "month_open": 91.26, "ltp": 100.30, "prev_close": 100.30,
+        "dip_score_pct": -9.91, "dma_18": 95.33, "momentum": "STRONG BULLISH",
+        "signal": "STRONG BUY — active sector score 8.4. Cancel stale GTT 316059658.",
+        "apr22_change_pct": 0.14
       },
-      "ICICIB22":   {
-        "month_open": 116.65, "ltp": 125.56, "prev_close": 125.06,
-        "dip_score_pct": -7.63, "dma_20_approx": 119.5, "momentum": "BULLISH",
-        "signal": "DEPLOY (final week)", "day_change_pct": 0.46
+      "ICICIB22": {
+        "month_open": 116.65, "ltp": 125.76, "prev_close": 125.76,
+        "dip_score_pct": -7.85, "dma_20_approx": 120.0, "momentum": "BULLISH",
+        "signal": "DEPLOY (final week) — cancel stale GTT 316059660",
+        "apr22_change_pct": 0.05
       },
-      "BANKBEES":   {
-        "ltp": 591.06, "prev_close": 582.73, "momentum": "BULLISH",
-        "signal": "HOLD — score 5.6, rotation out", "day_change_pct": 1.29
+      "BANKBEES": {
+        "ltp": 588.90, "prev_close": 591.06, "momentum": "HOLD",
+        "signal": "HOLD — score 5.6, rotation out. 7 units settled.", "apr22_change_pct": -0.37
       },
-      "ITBEES":     {
-        "ltp": 35.00, "prev_close": 34.80, "momentum": "RECOVERING (below 200-DMA)",
-        "signal": "AVOID — month 1 of sub-4 watch (score 2.9). STOP NEW BUYS.", "day_change_pct": 0.57
+      "ITBEES": {
+        "ltp": 33.69, "prev_close": 34.96, "dma_18": 33.94, "momentum": "BEARISH (below DMA)",
+        "signal": "AVOID — Month 1 of sub-4 watch (score 2.9). -3.63% with 2.6x volume on Apr 22 = institutional exit.",
+        "consecutive_below4_months": 1, "apr22_change_pct": -3.63, "volume_flag": "INSTITUTIONAL_SELLING"
       },
       "PHARMABEES": {
-        "ltp": 23.05, "prev_close": 23.02, "momentum": "FLAT",
-        "signal": "HOLD — backup sector. No new buy this month.", "day_change_pct": 0.17
+        "ltp": 23.00, "prev_close": 23.05, "momentum": "FLAT",
+        "signal": "HOLD — score 7.9 backup. No new buy Apr.", "apr22_change_pct": -0.22
       },
       "LIQUIDBEES": {
         "ltp": 999.99, "momentum": "STABLE",
-        "signal": "BUY — existing GTT 315882294 active"
+        "signal": "BUY — keep existing GTT 315882294"
       }
     },
 
     "buy_recommendations": [
-      { "rank": 1, "symbol": "NSE:NIFTYBEES",  "signal": "DEPLOY",      "qty": 31, "trigger_price": 276.24, "limit_price": 280.38, "est_total_inr": 8563,  "bucket": "Large Cap (40%)",        "platform": "Kite CNC GTT", "action": "CANCEL GTT 315882285 first" },
-      { "rank": 2, "symbol": "NSE:GOLDBEES",   "signal": "DEPLOY",      "qty": 25, "trigger_price": 124.59, "limit_price": 126.46, "est_total_inr": 3115,  "bucket": "Gold (15%)",             "platform": "Kite CNC GTT", "action": "CANCEL GTT 315882286 first" },
-      { "rank": 3, "symbol": "NSE:PSUBNKBEES", "signal": "STRONG BUY", "qty": 32, "trigger_price": 99.66,  "limit_price": 101.15, "est_total_inr": 3189,  "bucket": "Sector (15%) — active",  "platform": "Kite CNC GTT", "action": "CANCEL GTT 315882288 first" },
-      { "rank": 4, "symbol": "NSE:JUNIORBEES", "signal": "DEPLOY",      "qty": 4,  "trigger_price": 758.79, "limit_price": 770.17, "est_total_inr": 3035,  "bucket": "Mid/Small (15%)",        "platform": "Kite CNC GTT", "action": "CANCEL GTT 315882290 first" },
-      { "rank": 5, "symbol": "NSE:ICICIB22",   "signal": "DEPLOY",      "qty": 17, "trigger_price": 124.93, "limit_price": 126.80, "est_total_inr": 2124,  "bucket": "International (10%)",    "platform": "Kite CNC GTT", "action": "CANCEL GTT 315882292 first" },
-      { "rank": 6, "symbol": "NSE:LIQUIDBEES", "signal": "BUY",         "qty": 1,  "trigger_price": 994.99, "limit_price": 1009.92,"est_total_inr": 995,   "bucket": "Debt/Liquid (5%)",       "platform": "Kite CNC GTT", "action": "KEEP existing GTT 315882294" }
+      { "rank": 1, "symbol": "NSE:NIFTYBEES",  "signal": "DEPLOY",      "qty": 31, "trigger_price": 274.26, "limit_price": 278.37, "est_total_inr": 8502,  "bucket": "Large Cap (40%)",       "platform": "Kite CNC GTT", "action": "PLACE NEW — no existing GTT (missed yesterday)" },
+      { "rank": 2, "symbol": "NSE:PSUBNKBEES", "signal": "STRONG BUY", "qty": 32, "trigger_price": 99.85,  "limit_price": 101.35, "est_total_inr": 3195,  "bucket": "Sector (15%) — active", "platform": "Kite CNC GTT", "action": "CANCEL GTT 316059658 first (trigger 99.66 too low)" },
+      { "rank": 3, "symbol": "NSE:JUNIORBEES", "signal": "DEPLOY",      "qty": 4,  "trigger_price": 764.43, "limit_price": 776.10, "est_total_inr": 3058,  "bucket": "Mid/Small (15%)",       "platform": "Kite CNC GTT", "action": "CANCEL GTT 316059659 first (trigger 758.79 too low)" },
+      { "rank": 4, "symbol": "NSE:ICICIB22",   "signal": "DEPLOY",      "qty": 17, "trigger_price": 125.13, "limit_price": 127.01, "est_total_inr": 2127,  "bucket": "International (10%)",   "platform": "Kite CNC GTT", "action": "CANCEL GTT 316059660 first (trigger 124.93 too low)" },
+      { "rank": 5, "symbol": "NSE:GOLDBEES",   "signal": "DEPLOY",      "qty": 25, "trigger_price": 124.59, "limit_price": 126.46, "est_total_inr": 3115,  "bucket": "Gold (15%)",            "platform": "Kite CNC GTT", "action": "KEEP GTT 316059657 (trigger 124.59 — higher, more likely to fire)" },
+      { "rank": 6, "symbol": "NSE:LIQUIDBEES", "signal": "BUY",         "qty": 1,  "trigger_price": 994.99, "limit_price": 1009.92,"est_total_inr": 995,   "bucket": "Debt/Liquid (5%)",      "platform": "Kite CNC GTT", "action": "KEEP existing GTT 315882294" }
     ],
 
     "gtt_housekeeping": {
       "cancel_stale_buy_gtts": [
-        { "gtt_id": 315882285, "symbol": "NIFTYBEES",  "reason": "Trigger ₹273.83 based on Apr 20 close — stale for Apr 22" },
-        { "gtt_id": 315882286, "symbol": "GOLDBEES",   "reason": "Trigger ₹124.38 based on Apr 20 close — stale for Apr 22" },
-        { "gtt_id": 315882288, "symbol": "PSUBNKBEES", "reason": "Trigger ₹98.78 based on Apr 21 pre-open — stale for Apr 22" },
-        { "gtt_id": 315882290, "symbol": "JUNIORBEES", "reason": "Trigger ₹752.77 based on Apr 20 close — stale for Apr 22" },
-        { "gtt_id": 315882292, "symbol": "ICICIB22",   "reason": "Trigger ₹124.44 based on Apr 20 close — stale for Apr 22" }
+        { "gtt_id": 316059658, "symbol": "PSUBNKBEES", "reason": "Trigger 99.66 based on Apr 22 intraday — too low vs close 100.30, won't fire at open" },
+        { "gtt_id": 316059659, "symbol": "JUNIORBEES", "reason": "Trigger 758.79 based on Apr 21 close — too low vs Apr 22 close 768.27" },
+        { "gtt_id": 316059660, "symbol": "ICICIB22",   "reason": "Trigger 124.93 based on Apr 22 intraday — too low vs close 125.76" }
       ],
       "keep_buy_gtts": [
-        { "gtt_id": 315882294, "symbol": "LIQUIDBEES", "reason": "Trigger ₹994.99 still valid" }
+        { "gtt_id": 316059657, "symbol": "GOLDBEES",   "reason": "Trigger 124.59 = 0.32% below close 124.99 — higher trigger = more likely to fire" },
+        { "gtt_id": 315882294, "symbol": "LIQUIDBEES", "reason": "Trigger 994.99 still valid" }
       ]
     },
 
     "trailing_stop_ratchets": [
-      { "symbol": "AXISBANK",  "old_gtt": 315269606, "old_stop": 1247, "new_stop": 1268, "new_limit": 1255, "new_peak": 1377.7, "buffer_pct": 7.97, "action": "CANCEL + REPLACE" },
-      { "symbol": "ICICIBANK", "old_gtt": 315882316, "old_stop": 1248, "new_stop": 1278, "new_limit": 1265, "new_peak": 1388.4, "buffer_pct": 7.95, "action": "CANCEL + REPLACE" },
-      { "symbol": "RELIANCE",  "old_gtt": 315269660, "old_stop": 1237, "new_stop": 1256, "new_limit": 1244, "note": "Correcting GTT to match portfolio_state stop ₹1256 (set Apr 20)", "buffer_pct": 7.17, "action": "CANCEL + REPLACE" },
-      { "symbol": "TMCV",      "old_gtt": 315269694, "old_stop": 407,  "new_stop": 408,  "new_limit": 404,  "new_peak": 442.55, "buffer_pct": 7.81, "action": "CANCEL + REPLACE" }
+      { "symbol": "TMCV",     "old_gtt": 316059666, "old_stop": 408,  "new_stop": 412,  "new_limit": 408,  "new_peak": 447.8, "buffer_pct": 8.02, "action": "CANCEL + REPLACE — peak hit 447.8, stop floor = 412 (-8%)" },
+      { "symbol": "AXISBANK", "old_gtt": 316059662, "old_stop": 1268, "new_stop": 1269, "new_limit": 1256, "new_peak": 1379.6, "buffer_pct": 8.01, "action": "MINOR UPDATE — peak hit 1379.6, stop floor = 1269. 1-point diff, optional." }
     ],
 
     "hold_list": ["BANKBEES", "PHARMABEES", "ITBEES (no new buys)", "AXISBANK", "ICICIBANK", "RELIANCE", "TMCV", "KOTAKBANK", "HDFCBANK", "HINDUNILVR"],
     "exit_alerts": [],
 
     "trailing_stop_status": [
-      { "symbol": "AXISBANK",  "entry": 755,    "peak": 1377.7,  "stop_new": 1268, "current": 1377.7,  "pnl_pct": 82.5, "buffer_pct": 7.97, "status": "RATCHET NEEDED" },
-      { "symbol": "ICICIBANK", "entry": 731,    "peak": 1388.4,  "stop_new": 1278, "current": 1388.4,  "pnl_pct": 89.9, "buffer_pct": 7.95, "status": "RATCHET NEEDED" },
-      { "symbol": "RELIANCE",  "entry": 962.32, "peak": 1365.10, "stop_new": 1256, "current": 1353.3,  "pnl_pct": 40.6, "buffer_pct": 7.17, "status": "GTT CORRECTION NEEDED" },
-      { "symbol": "TMCV",      "entry": 260.76, "peak": 442.55,  "stop_new": 408,  "current": 442.55,  "pnl_pct": 69.7, "buffer_pct": 7.81, "status": "RATCHET NEEDED" }
+      { "symbol": "AXISBANK",  "entry": 755,    "peak": 1379.6,  "stop_new": 1269, "current": 1379.6,  "pnl_pct": 82.7, "buffer_pct": 8.01, "status": "NEW HIGH — minor ratchet" },
+      { "symbol": "ICICIBANK", "entry": 731,    "peak": 1388.4,  "stop": 1278,     "current": 1367.6,  "pnl_pct": 87.1, "buffer_pct": 6.55, "status": "⚠ WATCH — buffer tightening (price below peak)" },
+      { "symbol": "RELIANCE",  "entry": 962.32, "peak": 1365.10, "stop": 1256,     "current": 1362.1,  "pnl_pct": 41.5, "buffer_pct": 7.79, "status": "SAFE" },
+      { "symbol": "TMCV",      "entry": 260.76, "peak": 447.8,   "stop_new": 412,  "current": 447.8,   "pnl_pct": 71.7, "buffer_pct": 8.02, "status": "NEW HIGH — update stop 408→412" }
     ],
 
     "live_holdings_summary": {
-      "cash_inr": 183676.30,
-      "note": "₹200K Apr transfer settled. ₹183,676 available. Fully funded for remaining ₹1,29,193 budget.",
-      "t1_settled_today": [
-        { "symbol": "NIFTYBEES",  "qty_t1": 32,  "note": "From Apr 20 GTT exec" },
-        { "symbol": "JUNIORBEES", "qty_t1": 4,   "note": "From Apr 20 GTT exec" },
-        { "symbol": "GOLDBEES",   "qty_t1": 60,  "note": "From Apr 20 GTT exec (60 vs 50 recommended — Mahantesh to confirm)" },
-        { "symbol": "ICICIB22",   "qty_t1": 17,  "note": "From Apr 20 GTT exec" },
-        { "symbol": "PSUBNKBEES", "qty_t1": 34,  "note": "From Apr 20 GTT exec" }
-      ]
+      "cash_inr_kite": 0,
+      "cash_note": "⚠ Margins API returned ₹0 — likely post-login data glitch. Last known: ₹183,676 (Apr 22). Apr 22 GTTs did NOT trigger (all still active). Expected cash: ~₹183,676. Mahantesh to verify in Kite app.",
+      "total_holdings_value_approx_inr": 533924,
+      "total_pnl_inr": 50504
     },
 
     "budget_status": {
       "total_budget_inr": 400000,
       "deployed_inr": 270807,
-      "deployed_note": "₹246,104 as of Apr 20 + ~₹24,703 from Apr 21 T1 settlements",
+      "deployed_note": "No new GTT executions on Apr 22 (all triggers above closing prices). Same as Apr 22 brief.",
       "remaining_inr": 129193,
-      "trading_days_remaining": 7,
-      "daily_target_inr": 18456,
-      "today_gtts_inr": 21021,
+      "trading_days_remaining": 6,
+      "daily_target_inr": 21532,
+      "today_gtts_inr": 20992,
       "pace": "ON TRACK — final week, deploying regardless of dip",
-      "kite_cash_inr": 183676.30
+      "missed_purchase_alert": "NIFTYBEES GTT not placed Apr 22 — potential missed fill at ~275.52 open"
     },
 
     "sector_allocation_rule": "full",
@@ -148,6 +145,25 @@
   },
 
   "history": [
+    {
+      "date": "2026-04-23",
+      "fii_net_crore": -2078.36,
+      "dii_net_crore": -1048.17,
+      "fii_stance": "SELLER",
+      "dii_stance": "SELLER",
+      "macro": { "dxy": 98.41, "us_10yr": 4.292, "brent_usd": 93.93, "yield_spread": 2.71 },
+      "global_signal": "NEUTRAL-BEARISH",
+      "buy_signals": ["NIFTYBEES", "GOLDBEES", "PSUBNKBEES", "JUNIORBEES", "ICICIB22", "LIQUIDBEES"],
+      "exit_alerts": [],
+      "below4_sectors": ["ITBEES"],
+      "niftybees_ltp": 275.64,
+      "goldbees_ltp": 124.99,
+      "total_gtt_inr": 20992,
+      "budget_remaining_inr": 129193,
+      "kite_cash_inr_note": "API returned 0 — likely glitch, expected ~183676",
+      "pace": "ON TRACK — final week",
+      "flags": ["BOTH_FII_DII_SELLER", "ITBEES_INSTITUTIONAL_EXIT", "NIFTYBEES_GTT_MISSED_APR22"]
+    },
     {
       "date": "2026-04-22",
       "fii_net_crore": -1918.99,

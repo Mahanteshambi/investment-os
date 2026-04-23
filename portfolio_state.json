@@ -1,6 +1,6 @@
 {
   "_comment": "Master state file. Holdings/cash = live from Kite MCP. Non-Kite assets = Google Drive sheet [google_sheet_id from user_config.json]. This file tracks: budget, trailing stops, FD calendar, execution log.",
-  "last_updated": "2026-04-22",
+  "last_updated": "2026-04-23",
   "mode": "advisory",
 
   "monthly_budget": {
@@ -69,10 +69,10 @@
   "trailing_stops": {
     "_note": "Set at -8% from peak for positions with >15% gain. Ratchet up every 5% gain. Updated by SKILL-06 weekly.",
     "positions": [
-      { "symbol": "AXISBANK",  "entry": 755,    "peak": 1377.7,  "stop": 1268, "gtt_id": 316059662, "current_ltp": 1377.7,  "pnl_pct": 82.5,  "buffer_pct": 7.97, "status": "ACTIVE — ratcheted Apr 22" },
-      { "symbol": "ICICIBANK", "entry": 731,    "peak": 1388.4,  "stop": 1278, "gtt_id": 316059663, "current_ltp": 1388.4,  "pnl_pct": 89.9,  "buffer_pct": 7.95, "status": "ACTIVE — ratcheted Apr 22" },
-      { "symbol": "RELIANCE",  "entry": 962.32, "peak": 1365.10, "stop": 1256, "gtt_id": 316059664, "current_ltp": 1353.3,  "pnl_pct": 40.6,  "buffer_pct": 7.17, "status": "ACTIVE — GTT corrected Apr 22" },
-      { "symbol": "TMCV",      "entry": 260.76, "peak": 442.55,  "stop": 408,  "gtt_id": 316059666, "current_ltp": 442.55,  "pnl_pct": 69.7,  "buffer_pct": 7.81, "status": "ACTIVE — ratcheted Apr 22" }
+      { "symbol": "AXISBANK",  "entry": 755,    "peak": 1379.6,  "stop": 1269, "gtt_id": 316059662, "current_ltp": 1379.6,  "pnl_pct": 82.7,  "buffer_pct": 8.01, "status": "ACTIVE — peak updated Apr 23, minor stop ratchet 1268→1269" },
+      { "symbol": "ICICIBANK", "entry": 731,    "peak": 1388.4,  "stop": 1278, "gtt_id": 316059663, "current_ltp": 1367.6,  "pnl_pct": 87.1,  "buffer_pct": 6.55, "status": "⚠ WATCH — price below peak, buffer tightening Apr 23" },
+      { "symbol": "RELIANCE",  "entry": 962.32, "peak": 1365.10, "stop": 1256, "gtt_id": 316059664, "current_ltp": 1362.1,  "pnl_pct": 41.5,  "buffer_pct": 7.79, "status": "ACTIVE — Apr 23" },
+      { "symbol": "TMCV",      "entry": 260.76, "peak": 447.8,   "stop": 412,  "gtt_id": 316059666, "current_ltp": 447.8,   "pnl_pct": 71.7,  "buffer_pct": 8.02, "status": "ACTIVE — peak hit 447.8 Apr 23, stop must update 408→412 (⚠ pending confirmation)" }
     ]
   },
 
