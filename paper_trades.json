@@ -195,6 +195,35 @@
 
   "trade_log": [
     {
+      "timestamp": "2026-04-23T05:58:00+05:30",
+      "action": "GTT_PLACED_REAL",
+      "session": "SKILL-02 Apr 23 | Confirmed by Mahantesh",
+      "cancelled_gtts": [
+        { "gtt_id": 316059658, "symbol": "NSE:PSUBNKBEES", "reason": "stale trigger 99.66 — too low for Apr 23" },
+        { "gtt_id": 316059659, "symbol": "NSE:JUNIORBEES", "reason": "stale trigger 758.79 — too low for Apr 23" },
+        { "gtt_id": 316059660, "symbol": "NSE:ICICIB22",   "reason": "stale trigger 124.93 — too low for Apr 23" },
+        { "gtt_id": 316059662, "symbol": "NSE:AXISBANK",   "reason": "trailing stop ratchet 1268→1269 (peak 1379.6)" },
+        { "gtt_id": 316059666, "symbol": "NSE:TMCV",       "reason": "trailing stop ratchet 408→412 (peak 447.8)" }
+      ],
+      "buy_gtts": [
+        { "gtt_id": 316237766, "symbol": "NSE:NIFTYBEES",  "qty": 31, "trigger": 274.26, "limit": 278.37, "est_inr": 8502,  "bucket": "Large Cap",     "note": "NEW — missed Apr 22, placed today" },
+        { "gtt_id": 316237767, "symbol": "NSE:PSUBNKBEES", "qty": 32, "trigger": 99.85,  "limit": 101.35, "est_inr": 3195,  "bucket": "Sector",        "note": "replaced 316059658" },
+        { "gtt_id": 316237769, "symbol": "NSE:JUNIORBEES", "qty": 4,  "trigger": 764.43, "limit": 776.10, "est_inr": 3058,  "bucket": "Mid/Small",     "note": "replaced 316059659" },
+        { "gtt_id": 316237770, "symbol": "NSE:ICICIB22",   "qty": 17, "trigger": 125.13, "limit": 127.01, "est_inr": 2127,  "bucket": "International", "note": "replaced 316059660" },
+        { "gtt_id": 316059657, "symbol": "NSE:GOLDBEES",   "qty": 25, "trigger": 124.59, "limit": 126.46, "est_inr": 3115,  "bucket": "Gold",          "note": "KEPT from Apr 22 — trigger still valid" },
+        { "gtt_id": 315882294, "symbol": "NSE:LIQUIDBEES", "qty": 1,  "trigger": 994.99, "limit": 1009.92,"est_inr": 995,   "bucket": "Debt/Liquid",   "note": "KEPT from Apr 21" }
+      ],
+      "sell_gtts_trailing_stops": [
+        { "gtt_id": 316237772, "symbol": "NSE:AXISBANK",  "qty": 10, "trigger": 1269, "limit": 1256, "peak": 1379.6, "note": "ratcheted from 1268" },
+        { "gtt_id": 316237771, "symbol": "NSE:TMCV",      "qty": 43, "trigger": 412,  "limit": 408,  "peak": 447.8,  "note": "ratcheted from 408" },
+        { "gtt_id": 316059663, "symbol": "NSE:ICICIBANK", "qty": 10, "trigger": 1278, "limit": 1265, "peak": 1388.4, "note": "unchanged" },
+        { "gtt_id": 316059664, "symbol": "NSE:RELIANCE",  "qty": 22, "trigger": 1256, "limit": 1244, "peak": 1365.1, "note": "unchanged" }
+      ],
+      "total_buy_queued_inr": 20992,
+      "budget_remaining_after_inr": 121193,
+      "note": "Both FII+DII sold Apr 22. ITBEES institutional exit. GOLDBEES GTT kept (trigger 124.59 — Apr 22 low was 124.47, may have fired). TMCV+AXISBANK stops ratcheted on new peaks."
+    },
+    {
       "timestamp": "2026-04-22T04:59:00+05:30",
       "action": "GTT_PLACED_REAL",
       "session": "SKILL-02 Apr 22 | Confirmed by Mahantesh",
