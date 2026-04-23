@@ -6,8 +6,8 @@
   "monthly_budget": {
     "total_inr": 400000,
     "month": "2026-04",
-    "deployed_inr": 278807,
-    "_deployed_note": "₹270,807 through Apr 22 T1 settlements + ~₹8,000 Apr 22 GTT executions (Mahantesh confirmed). Apr 23 GTTs queued ₹20,992 — not counted until triggered.",
+    "deployed_inr": 279348,
+    "_deployed_note": "₹270,807 through Apr 22 T1 settlements + ₹8,541 (NIFTYBEES 31 qty @ ~₹275.52, Apr 22 GTT fired at open). GTT executed and disappeared from active list — confirmed by Mahantesh. Apr 23 GTTs queued ₹20,992 — not counted until triggered.",
     "remaining_inr": 121193,
     "trading_days_total": 20,
     "trading_days_elapsed": 14,
@@ -17,7 +17,7 @@
     "pace_status": "ON TRACK — ₹20,199/day for 5 remaining days (Apr 24-30). Apr 23 GTTs active.",
     "bucket_deployed": {
       "_note": "Approximate, based on T+1 purchases confirmed. Mahantesh to confirm full deployment per bucket.",
-      "large_cap_inr": 24178,
+      "large_cap_inr": 32719,
       "mid_small_inr": 7486,
       "sector_inr": 4055,
       "gold_inr": 0,
