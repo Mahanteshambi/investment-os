@@ -1,27 +1,27 @@
 {
   "_comment": "Master state file. Holdings/cash = live from Kite MCP. Non-Kite assets = Google Drive sheet [google_sheet_id from user_config.json]. This file tracks: budget, trailing stops, FD calendar, execution log.",
-  "last_updated": "2026-04-23",
+  "last_updated": "2026-04-24",
   "mode": "advisory",
 
   "monthly_budget": {
     "total_inr": 400000,
     "month": "2026-04",
-    "deployed_inr": 279348,
-    "_deployed_note": "₹270,807 through Apr 22 T1 settlements + ₹8,541 (NIFTYBEES 31 qty @ ~₹275.52, Apr 22 GTT fired at open). GTT executed and disappeared from active list — confirmed by Mahantesh. Apr 23 GTTs queued ₹20,992 — not counted until triggered.",
-    "remaining_inr": 121193,
+    "deployed_inr": 299251,
+    "_deployed_note": "₹279,348 through Apr 22 + Apr 23 GTTs all fired at Apr 24 open: NIFTYBEES 31×₹273.76=₹8,487 (T1 Apr 24), GOLDBEES 25×₹124.08=₹3,102, JUNIORBEES 4×₹759.65=₹3,039, PSUBNKBEES 32×₹98.11=₹3,140, ICICIB22 17×₹125.59=₹2,135. All GTTs fired confirmed (none active in get_gtts).",
+    "remaining_inr": 100749,
     "trading_days_total": 20,
-    "trading_days_elapsed": 14,
-    "trading_days_remaining": 5,
-    "daily_pacing_target_inr": 20199,
+    "trading_days_elapsed": 15,
+    "trading_days_remaining": 4,
+    "daily_pacing_target_inr": 25187,
     "full_deploy_deadline": "2026-04-30",
-    "pace_status": "ON TRACK — ₹20,199/day for 5 remaining days (Apr 24-30). Apr 23 GTTs active.",
+    "pace_status": "ON TRACK — ₹25,187/day for 4 remaining days (Apr 25, 28, 29, 30). Gold bucket behind — prioritising GOLDBEES.",
     "bucket_deployed": {
-      "_note": "Approximate, based on T+1 purchases confirmed. Mahantesh to confirm full deployment per bucket.",
-      "large_cap_inr": 32719,
-      "mid_small_inr": 7486,
-      "sector_inr": 4055,
-      "gold_inr": 0,
-      "international_inr": 4975,
+      "_note": "Approximate April 2026 deployments. Gold underreported — GOLDBEES 60 settled + 25 T1 = ~₹10,604 deployed in April. Mahantesh to reconcile at month-end.",
+      "large_cap_inr": 41206,
+      "mid_small_inr": 10525,
+      "sector_inr": 7195,
+      "gold_inr": 10604,
+      "international_inr": 7110,
       "debt_liquid_inr": 0
     },
     "bucket_target_inr": {
@@ -35,11 +35,11 @@
   },
 
   "kite_account": {
-    "_synced": "2026-04-20 via SKILL-06",
+    "_synced": "2026-04-24 via SKILL-02",
     "user_id": "[KITE_ACCOUNT_ID]",
-    "available_cash_inr": 8429.80,
-    "holdings_value_inr": 508789,
-    "total_equity_inr": 517219
+    "available_cash_inr": 155137.70,
+    "holdings_value_inr": 538408,
+    "total_equity_inr": 693546
   },
 
   "kite_holdings_snapshot": {
@@ -69,35 +69,37 @@
   "trailing_stops": {
     "_note": "Set at -8% from peak for positions with >15% gain. Ratchet up every 5% gain. Updated by SKILL-06 weekly.",
     "positions": [
-      { "symbol": "AXISBANK",  "entry": 755,    "peak": 1379.6,  "stop": 1269, "gtt_id": 316237772, "current_ltp": 1379.6,  "pnl_pct": 82.7,  "buffer_pct": 8.01, "status": "ACTIVE — ratcheted Apr 23 (1268→1269, GTT replaced)" },
-      { "symbol": "ICICIBANK", "entry": 731,    "peak": 1388.4,  "stop": 1278, "gtt_id": 316059663, "current_ltp": 1367.6,  "pnl_pct": 87.1,  "buffer_pct": 6.55, "status": "⚠ WATCH — price below peak, buffer tightening" },
-      { "symbol": "RELIANCE",  "entry": 962.32, "peak": 1365.10, "stop": 1256, "gtt_id": 316059664, "current_ltp": 1362.1,  "pnl_pct": 41.5,  "buffer_pct": 7.79, "status": "ACTIVE" },
-      { "symbol": "TMCV",      "entry": 260.76, "peak": 447.8,   "stop": 412,  "gtt_id": 316237771, "current_ltp": 447.8,   "pnl_pct": 71.7,  "buffer_pct": 8.02, "status": "ACTIVE — ratcheted Apr 23 (408→412, GTT replaced)" }
+      { "symbol": "AXISBANK",  "entry": 755,    "peak": 1379.6,  "stop": 1269, "gtt_id": 316237772, "current_ltp": 1369.6,  "pnl_pct": 81.4,  "buffer_pct": 7.34, "status": "SAFE" },
+      { "symbol": "ICICIBANK", "entry": 731,    "peak": 1388.4,  "stop": 1278, "gtt_id": 316059663, "current_ltp": 1347.75, "pnl_pct": 84.4,  "buffer_pct": 5.18, "status": "⚠ WATCH — buffer tightening. Peak 1388, now 1347." },
+      { "symbol": "RELIANCE",  "entry": 962.32, "peak": 1362.9,  "stop": 1256, "gtt_id": 316059664, "current_ltp": 1343.1,  "pnl_pct": 39.6,  "buffer_pct": 6.48, "status": "SAFE" },
+      { "symbol": "TMCV",      "entry": 260.76, "peak": 447.8,   "stop": 412,  "gtt_id": 316237771, "current_ltp": 431.7,   "pnl_pct": 65.6,  "buffer_pct": 4.56, "status": "⚠ WATCH — -3.60% Apr 24. Crude $106 = CV sector headwind. Buffer tightening." }
     ]
   },
 
   "signals": {
     "_note": "Updated daily by SKILL-02. FII/DII from NSE API. Macro from Yahoo Finance.",
-    "fii_stance": "SELLER",
-    "dii_stance": "BUYER",
-    "last_fii_net_crore": -1918.99,
-    "last_dii_net_crore": 2221.27,
+    "fii_stance": "BUYER",
+    "dii_stance": "SELLER",
+    "last_fii_net_crore": 941.35,
+    "last_dii_net_crore": -3254.71,
     "active_sector_etf": "NSE:PSUBNKBEES",
     "active_sector_score": 8.4,
-    "signal_date": "2026-04-22",
+    "signal_date": "2026-04-24",
     "macro": {
-      "_note": "DXY/US10yr/Oil fetched live by SKILL-02. India10yr updated manually when RBI changes rate.",
-      "dxy": 98.41,
-      "dxy_signal": "BULLISH — below 100",
-      "us_10yr_yield_pct": 4.292,
+      "_note": "DXY/US10yr/Oil fetched live by SKILL-02 Apr 24. India10yr updated manually when RBI changes rate.",
+      "dxy": 98.82,
+      "dxy_5d": [98.05, 98.41, 98.59, 98.82],
+      "dxy_signal": "BULLISH (below 100) — but RISING. Tailwind eroding.",
+      "us_10yr_yield_pct": 4.323,
       "india_10yr_yield_pct": 7.0,
-      "yield_spread_pct": 2.71,
-      "yield_spread_zone": "2-3% = FII CAUTIOUS (as of Apr 2026)",
-      "brent_crude_usd": 93.93,
-      "oil_signal": "⚠ ABOVE $90 — PRESSURE",
+      "yield_spread_pct": 2.677,
+      "yield_spread_zone": "2-3% = FII CAUTIOUS — NARROWING",
+      "brent_crude_usd": 106.16,
+      "brent_5d": [95.48, 98.48, 101.91, 106.16],
+      "oil_signal": "⚠⚠ MAJOR SPIKE — $106.16/barrel. +12.9% in 4 days. India CAD/rupee/inflation risk.",
       "cape_ratio": 33,
       "cape_avg": 25,
-      "cape_signal": "ELEVATED — favour value/quality, not high-PE growth",
+      "cape_signal": "ELEVATED — favour systematic, not lumpsum aggression",
       "evi_zone": "NEUTRAL (market recovered from sub-100 in early Apr 2026)"
     }
   },
