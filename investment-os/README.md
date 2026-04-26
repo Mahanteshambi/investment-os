@@ -42,6 +42,28 @@ cd "investment-os/backend"
 uv run seed-data --reset --days 60
 ```
 
+Load real data from Kite + Google Sheets:
+
+1. Create `investment-os/backend/.env` from `.env.example`
+2. Fill:
+   - `KITE_API_KEY`
+   - `KITE_ACCESS_TOKEN`
+   - `GOOGLE_SHEETS_CREDENTIALS_JSON` (service-account JSON path)
+   - `GOOGLE_SHEET_ID` (already set to your portfolio sheet)
+3. Start backend, then trigger:
+
+```bash
+curl -X POST http://localhost:8000/api/sync \
+  -H "Content-Type: application/json" \
+  -d '{"sources":["all"]}'
+```
+
+Check ingestion status:
+
+```bash
+curl http://localhost:8000/api/sync/status
+```
+
 ## 2) Run Frontend
 
 Use `pnpm` only (do not use npm in this workspace path).
@@ -59,3 +81,4 @@ Open `http://localhost:3000`.
 - Dev/build scripts use webpack mode to avoid Turbopack path issues.
 - API base URL defaults to `http://localhost:8000`.
 - To override: set `NEXT_PUBLIC_API_URL`.
+- Backend now fails sync with clear errors if Kite/Google credentials are missing.

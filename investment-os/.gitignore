@@ -1,0 +1,29 @@
+# Python
+**/__pycache__/
+**/*.py[cod]
+**/.pytest_cache/
+**/.ruff_cache/
+backend/.venv/
+
+# Environment and local secrets
+**/.env
+**/.env.*
+!backend/.env.example
+backend/credentials/
+backend/*.json
+
+# Local databases and logs
+backend/data/*.duckdb
+backend/data/*.duckdb.wal
+backend/data/*.duckdb-shm
+backend/data/*.duckdb-wal
+*.log
+
+# Node / Next
+frontend/node_modules/
+frontend/.next/
+frontend/out/
+frontend/tsconfig.tsbuildinfo
+
+# Package manager artifacts
+.pnpm-store/
