@@ -5,6 +5,7 @@ CREATE TABLE IF NOT EXISTS holdings (
     asset_class VARCHAR NOT NULL,
     sub_class VARCHAR,
     source VARCHAR NOT NULL,
+    platform VARCHAR,
     quantity DECIMAL(18,4),
     avg_cost DECIMAL(18,4),
     current_price DECIMAL(18,4),

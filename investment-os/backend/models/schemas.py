@@ -9,6 +9,7 @@ class HoldingBase(BaseModel):
     asset_class: str  # 'equity' | 'mf' | 'etf' | 'gold' | 'cash' | 'debt'
     sub_class: Optional[str] = None
     source: str  # 'kite' | 'sheets' | 'manual'
+    platform: Optional[str] = None
     quantity: Optional[float] = None
     avg_cost: Optional[float] = None
     current_price: Optional[float] = None
@@ -89,6 +90,21 @@ class SyncStatus(BaseModel):
     records_updated: int
     synced_at: Optional[datetime] = None
     error_message: Optional[str] = None
+
+
+class KiteLoginURLResponse(BaseModel):
+    login_url: str
+
+
+class KiteSessionRequest(BaseModel):
+    request_token: str
+    persist: bool = True
+
+
+class KiteSessionResponse(BaseModel):
+    status: str
+    message: str
+    expires_at: Optional[datetime] = None
 
 
 class AgentSignal(BaseModel):

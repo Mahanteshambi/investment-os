@@ -19,15 +19,16 @@ def _row_to_holding(row) -> HoldingResponse:
         asset_class=row[3],
         sub_class=row[4],
         source=row[5],
-        quantity=row[6],
-        avg_cost=row[7],
-        current_price=row[8],
-        current_value=row[9],
-        invested_value=row[10],
-        unrealized_pnl=row[11],
-        unrealized_pnl_pct=row[12],
-        sector=row[13],
-        last_updated=row[14],
+        platform=row[6],
+        quantity=row[7],
+        avg_cost=row[8],
+        current_price=row[9],
+        current_value=row[10],
+        invested_value=row[11],
+        unrealized_pnl=row[12],
+        unrealized_pnl_pct=row[13],
+        sector=row[14],
+        last_updated=row[15],
     )
 
 
@@ -61,14 +62,21 @@ def get_holdings(
     order_sql = f"ORDER BY {sort_col} DESC" if sort in SORT_MAP else f"ORDER BY {sort_col} ASC"
 
     rows = db.execute(
-        f"SELECT * FROM holdings {where_sql} {order_sql}", params
+        f"""SELECT id, asset_name, ticker, asset_class, sub_class, source, platform,
+                   quantity, avg_cost, current_price, current_value, invested_value,
+                   unrealized_pnl, unrealized_pnl_pct, sector, last_updated 
+            FROM holdings {where_sql} {order_sql}""", params
     ).fetchall()
     return [_row_to_holding(r) for r in rows]
 
 
 @router.get("/{holding_id}", response_model=HoldingResponse)
 def get_holding(holding_id: str, db: duckdb.DuckDBPyConnection = Depends(get_db)):
-    row = db.execute("SELECT * FROM holdings WHERE id = ?", [holding_id]).fetchone()
+    row = db.execute(
+        """SELECT id, asset_name, ticker, asset_class, sub_class, source, platform,
+                  quantity, avg_cost, current_price, current_value, invested_value,
+                  unrealized_pnl, unrealized_pnl_pct, sector, last_updated 
+           FROM holdings WHERE id = ?""", [holding_id]).fetchone()
     if row is None:
         raise HTTPException(status_code=404, detail="Holding not found")
     return _row_to_holding(row)
@@ -81,18 +89,22 @@ def create_holding(body: HoldingCreate, db: duckdb.DuckDBPyConnection = Depends(
     db.execute(
         """
         INSERT INTO holdings (
-            id, asset_name, ticker, asset_class, sub_class, source,
+            id, asset_name, ticker, asset_class, sub_class, source, platform,
             quantity, avg_cost, current_price, current_value,
             invested_value, unrealized_pnl, unrealized_pnl_pct, sector, last_updated
-        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
         """,
         [
-            body.id, body.asset_name, body.ticker, body.asset_class, body.sub_class, body.source,
+            body.id, body.asset_name, body.ticker, body.asset_class, body.sub_class, body.source, body.platform,
             body.quantity, body.avg_cost, body.current_price, body.current_value,
             body.invested_value, body.unrealized_pnl, body.unrealized_pnl_pct, body.sector, now,
         ],
     )
-    row = db.execute("SELECT * FROM holdings WHERE id = ?", [body.id]).fetchone()
+    row = db.execute(
+        """SELECT id, asset_name, ticker, asset_class, sub_class, source, platform,
+                  quantity, avg_cost, current_price, current_value, invested_value,
+                  unrealized_pnl, unrealized_pnl_pct, sector, last_updated 
+           FROM holdings WHERE id = ?""", [body.id]).fetchone()
     return _row_to_holding(row)
 
 
@@ -105,20 +117,24 @@ def update_holding(holding_id: str, body: HoldingCreate, db: duckdb.DuckDBPyConn
     db.execute(
         """
         UPDATE holdings SET
-            asset_name=?, ticker=?, asset_class=?, sub_class=?, source=?,
+            asset_name=?, ticker=?, asset_class=?, sub_class=?, source=?, platform=?,
             quantity=?, avg_cost=?, current_price=?, current_value=?,
             invested_value=?, unrealized_pnl=?, unrealized_pnl_pct=?,
             sector=?, last_updated=?
         WHERE id=?
         """,
         [
-            body.asset_name, body.ticker, body.asset_class, body.sub_class, body.source,
+            body.asset_name, body.ticker, body.asset_class, body.sub_class, body.source, body.platform,
             body.quantity, body.avg_cost, body.current_price, body.current_value,
             body.invested_value, body.unrealized_pnl, body.unrealized_pnl_pct,
             body.sector, now, holding_id,
         ],
     )
-    row = db.execute("SELECT * FROM holdings WHERE id = ?", [holding_id]).fetchone()
+    row = db.execute(
+        """SELECT id, asset_name, ticker, asset_class, sub_class, source, platform,
+                  quantity, avg_cost, current_price, current_value, invested_value,
+                  unrealized_pnl, unrealized_pnl_pct, sector, last_updated 
+           FROM holdings WHERE id = ?""", [holding_id]).fetchone()
     return _row_to_holding(row)
 
 

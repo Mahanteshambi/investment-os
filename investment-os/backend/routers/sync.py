@@ -1,12 +1,32 @@
-from fastapi import APIRouter, Depends
+from fastapi import APIRouter, Depends, HTTPException
 import duckdb
 
 from database.connection import get_db
-from models.schemas import SyncRequest, SyncResponse, SyncStatus
+from models.schemas import (
+    KiteLoginURLResponse,
+    KiteSessionRequest,
+    KiteSessionResponse,
+    SyncRequest,
+    SyncResponse,
+    SyncStatus,
+)
 from services import sync_service
+from services.kite_service import KiteService
 
 router = APIRouter(prefix="/api/sync", tags=["sync"])
+_kite_service = KiteService()
 
+
+@router.post("/wipe")
+def wipe_db(db: duckdb.DuckDBPyConnection = Depends(get_db)):
+    try:
+        db.execute("ALTER TABLE holdings ADD COLUMN platform VARCHAR;")
+    except Exception:
+        pass
+    db.execute("DELETE FROM holdings")
+    db.execute("DELETE FROM daily_snapshots")
+    db.execute("DELETE FROM sync_log")
+    return {"status": "wiped"}
 
 @router.post("", response_model=SyncResponse)
 def trigger_sync(body: SyncRequest):
@@ -62,3 +82,27 @@ def get_sync_status(db: duckdb.DuckDBPyConnection = Depends(get_db)):
         )
         for r in rows
     ]
+
+
+@router.get("/kite/login-url", response_model=KiteLoginURLResponse)
+def get_kite_login_url():
+    try:
+        return KiteLoginURLResponse(login_url=_kite_service.get_login_url())
+    except RuntimeError as e:
+        raise HTTPException(status_code=400, detail=str(e)) from e
+
+
+@router.post("/kite/session", response_model=KiteSessionResponse)
+def create_kite_session(body: KiteSessionRequest):
+    try:
+        expires_at = _kite_service.create_access_session(
+            request_token=body.request_token,
+            persist=body.persist,
+        )
+        return KiteSessionResponse(
+            status="success",
+            message="Kite access token generated successfully.",
+            expires_at=expires_at,
+        )
+    except RuntimeError as e:
+        raise HTTPException(status_code=400, detail=str(e)) from e

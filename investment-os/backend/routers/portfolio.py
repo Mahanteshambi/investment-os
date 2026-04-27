@@ -10,13 +10,18 @@ router = APIRouter(prefix="/api/portfolio", tags=["portfolio"])
 
 def _fetch_holdings(db: duckdb.DuckDBPyConnection) -> list[HoldingResponse]:
     from datetime import datetime
-    rows = db.execute("SELECT * FROM holdings ORDER BY current_value DESC NULLS LAST").fetchall()
+    rows = db.execute("""
+        SELECT id, asset_name, ticker, asset_class, sub_class, source, platform, 
+               quantity, avg_cost, current_price, current_value, invested_value, 
+               unrealized_pnl, unrealized_pnl_pct, sector, last_updated 
+        FROM holdings ORDER BY current_value DESC NULLS LAST
+    """).fetchall()
     return [
         HoldingResponse(
             id=r[0], asset_name=r[1], ticker=r[2], asset_class=r[3], sub_class=r[4],
-            source=r[5], quantity=r[6], avg_cost=r[7], current_price=r[8],
-            current_value=r[9], invested_value=r[10], unrealized_pnl=r[11],
-            unrealized_pnl_pct=r[12], sector=r[13], last_updated=r[14] or datetime.now(),
+            source=r[5], platform=r[6], quantity=r[7], avg_cost=r[8], current_price=r[9],
+            current_value=r[10], invested_value=r[11], unrealized_pnl=r[12],
+            unrealized_pnl_pct=r[13], sector=r[14], last_updated=r[15] or datetime.now(),
         )
         for r in rows
     ]
@@ -54,7 +59,7 @@ def get_allocation(db: duckdb.DuckDBPyConnection = Depends(get_db)):
         class_totals: dict[str, float] = {}
         for h in holdings:
             class_totals[h.asset_class] = class_totals.get(h.asset_class, 0.0) + (h.current_value or 0)
-        by_class = {k: round(v / total_value * 100, 2) for k, v in class_totals.items()}
+        by_class = {k: round(v, 2) for k, v in class_totals.items()}
 
     by_sector = calculate_sector_exposure(holdings)
     return AllocationBreakdown(by_class=by_class, by_sector=by_sector)
@@ -67,7 +72,7 @@ def get_performance(days: int = Query(default=90, ge=1, le=1825), db: duckdb.Duc
         SELECT snapshot_date, total_value, invested_value, total_pnl, total_pnl_pct,
                equity_pct, mf_pct, gold_pct, cash_pct, debt_pct, nifty50_value
         FROM daily_snapshots
-        WHERE snapshot_date >= CURRENT_DATE - INTERVAL ? DAY
+        WHERE snapshot_date >= CURRENT_DATE - (? * INTERVAL '1 day')
         ORDER BY snapshot_date ASC
         """,
         [days],

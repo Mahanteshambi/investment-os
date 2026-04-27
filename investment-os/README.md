@@ -47,10 +47,22 @@ Load real data from Kite + Google Sheets:
 1. Create `investment-os/backend/.env` from `.env.example`
 2. Fill:
    - `KITE_API_KEY`
-   - `KITE_ACCESS_TOKEN`
+   - `KITE_API_SECRET`
+   - `KITE_ACCESS_TOKEN` (optional if generated via API below)
    - `GOOGLE_SHEETS_CREDENTIALS_JSON` (service-account JSON path)
    - `GOOGLE_SHEET_ID` (already set to your portfolio sheet)
-3. Start backend, then trigger:
+3. Generate Kite session token once per day:
+
+```bash
+curl http://localhost:8000/api/sync/kite/login-url
+# open login_url, complete login, copy request_token from redirect URL
+
+curl -X POST http://localhost:8000/api/sync/kite/session \
+  -H "Content-Type: application/json" \
+  -d '{"request_token":"PASTE_REQUEST_TOKEN","persist":true}'
+```
+
+4. Start backend sync:
 
 ```bash
 curl -X POST http://localhost:8000/api/sync \
