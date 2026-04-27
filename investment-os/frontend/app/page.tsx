@@ -1,11 +1,8 @@
 import { Suspense } from "react"
 import { TopBar } from "@/components/layout/TopBar"
 import { SummaryBar } from "@/components/dashboard/SummaryBar"
-import { AllocationDonut } from "@/components/dashboard/AllocationDonut"
-import { PerformanceChart } from "@/components/dashboard/PerformanceChart"
-import { SectorExposure } from "@/components/dashboard/SectorExposure"
+import { AllocationBar } from "@/components/dashboard/AllocationBar"
 import { AllocationDrift } from "@/components/dashboard/AllocationDrift"
-import { PlatformExposure } from "@/components/dashboard/PlatformExposure"
 import { TopMovers } from "@/components/dashboard/TopMovers"
 import { HoldingsTable } from "@/components/holdings/HoldingsTable"
 import { Skeleton } from "@/components/ui/skeleton"
@@ -19,26 +16,19 @@ export default function DashboardPage() {
           <SummaryBar />
         </Suspense>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <div className="md:col-span-1">
-            <Suspense fallback={<Skeleton className="h-80 w-full bg-gray-800" />}>
-              <AllocationDonut />
-            </Suspense>
-          </div>
-          <div className="md:col-span-2">
+        <div className="w-full">
+          <Suspense fallback={<Skeleton className="h-80 w-full bg-gray-800" />}>
+            <AllocationBar />
+          </Suspense>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="col-span-1">
             <Suspense fallback={<Skeleton className="h-80 w-full bg-gray-800" />}>
               <AllocationDrift />
             </Suspense>
           </div>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <div className="md:col-span-1">
-            <Suspense fallback={<Skeleton className="h-80 w-full bg-gray-800" />}>
-              <PlatformExposure />
-            </Suspense>
-          </div>
-          <div className="md:col-span-2">
+          <div className="col-span-1">
             <Suspense fallback={<Skeleton className="h-80 w-full bg-gray-800" />}>
               <TopMovers />
             </Suspense>
