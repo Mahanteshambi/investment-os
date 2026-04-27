@@ -16,24 +16,30 @@ _sheets_service = SheetsService()
 
 
 def _upsert_holdings(conn: duckdb.DuckDBPyConnection, holdings: list[HoldingCreate], source: str) -> int:
-    conn.execute("DELETE FROM holdings WHERE source = ?", [source])
-    for h in holdings:
-        conn.execute(
-            """
-            INSERT INTO holdings (
-                id, asset_name, ticker, asset_class, sub_class, source,
-                quantity, avg_cost, current_price, current_value,
-                invested_value, unrealized_pnl, unrealized_pnl_pct,
-                sector, last_updated
-            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-            """,
-            [
-                h.id, h.asset_name, h.ticker, h.asset_class, h.sub_class, h.source,
-                h.quantity, h.avg_cost, h.current_price, h.current_value,
-                h.invested_value, h.unrealized_pnl, h.unrealized_pnl_pct,
-                h.sector, datetime.now(),
-            ],
-        )
+    conn.execute("BEGIN")
+    try:
+        conn.execute("DELETE FROM holdings WHERE source = ?", [source])
+        for h in holdings:
+            conn.execute(
+                """
+                INSERT INTO holdings (
+                    id, asset_name, ticker, asset_class, sub_class, source,
+                    quantity, avg_cost, current_price, current_value,
+                    invested_value, unrealized_pnl, unrealized_pnl_pct,
+                    sector, last_updated
+                ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                """,
+                [
+                    h.id, h.asset_name, h.ticker, h.asset_class, h.sub_class, h.source,
+                    h.quantity, h.avg_cost, h.current_price, h.current_value,
+                    h.invested_value, h.unrealized_pnl, h.unrealized_pnl_pct,
+                    h.sector, datetime.now(),
+                ],
+            )
+        conn.execute("COMMIT")
+    except Exception:
+        conn.execute("ROLLBACK")
+        raise
     return len(holdings)
 
 

@@ -15,6 +15,11 @@ const CLASS_COLORS: Record<string, string> = {
   gold: "#f59e0b",
   cash: "#10b981",
   debt: "#64748b",
+  fd: "#3b82f6",     // blue
+  ppf: "#ec4899",    // pink
+  pf: "#d946ef",     // fuchsia
+  rd: "#14b8a6",     // teal
+  savings: "#06b6d4" // cyan
 }
 
 const CLASS_LABELS: Record<string, string> = {
@@ -24,6 +29,11 @@ const CLASS_LABELS: Record<string, string> = {
   gold: "Gold",
   cash: "Cash",
   debt: "Debt",
+  fd: "Fixed Deposit",
+  ppf: "PPF",
+  pf: "PF",
+  rd: "RD",
+  savings: "Savings Acc"
 }
 
 export function AllocationDonut() {
@@ -50,9 +60,12 @@ export function AllocationDonut() {
     )
   }
 
-  const pieData = Object.entries(alloc.by_class).map(([cls, pct]) => ({
+  const totalValue = summary?.total_value ?? 0
+
+  const pieData = Object.entries(alloc.by_class).map(([cls, amount]) => ({
     name: CLASS_LABELS[cls] || cls,
-    value: pct,
+    value: amount,
+    pct: totalValue > 0 ? (amount / totalValue) * 100 : 0,
     cls,
   }))
 
@@ -69,7 +82,6 @@ export function AllocationDonut() {
     )
   }
 
-  const totalValue = summary?.total_value ?? 0
 
   return (
     <Card className="bg-gray-900 border-gray-800 h-full">
@@ -97,7 +109,7 @@ export function AllocationDonut() {
               <Tooltip
                 contentStyle={{ background: "#1f2937", border: "1px solid #374151", borderRadius: 8 }}
                 labelStyle={{ color: "#e5e7eb" }}
-                formatter={(val) => [`${Number(val ?? 0).toFixed(1)}%`, ""]}
+                formatter={(value, name, props) => [`${props.payload.pct.toFixed(1)}%`, name]}
               />
             </PieChart>
           </ResponsiveContainer>
@@ -120,9 +132,9 @@ export function AllocationDonut() {
                 <span className="text-gray-400">{entry.name}</span>
               </div>
               <div className="flex items-center gap-2 text-gray-300">
-                <span>{entry.value.toFixed(1)}%</span>
+                <span>{entry.pct.toFixed(1)}%</span>
                 {totalValue > 0 && (
-                  <span className="text-gray-600">{formatINR((entry.value / 100) * totalValue)}</span>
+                  <span className="text-gray-600">{formatINR(entry.value)}</span>
                 )}
               </div>
             </div>

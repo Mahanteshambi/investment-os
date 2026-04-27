@@ -4,7 +4,9 @@ import { SummaryBar } from "@/components/dashboard/SummaryBar"
 import { AllocationDonut } from "@/components/dashboard/AllocationDonut"
 import { PerformanceChart } from "@/components/dashboard/PerformanceChart"
 import { SectorExposure } from "@/components/dashboard/SectorExposure"
-import { AgentSignals } from "@/components/dashboard/AgentSignals"
+import { AllocationDrift } from "@/components/dashboard/AllocationDrift"
+import { PlatformExposure } from "@/components/dashboard/PlatformExposure"
+import { TopMovers } from "@/components/dashboard/TopMovers"
 import { HoldingsTable } from "@/components/holdings/HoldingsTable"
 import { Skeleton } from "@/components/ui/skeleton"
 
@@ -25,18 +27,22 @@ export default function DashboardPage() {
           </div>
           <div className="md:col-span-2">
             <Suspense fallback={<Skeleton className="h-80 w-full bg-gray-800" />}>
-              <PerformanceChart />
+              <AllocationDrift />
             </Suspense>
           </div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <Suspense fallback={<Skeleton className="h-80 w-full bg-gray-800" />}>
-            <SectorExposure />
-          </Suspense>
-          <Suspense fallback={<Skeleton className="h-80 w-full bg-gray-800" />}>
-            <AgentSignals />
-          </Suspense>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="md:col-span-1">
+            <Suspense fallback={<Skeleton className="h-80 w-full bg-gray-800" />}>
+              <PlatformExposure />
+            </Suspense>
+          </div>
+          <div className="md:col-span-2">
+            <Suspense fallback={<Skeleton className="h-80 w-full bg-gray-800" />}>
+              <TopMovers />
+            </Suspense>
+          </div>
         </div>
 
         <div className="bg-gray-900 border border-gray-800 rounded-xl p-4">

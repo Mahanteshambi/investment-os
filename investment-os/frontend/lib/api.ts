@@ -58,3 +58,14 @@ export async function getSyncStatus(): Promise<SyncStatus[]> {
 export async function getAgentSignals(): Promise<AgentSignal[]> {
   return fetchJSON("/api/agents/signals")
 }
+
+export async function getKiteLoginUrl(): Promise<{ login_url: string }> {
+  return fetchJSON("/api/sync/kite/login-url")
+}
+
+export async function submitKiteToken(requestToken: string): Promise<any> {
+  return fetchJSON("/api/sync/kite/session", {
+    method: "POST",
+    body: JSON.stringify({ request_token: requestToken, persist: true }),
+  })
+}
