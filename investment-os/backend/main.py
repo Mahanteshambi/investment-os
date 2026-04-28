@@ -9,7 +9,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 from database.connection import get_connection, close_connection
-from routers import holdings, portfolio, snapshots, sync
+from routers import holdings, portfolio, snapshots, sync, intelligence
 from scheduler.jobs import start_scheduler, stop_scheduler
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(name)s — %(message)s")
@@ -47,13 +47,12 @@ app.include_router(holdings.router)
 app.include_router(snapshots.router)
 app.include_router(sync.router)
 
-
-# Stubbed agents endpoint
 from fastapi import APIRouter
 from models.schemas import AgentSignal
 
-agents_router = APIRouter(prefix="/api/agents", tags=["agents"])
+app.include_router(intelligence.router)
 
+agents_router = APIRouter(prefix="/api/agents", tags=["agents"])
 
 @agents_router.get("/signals", response_model=list[AgentSignal])
 def get_agent_signals():

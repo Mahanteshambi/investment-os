@@ -59,6 +59,23 @@ export async function getAgentSignals(): Promise<AgentSignal[]> {
   return fetchJSON("/api/agents/signals")
 }
 
+// MF Intelligence
+export async function syncMFIntelligence() {
+  return fetchJSON("/api/mf/sync", { method: "POST" })
+}
+
+export async function getMFProfiles() {
+  return fetchJSON("/api/mf/profiles")
+}
+
+export async function getMFAlerts() {
+  return fetchJSON("/api/mf/alerts")
+}
+
+export async function getMFFactsheets(isin: string) {
+  return fetchJSON(`/api/mf/factsheets/${isin}`)
+}
+
 export async function getKiteLoginUrl(): Promise<{ login_url: string }> {
   return fetchJSON("/api/sync/kite/login-url")
 }

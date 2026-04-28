@@ -118,3 +118,65 @@ class AgentSignal(BaseModel):
 class AllocationBreakdown(BaseModel):
     by_class: dict[str, float]
     by_sector: list[dict]
+
+class MFProfileBase(BaseModel):
+    isin: str
+    fund_name: str
+    category: Optional[str] = None
+    sub_category: Optional[str] = None
+    objective: Optional[str] = None
+    fund_manager: Optional[str] = None
+    benchmark: Optional[str] = None
+    launch_date: Optional[date] = None
+    expense_ratio: Optional[float] = None
+    aum_cr: Optional[float] = None
+
+class MFProfileResponse(MFProfileBase):
+    last_updated: datetime
+
+class MFSectorWeight(BaseModel):
+    id: str
+    factsheet_id: str
+    sector_name: str
+    weight_pct: float
+
+class MFStockHolding(BaseModel):
+    id: str
+    factsheet_id: str
+    stock_name: str
+    weight_pct: float
+
+class MFFactsheetBase(BaseModel):
+    isin: str
+    factsheet_month: date
+    equity_pct: Optional[float] = None
+    debt_pct: Optional[float] = None
+    cash_pct: Optional[float] = None
+    return_1y: Optional[float] = None
+    return_3y: Optional[float] = None
+    return_5y: Optional[float] = None
+    return_inception: Optional[float] = None
+    benchmark_return_1y: Optional[float] = None
+    benchmark_return_3y: Optional[float] = None
+    benchmark_return_5y: Optional[float] = None
+    benchmark_return_inception: Optional[float] = None
+    category_return_1y: Optional[float] = None
+    category_return_3y: Optional[float] = None
+    category_return_5y: Optional[float] = None
+
+class MFFactsheetResponse(MFFactsheetBase):
+    id: str
+    last_updated: datetime
+    sector_weights: list[MFSectorWeight] = []
+    stock_holdings: list[MFStockHolding] = []
+
+class MFAlertBase(BaseModel):
+    isin: str
+    alert_type: str
+    old_value: Optional[str] = None
+    new_value: Optional[str] = None
+
+class MFAlertResponse(MFAlertBase):
+    id: str
+    alert_date: datetime
+    is_read: bool
