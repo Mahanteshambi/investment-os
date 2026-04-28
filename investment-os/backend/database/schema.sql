@@ -66,3 +66,67 @@ CREATE TABLE IF NOT EXISTS sync_log (
     records_updated INTEGER DEFAULT 0,
     error_message VARCHAR
 );
+
+-- Mutual Fund Intelligence Tables
+
+CREATE TABLE IF NOT EXISTS mf_profiles (
+    isin VARCHAR PRIMARY KEY,
+    fund_name VARCHAR NOT NULL,
+    category VARCHAR,
+    sub_category VARCHAR,
+    objective TEXT,
+    fund_manager VARCHAR,
+    benchmark VARCHAR,
+    launch_date DATE,
+    expense_ratio DECIMAL(5,2),
+    aum_cr DECIMAL(12,2),
+    last_updated TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS mf_factsheets (
+    id VARCHAR PRIMARY KEY,
+    isin VARCHAR NOT NULL,
+    factsheet_month DATE NOT NULL, -- Stored as 1st of the month (e.g., '2023-10-01')
+    equity_pct DECIMAL(5,2),
+    debt_pct DECIMAL(5,2),
+    cash_pct DECIMAL(5,2),
+    return_1y DECIMAL(8,4),
+    return_3y DECIMAL(8,4),
+    return_5y DECIMAL(8,4),
+    return_inception DECIMAL(8,4),
+    benchmark_return_1y DECIMAL(8,4),
+    benchmark_return_3y DECIMAL(8,4),
+    benchmark_return_5y DECIMAL(8,4),
+    benchmark_return_inception DECIMAL(8,4),
+    category_return_1y DECIMAL(8,4),
+    category_return_3y DECIMAL(8,4),
+    category_return_5y DECIMAL(8,4),
+    last_updated TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    UNIQUE(isin, factsheet_month)
+);
+
+CREATE TABLE IF NOT EXISTS mf_sector_weights (
+    id VARCHAR PRIMARY KEY,
+    factsheet_id VARCHAR NOT NULL,
+    sector_name VARCHAR NOT NULL,
+    weight_pct DECIMAL(5,2) NOT NULL,
+    UNIQUE(factsheet_id, sector_name)
+);
+
+CREATE TABLE IF NOT EXISTS mf_stock_holdings (
+    id VARCHAR PRIMARY KEY,
+    factsheet_id VARCHAR NOT NULL,
+    stock_name VARCHAR NOT NULL,
+    weight_pct DECIMAL(5,2) NOT NULL,
+    UNIQUE(factsheet_id, stock_name)
+);
+
+CREATE TABLE IF NOT EXISTS mf_alerts (
+    id VARCHAR PRIMARY KEY,
+    isin VARCHAR NOT NULL,
+    alert_type VARCHAR NOT NULL, -- 'MANAGER_CHANGE', 'OBJECTIVE_CHANGE', 'CATEGORY_CHANGE', 'SECTOR_DRIFT', 'NEW_STOCK', 'EXIT_STOCK'
+    old_value VARCHAR,
+    new_value VARCHAR,
+    alert_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    is_read BOOLEAN DEFAULT FALSE
+);
