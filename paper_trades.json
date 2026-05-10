@@ -195,6 +195,219 @@
 
   "trade_log": [
     {
+      "timestamp": "2026-05-08T08:00:00+08:00",
+      "action": "GTT_PLACED_REAL",
+      "session": "SKILL-02 May 8 | Confirmed by Mahantesh",
+      "note_context": "May Day 4. Oil crashed $114→$102 (-10.2% in 4 days). FII mild seller -₹341 Cr May 7. DII buyer +₹441 Cr. DXY 98.23 (falling, bullish). US10yr 4.39% (off peak). Yield spread 2.61% (marginal improvement). All May 7 carry GTTs still active (not fired). New GTTs at fresh 0.5% dip levels.",
+      "buy_gtts": [
+        {"gtt_id": 318173888, "symbol": "NSE:NIFTYBEES",  "qty": 41, "trigger": 273.8, "limit": 278.0, "est_inr": 11226, "bucket": "Large Cap",     "status": "GTT_PLACED", "fired_date": null, "fired_price": null},
+        {"gtt_id": 318173890, "symbol": "NSE:JUNIORBEES", "qty": 5,  "trigger": 771.1, "limit": 782.7, "est_inr": 3856,  "bucket": "Mid/Small",     "status": "GTT_PLACED", "fired_date": null, "fired_price": null},
+        {"gtt_id": 318173891, "symbol": "NSE:CPSEETF",    "qty": 33, "trigger": 106.4, "limit": 108.0, "est_inr": 3511,  "bucket": "Sector (CPSE)", "status": "GTT_PLACED", "fired_date": null, "fired_price": null},
+        {"gtt_id": 318173892, "symbol": "NSE:GOLDBEES",   "qty": 28, "trigger": 123.9, "limit": 125.8, "est_inr": 3469,  "bucket": "Gold",          "status": "GTT_PLACED", "fired_date": null, "fired_price": null},
+        {"gtt_id": 318173893, "symbol": "NSE:ICICIB22",   "qty": 19, "trigger": 123.7, "limit": 125.6, "est_inr": 2350,  "bucket": "International", "status": "GTT_PLACED", "fired_date": null, "fired_price": null}
+      ],
+      "total_new_buy_queued_inr": 24412,
+      "may_budget_deployed_inr": 20431,
+      "may_budget_remaining_inr": 379569,
+      "kite_cash_inr": 131706.70,
+      "macro_context": "Brent $102.41 (crashed from $114 — India CAD relief). DXY 98.23 (falling, EM tailwind). US10yr 4.39% (off 4.446% peak). Yield spread 2.61% (widening — mild positive). FII mild seller after May 4 big reversal. DII holding floor."
+    },
+    {
+      "timestamp": "2026-05-07T08:00:00+08:00",
+      "action": "GTT_PLACED_REAL",
+      "session": "SKILL-02 May 7 | Confirmed by Mahantesh",
+      "note_context": "May Day 3. May 5 GTTs confirmed fired May 6 (NIFTYBEES 31+CPSEETF 33+PSUBNKBEES 34+GOLDBEES 26+ICICIB22 17 = ~₹20,431). ITBEES 1500 units sold May 6 (~₹48,270 proceeds). Cash ₹1,31,707. Market up +1.3-2.7% today vs yesterday close. Triggers set at -0.5% of prev close for pullback entry. CPSEETF on BSE (trigger adjusted to LTP×0.995 since LTP < prev close today).",
+      "may6_fires_confirmed": [
+        {"gtt_id": 317591218, "symbol": "NSE:NIFTYBEES",  "qty": 31, "est_price": 271.75, "est_inr": 8424, "status": "FIRED", "fired_date": "2026-05-06"},
+        {"gtt_id": 317591459, "symbol": "BSE:CPSEETF",    "qty": 33, "est_price": 107.47, "est_inr": 3546, "status": "FIRED", "fired_date": "2026-05-06"},
+        {"gtt_id": 317591232, "symbol": "NSE:PSUBNKBEES", "qty": 34, "est_price": 93.67,  "est_inr": 3185, "status": "FIRED", "fired_date": "2026-05-06"},
+        {"gtt_id": 317591233, "symbol": "NSE:GOLDBEES",   "qty": 26, "est_price": 121.77, "est_inr": 3166, "status": "FIRED", "fired_date": "2026-05-06"},
+        {"gtt_id": 317591234, "symbol": "NSE:ICICIB22",   "qty": 17, "est_price": 124.11, "est_inr": 2110, "status": "FIRED", "fired_date": "2026-05-06"},
+        {"gtt_id": 317591424, "symbol": "NSE:ITBEES",     "qty": 1500, "transaction_type": "SELL", "est_price": 32.18, "est_proceeds": 48270, "status": "FIRED", "fired_date": "2026-05-06", "ltcg": "~₹0 (breakeven exit)", "note": "EXIT — 2 consecutive months sub-4 rule. Trade book confirms 3 fills: 1334+150+16 units."}
+      ],
+      "buy_gtts": [
+        {"gtt_id": 317961869, "symbol": "NSE:NIFTYBEES",  "qty": 39, "trigger": 270.94, "limit": 274.90, "est_inr": 10567, "bucket": "Large Cap",     "status": "GTT_PLACED"},
+        {"gtt_id": 317961870, "symbol": "NSE:JUNIORBEES", "qty": 5,  "trigger": 758.67, "limit": 770.05, "est_inr": 3793,  "bucket": "Mid/Small",     "status": "GTT_PLACED"},
+        {"gtt_id": 317961872, "symbol": "BSE:CPSEETF",    "qty": 31, "trigger": 106.14, "limit": 107.73, "est_inr": 3284,  "bucket": "Sector (CPSE)", "status": "GTT_PLACED", "note": "Trigger = LTP×0.995 (LTP ₹106.67 < prev close ₹107.64 today)"},
+        {"gtt_id": 317961873, "symbol": "NSE:PSUBNKBEES", "qty": 17, "trigger": 93.44,  "limit": 94.84,  "est_inr": 1589,  "bucket": "Sector (PSU Bank)", "status": "GTT_PLACED"},
+        {"gtt_id": 317961875, "symbol": "NSE:GOLDBEES",   "qty": 27, "trigger": 121.55, "limit": 123.37, "est_inr": 3282,  "bucket": "Gold",          "status": "GTT_PLACED"},
+        {"gtt_id": 317961876, "symbol": "NSE:ICICIB22",   "qty": 18, "trigger": 123.64, "limit": 125.49, "est_inr": 2226,  "bucket": "International", "status": "GTT_PLACED"}
+      ],
+      "carry_gtts_still_active": [
+        {"gtt_id": 317591219, "symbol": "NSE:JUNIORBEES", "qty": 4,  "trigger": 755.42, "limit": 766.75, "note": "May 5 deep-dip GTT, still active"},
+        {"gtt_id": 317175289, "symbol": "NSE:GOLDBEES",   "qty": 38, "trigger": 120.97, "limit": 122.78, "note": "Apr 30 deep-dip GTT, still active"},
+        {"gtt_id": 316824233, "symbol": "NSE:LIQUIDBEES", "qty": 2,  "trigger": 994.99, "limit": 1009.92,"note": "Apr 28 carry-over"},
+        {"gtt_id": 317591231, "symbol": "NSE:RELIANCE",   "qty": 22, "trigger": 1346,   "limit": 1333,   "transaction_type": "SELL", "note": "Trailing stop active. LTP ₹1,437.85, buffer 6.8%"}
+      ],
+      "total_new_buy_queued_inr": 24741,
+      "may_budget_deployed_inr": 20431,
+      "may_budget_remaining_inr": 379569,
+      "kite_cash_inr": 131706.70,
+      "macro_context": "DXY 98.48 (below 100 — EM tailwind). US10yr 4.446% (rising headwind). Yield spread 2.55% (FII cautious but both buying May 4). Brent $114 (elevated — CPSEETF earnings boost). CAPE 33 (elevated — systematic SIP correct). Market up +1.3-2.7% today."
+    },
+    {
+      "timestamp": "2026-05-05T09:30:00+08:00",
+      "action": "GTT_PLACED_REAL",
+      "session": "SKILL-04 May 2026 | Confirmed by Mahantesh",
+      "note_context": "Sector rotation May 2026. CPSEETF new active sector (score 10.0). ITBEES exit triggered (Month 2 sub-4: Apr 2.9, May 2.4). PSUBNKBEES reduced to ₹30k/month. War thesis: oil+defense+CPSE alignment. CPSEETF captures ONGC+HAL+Coal India+NTPC+Power Grid.",
+      "buy_gtts": [
+        {"gtt_id": 317591459, "symbol": "NSE:CPSEETF", "qty": 33, "trigger": 107.47, "limit": 109.08, "est_inr": 3546, "bucket": "Sector (new active)", "approach": "DAILY SIP — ₹60k/17 days = ₹3,529/day. Bulk GTT317591422 (556 units) cancelled in favour of daily SIP to align with CAPE-33 systematic rule.", "status": "GTT_PLACED"}
+      ],
+      "cancelled_gtts": [
+        {"gtt_id": 317591422, "symbol": "NSE:CPSEETF", "qty": 556, "trigger": 107.47, "est_inr": 59793, "reason": "Switched from bulk to daily SIP. CAPE 33 + RSI 78.6 = systematic entry preferred over lumpsum."}
+      ],
+      "sell_gtts": [
+        {"gtt_id": 317591424, "symbol": "NSE:ITBEES", "qty": 1500, "trigger": 32.00, "limit": 31.36, "est_proceeds": 48000, "reason": "EXIT — Month 2 sub-4 rule triggered (Apr 2.9, May 2.4). DeepSeek structural headwind. Break-even exit. Tax: negligible (at loss). Proceeds to redeploy into CPSEETF.", "status": "GTT_PLACED"}
+      ],
+      "sector_rotation": {
+        "from": "NSE:PSUBNKBEES", "from_score": 6.8,
+        "to": "NSE:CPSEETF", "to_score": 10.0,
+        "psubnkbees_new_allocation": "₹30,000/month (reduced from ₹60k, redirect ₹30k to Large Cap/NIFTYBEES)",
+        "cpseetf_allocation": "₹60,000/month via daily SIP (~33 units/day)",
+        "war_thesis": "CPSEETF captures ONGC+HAL+Coal India+NTPC+Power Grid. Oil+defense+energy infrastructure play."
+      }
+    },
+    {
+      "timestamp": "2026-05-05T08:00:00+08:00",
+      "action": "GTT_PLACED_REAL",
+      "session": "SKILL-02 May 5 | Confirmed by Mahantesh",
+      "note_context": "May Day 2. First May budget GTTs. 3 stops confirmed (AXISBANK+TMCV+ICICIBANK). RELIANCE new peak ₹1,463.10 → ratcheted stop 1312→1346 (cancelled GTT317175294, placed GTT317591231). FII BUYER +₹2,836 Cr (reversal). DXY 98.48, Brent $114.04, US10yr 4.446%, yield spread 2.554%.",
+      "buy_gtts": [
+        {"gtt_id": 317591218, "symbol": "NSE:NIFTYBEES",  "qty": 31, "trigger": 271.75, "limit": 275.83, "est_inr": 8424,  "bucket": "Large Cap",     "status": "GTT_PLACED"},
+        {"gtt_id": 317591219, "symbol": "NSE:JUNIORBEES", "qty": 4,  "trigger": 755.42, "limit": 766.75, "est_inr": 3022,  "bucket": "Mid/Small",     "status": "GTT_PLACED"},
+        {"gtt_id": 317591232, "symbol": "NSE:PSUBNKBEES", "qty": 34, "trigger": 93.67,  "limit": 95.08,  "est_inr": 3185,  "bucket": "Sector",        "status": "GTT_PLACED"},
+        {"gtt_id": 317591233, "symbol": "NSE:GOLDBEES",   "qty": 26, "trigger": 121.77, "limit": 123.59, "est_inr": 3166,  "bucket": "Gold",          "status": "GTT_PLACED"},
+        {"gtt_id": 317591234, "symbol": "NSE:ICICIB22",   "qty": 17, "trigger": 124.11, "limit": 125.97, "est_inr": 2110,  "bucket": "International", "status": "GTT_PLACED"}
+      ],
+      "trailing_stop_ratchets": [
+        {"action": "CANCELLED", "gtt_id": 317175294, "symbol": "NSE:RELIANCE", "old_trigger": 1312, "old_limit": 1299, "reason": "new peak ₹1,463.10 confirmed from live LTP"},
+        {"action": "PLACED",    "gtt_id": 317591231, "symbol": "NSE:RELIANCE", "new_trigger": 1346, "new_limit": 1333, "qty": 22, "new_peak": 1463.10, "status": "GTT_PLACED"}
+      ],
+      "carry_gtts_still_active": [
+        {"gtt_id": 317175289, "symbol": "NSE:GOLDBEES",   "qty": 38, "trigger": 120.97, "est_inr": 4597, "note": "April carry-over, deeper dip trigger"},
+        {"gtt_id": 316824233, "symbol": "NSE:LIQUIDBEES", "qty": 2,  "trigger": 994.99, "est_inr": 1990, "note": "April carry-over"}
+      ],
+      "stops_confirmed_triggered": [
+        {"symbol": "NSE:AXISBANK",  "gtt_id": 316237772, "stop_price": 1269, "entry": 755,    "gain_pct": 68.1, "est_proceeds": 12690, "tax": "LTCG ~₹5,140"},
+        {"symbol": "NSE:TMCV",     "gtt_id": 316237771, "stop_price": 412,  "entry": 260.76, "gain_pct": 57.9, "est_proceeds": 17716, "tax": "LTCG ~₹6,503"},
+        {"symbol": "NSE:ICICIBANK","gtt_id": 316059663, "stop_price": 1278, "entry": 731,    "gain_pct": 74.8, "est_proceeds": 12780, "tax": "LTCG ~₹5,470"}
+      ],
+      "total_new_buy_queued_inr": 19907,
+      "may_budget_deployed_inr": 0,
+      "may_budget_remaining_inr": 400000,
+      "kite_cash_inr": 104159.90
+    },
+    {
+      "timestamp": "2026-04-30T08:00:00+08:00",
+      "action": "GTT_PLACED_REAL",
+      "session": "SKILL-02 Apr 30 | Confirmed by Mahantesh",
+      "note_context": "FINAL DAY of April. Remaining budget ₹31,501 fully deployed. Apr 29 T1 confirmed: GOLDBEES 29 + PSUBNKBEES 29 + JUNIORBEES 4. ICICIBANK likely sold via stop ₹1,278 (verify). RELIANCE new peak ₹1,426.15 → ratcheted stop 1278→1312. Oil $111.19, US10yr 4.418%, yield spread 2.582%.",
+      "buy_gtts": [
+        {"gtt_id": 317175285, "symbol": "NSE:NIFTYBEES",  "qty": 63, "trigger": 271.74, "limit": 275.82, "est_inr": 17120, "bucket": "Large Cap",     "status": "GTT_PLACED"},
+        {"gtt_id": 317175287, "symbol": "NSE:JUNIORBEES", "qty": 6,  "trigger": 755.96, "limit": 767.30, "est_inr": 4536,  "bucket": "Mid/Small",     "status": "GTT_PLACED"},
+        {"gtt_id": 317175288, "symbol": "NSE:PSUBNKBEES", "qty": 50, "trigger": 95.48,  "limit": 96.91,  "est_inr": 4774,  "bucket": "Sector",        "status": "GTT_PLACED"},
+        {"gtt_id": 317175289, "symbol": "NSE:GOLDBEES",   "qty": 38, "trigger": 120.97, "limit": 122.78, "est_inr": 4597,  "bucket": "Gold",          "status": "GTT_PLACED"},
+        {"gtt_id": 317175290, "symbol": "NSE:ICICIB22",   "qty": 3,  "trigger": 125.70, "limit": 127.59, "est_inr": 377,   "bucket": "International", "status": "GTT_PLACED"}
+      ],
+      "trailing_stop_ratchets": [
+        {"action": "CANCELLED", "gtt_id": 317006455, "symbol": "NSE:RELIANCE", "old_trigger": 1278, "old_limit": 1265, "reason": "new peak 1426.15 confirmed from live holdings"},
+        {"action": "PLACED",    "gtt_id": 317175294, "symbol": "NSE:RELIANCE", "new_trigger": 1312, "new_limit": 1299, "qty": 22, "new_peak": 1426.15, "status": "GTT_PLACED"}
+      ],
+      "carry_gtts_still_active": [
+        {"gtt_id": 317006450, "symbol": "NSE:NIFTYBEES",  "qty": 35, "trigger": 270.12, "est_inr": 9454},
+        {"gtt_id": 316824231, "symbol": "NSE:ICICIB22",   "qty": 22, "trigger": 125.14, "est_inr": 2753},
+        {"gtt_id": 316824233, "symbol": "NSE:LIQUIDBEES", "qty": 2,  "trigger": 994.99, "est_inr": 1990}
+      ],
+      "total_new_buy_queued_inr": 31404,
+      "budget_remaining_after_inr": 97,
+      "april_month_close": "₹3,99,903 deployed of ₹4,00,000 (99.98%)"
+    },
+    {
+      "timestamp": "2026-04-29T08:03:00+08:00",
+      "action": "GTT_PLACED_REAL",
+      "session": "SKILL-02 Apr 29 | Confirmed by Mahantesh",
+      "note_context": "Penultimate day of April. Apr 28 fires confirmed: NIFTYBEES 35+GOLDBEES 49+PSUBNKBEES 36 = ₹19,068. RELIANCE new peak ₹1,388.9 (BSE PnL verified) → ratcheted stop 1256→1278. DXY 98.57, Brent $103.67, US10yr 4.354%, Yield spread 2.646%.",
+      "buy_gtts": [
+        {"gtt_id": 317006450, "symbol": "NSE:NIFTYBEES",  "qty": 35, "trigger": 270.12, "limit": 274.17, "est_inr": 9454,  "bucket": "Large Cap", "status": "GTT_PLACED"},
+        {"gtt_id": 317006451, "symbol": "NSE:GOLDBEES",   "qty": 29, "trigger": 122.07, "limit": 123.90, "est_inr": 3540,  "bucket": "Gold",      "status": "GTT_PLACED"},
+        {"gtt_id": 317006453, "symbol": "NSE:PSUBNKBEES", "qty": 29, "trigger": 95.77,  "limit": 97.21,  "est_inr": 2778,  "bucket": "Sector",    "status": "GTT_PLACED"}
+      ],
+      "trailing_stop_ratchets": [
+        {"action": "CANCELLED", "gtt_id": 316059664, "symbol": "NSE:RELIANCE", "old_trigger": 1256, "old_limit": 1244, "reason": "new peak 1388.9 confirmed"},
+        {"action": "PLACED",    "gtt_id": 317006455, "symbol": "NSE:RELIANCE", "new_trigger": 1278, "new_limit": 1265, "qty": 22, "new_peak": 1388.9, "status": "GTT_PLACED"}
+      ],
+      "active_gtts_from_apr28": [
+        {"gtt_id": 316824230, "symbol": "NSE:JUNIORBEES", "qty": 4,  "trigger": 759.56, "est_inr": 3038},
+        {"gtt_id": 316824231, "symbol": "NSE:ICICIB22",   "qty": 22, "trigger": 125.14, "est_inr": 2753},
+        {"gtt_id": 316824233, "symbol": "NSE:LIQUIDBEES", "qty": 2,  "trigger": 994.99, "est_inr": 1990}
+      ],
+      "total_new_buy_queued_inr": 15772,
+      "total_today_exposure_inr": 23553,
+      "budget_remaining_after_inr": 31501,
+      "trading_days_left": 1
+    },
+    {
+      "timestamp": "2026-04-28T08:00:00+08:00",
+      "action": "GTT_PLACED_REAL",
+      "session": "SKILL-02 Apr 28 | Confirmed by Mahantesh",
+      "note_context": "Final week. NIFTYBEES GTT 316655533 confirmed fired Apr 27 (29 units ~₹7,903). 6 stale GTTs cancelled (triggers below market). 6 fresh GTTs placed. FII narrowed -₹1,151 Cr Apr 27 vs -₹8,828 Cr Apr 24. DXY 98.49, Brent $102.28.",
+      "cancelled_gtts": [
+        {"gtt_id": 316655535, "symbol": "NSE:PSUBNKBEES", "qty": 66, "trigger": 97.62,  "reason": "trigger below market 98.27"},
+        {"gtt_id": 316655537, "symbol": "NSE:GOLDBEES",   "qty": 25, "trigger": 123.46, "reason": "trigger below market 124.25"},
+        {"gtt_id": 316428721, "symbol": "NSE:GOLDBEES",   "qty": 51, "trigger": 123.46, "reason": "trigger below market 124.25 (Apr 24 original)"},
+        {"gtt_id": 316655543, "symbol": "NSE:JUNIORBEES", "qty": 5,  "trigger": 750.49, "reason": "trigger below market 763.38"},
+        {"gtt_id": 316655544, "symbol": "NSE:ICICIB22",   "qty": 24, "trigger": 124.35, "reason": "trigger below market 125.77"},
+        {"gtt_id": 315882294, "symbol": "NSE:LIQUIDBEES", "qty": 1,  "trigger": 994.99, "reason": "replacing with 2-unit GTT"}
+      ],
+      "confirmed_fires_prior": [
+        {"gtt_id": 316655533, "symbol": "NSE:NIFTYBEES", "qty": 29, "fired_date": "2026-04-27", "fired_at": "09:16 IST", "est_price": 272.52, "est_inr": 7903, "status": "FIRED"}
+      ],
+      "buy_gtts": [
+        {"gtt_id": 316824227, "symbol": "NSE:NIFTYBEES",  "qty": 35, "trigger": 271.15, "limit": 275.22, "est_inr": 9490,  "bucket": "Large Cap",     "fires": "Apr 28 open"},
+        {"gtt_id": 316824228, "symbol": "NSE:GOLDBEES",   "qty": 49, "trigger": 123.63, "limit": 125.48, "est_inr": 6058,  "bucket": "Gold (catch-up)","fires": "Apr 28 open"},
+        {"gtt_id": 316824229, "symbol": "NSE:PSUBNKBEES", "qty": 36, "trigger": 97.78,  "limit": 99.25,  "est_inr": 3520,  "bucket": "Sector (8.4)",  "fires": "Apr 28 open"},
+        {"gtt_id": 316824230, "symbol": "NSE:JUNIORBEES", "qty": 4,  "trigger": 759.56, "limit": 771.05, "est_inr": 3038,  "bucket": "Mid/Small",     "fires": "Apr 28 open"},
+        {"gtt_id": 316824231, "symbol": "NSE:ICICIB22",   "qty": 22, "trigger": 125.14, "limit": 127.02, "est_inr": 2753,  "bucket": "International", "fires": "Apr 28 open"},
+        {"gtt_id": 316824233, "symbol": "NSE:LIQUIDBEES", "qty": 2,  "trigger": 994.99, "limit": 1009.92,"est_inr": 1990,  "bucket": "Debt",          "fires": "Apr 28 open"}
+      ],
+      "sell_gtts_trailing_stops": [
+        {"gtt_id": 316237772, "symbol": "NSE:AXISBANK",  "current": 1324.20, "stop": 1269, "buffer_pct": 4.35, "status": "⚠ WATCH — down -3.1% from Friday"},
+        {"gtt_id": 316059663, "symbol": "NSE:ICICIBANK", "current": 1314.10, "stop": 1278, "buffer_pct": 2.82, "status": "⚠ WATCH — tightening"},
+        {"gtt_id": 316059664, "symbol": "NSE:RELIANCE",  "current": 1365.80, "stop": 1256, "buffer_pct": 8.71, "status": "SAFE — at new peak"},
+        {"gtt_id": 316237771, "symbol": "NSE:TMCV",      "current": 420.75,  "stop": 412,  "buffer_pct": 2.12, "status": "⚠ VERY TIGHT"}
+      ],
+      "total_buy_queued_inr": 26849,
+      "budget_remaining_after_inr": 47273,
+      "macro_context": "FII -₹1,151 Cr Apr 27 (narrowed from -₹8,828 Cr). DII +₹4,124 Cr. DXY 98.49. Brent $102.28. US 10yr 4.31%. Yield spread 2.69% cautious zone."
+    },
+    {
+      "timestamp": "2026-04-27T06:22:00+05:30",
+      "action": "GTT_PLACED_REAL",
+      "session": "SKILL-02 Apr 27 | Confirmed by Mahantesh",
+      "note_context": "Sunday brief. Apr 24 intraday GTTs fired (NIFTYBEES 32, PSUBNKBEES 51, JUNIORBEES 5, ICICIB22 10 = ₹18,724 confirmed via T1 holdings + cash reconciliation). GOLDBEES GTT 316428721 (51 units) still active. FII -₹8,828 Cr Apr 24 (massive sell). Oil declining $101 from $106 peak. Final 3 days to deploy ₹82,025.",
+      "buy_gtts": [
+        { "gtt_id": 316655533, "symbol": "NSE:NIFTYBEES",  "qty": 29, "trigger": 272.39, "limit": 276.48, "est_inr": 7899,  "bucket": "Large Cap",     "fires": "Apr 28 open" },
+        { "gtt_id": 316655535, "symbol": "NSE:PSUBNKBEES", "qty": 66, "trigger": 97.62,  "limit": 99.09,  "est_inr": 6443,  "bucket": "Sector (8.4)",  "fires": "Apr 28 open" },
+        { "gtt_id": 316655537, "symbol": "NSE:GOLDBEES",   "qty": 25, "trigger": 123.46, "limit": 125.31, "est_inr": 3087,  "bucket": "Gold catch-up", "fires": "Apr 28 open", "note": "Extra units — GTT 316428721 (51 units) also active" },
+        { "gtt_id": 316655543, "symbol": "NSE:JUNIORBEES", "qty": 5,  "trigger": 750.49, "limit": 761.75, "est_inr": 3752,  "bucket": "Mid/Small",     "fires": "Apr 28 open", "note": "Trigger adjusted to 750.49 (0.5% below LTP 754.26) — Kite rejected trigger above LTP" },
+        { "gtt_id": 316655544, "symbol": "NSE:ICICIB22",   "qty": 24, "trigger": 124.35, "limit": 126.21, "est_inr": 2984,  "bucket": "International", "fires": "Apr 28 open" }
+      ],
+      "existing_gtts_kept": [
+        { "gtt_id": 316428721, "symbol": "NSE:GOLDBEES",  "qty": 51, "trigger": 123.46, "note": "From Apr 24 brief — still active, did not fire" },
+        { "gtt_id": 315882294, "symbol": "NSE:LIQUIDBEES","qty": 1,  "trigger": 994.99, "note": "Apr 21 GTT — still active" }
+      ],
+      "sell_gtts_trailing_stops": [
+        { "gtt_id": 316237772, "symbol": "NSE:AXISBANK",  "current": 1362.85, "stop": 1269, "buffer_pct": 6.9,  "status": "SAFE" },
+        { "gtt_id": 316059663, "symbol": "NSE:ICICIBANK", "current": 1324.50, "stop": 1278, "buffer_pct": 3.5,  "status": "⚠ WATCH" },
+        { "gtt_id": 316059664, "symbol": "NSE:RELIANCE",  "current": 1331.00, "stop": 1256, "buffer_pct": 5.6,  "status": "SAFE" },
+        { "gtt_id": 316237771, "symbol": "NSE:TMCV",      "current": 425.00,  "stop": 412,  "buffer_pct": 3.1,  "status": "⚠ WATCH" }
+      ],
+      "total_new_buy_queued_inr": 24165,
+      "total_including_existing_goldbees_gtt_inr": 30462,
+      "budget_remaining_inr": 82025,
+      "macro_context": "FII -₹8,828 Cr Apr 24. DII +₹4,701 Cr. Brent $101 (down from $106 peak). DXY 98.64 (stable, sub-100). Yield spread 2.69% — FII cautious zone."
+    },
+    {
       "timestamp": "2026-04-23T05:58:00+05:30",
       "action": "GTT_PLACED_REAL",
       "session": "SKILL-02 Apr 23 | Confirmed by Mahantesh",

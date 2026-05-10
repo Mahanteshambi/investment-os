@@ -1,3 +1,7 @@
+# CLAUDE.md
+
+This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+
 # Investment OS — Claude Instructions
 
 ## Who I Am Working With
@@ -9,7 +13,7 @@ Time horizon: 5–10 years. Monthly budget: ₹4,00,000. Risk tolerance: up to 3
 
 **Malaysia timezone note:** Indian market (IST = UTC+5:30) opens at 11:45 AM Malaysia time, closes at 6:00 PM Malaysia time. Mahantesh cannot actively monitor intraday — **always recommend GTT orders, never regular market/limit orders.**
 
-Full profile: `user_profile.md` | Full architecture: `ARCHITECTURE.md`
+Full profile: `user_profile.md` | Full architecture + skill workflows: `ARCHITECTURE.md`
 
 ---
 
@@ -133,6 +137,10 @@ These four numbers drive gold, Indian equities, FII flows, and the rupee simulta
    - ICICI Pru Equity Valuation Index (EVI): check monthly at iciciprumf.com. Zones: <100 = accumulate | 100-130 = neutral | >130 = move incremental money to debt | >160 = book profits
    - Summary: India not a screaming buy but not overheated — suitable for systematic investing, not lumpsum aggression
 
+### NSE FII/DII Data
+- API endpoint: `https://www.nseindia.com/api/fiidiiTradeReact`
+- **Cloudflare protected** — raw `curl` from Bash tool returns 403. Use `mcp__shell__run_command` (maintains browser session headers) or fall back to Kite historical volume data.
+
 ---
 
 ## Execution Confirmation Protocol
@@ -142,8 +150,26 @@ When Mahantesh says **"confirm"** (or "proceed"):
 1. Place each recommended GTT order via `mcp__kite__place_gtt_order` one by one
 2. Print confirmation table: Instrument | GTT ID | Trigger ₹ | Limit ₹ | Qty | Status
 3. Update `portfolio_state.json` — increment bucket_deployed, update remaining_inr
-4. Update `paper_trades.json` — log each placement with GTT ID, date, trigger, limit, qty
+4. Update `paper_trades.json` — log each placement with GTT ID, date, trigger, limit, qty, bucket, status
 5. Acknowledge: "✅ X GTT orders placed. ₹Y queued. ₹Z remaining this month."
+
+**paper_trades.json entry format per order:**
+```json
+{
+  "gtt_id": 316237772,
+  "date": "YYYY-MM-DD",
+  "symbol": "NSE:NIFTYBEES",
+  "qty": 32,
+  "trigger_price": 272.39,
+  "limit_price": 276.48,
+  "est_total_inr": 8716,
+  "bucket": "Large Cap",
+  "status": "GTT_PLACED",
+  "fired_date": null,
+  "fired_price": null
+}
+```
+Update `status` → `"FIRED"` and fill `fired_date`/`fired_price` when Mahantesh confirms execution.
 
 ### Non-Kite Platforms (Mahantesh executes manually)
 After Claude places Kite GTTs, print a separate checklist:
@@ -178,6 +204,8 @@ Full definition in `target_allocation.json`. Monthly breakdown:
 | International | 10% | ₹40,000 | Kite + Coin | ICICIB22 + Motilal/Mirae global MF |
 | Debt/Liquid | 5% | ₹20,000 | Kite / FD | LIQUIDBEES or FD renewal |
 
+**Active sector ETF:** Always read from `sector_rotation.json` → `current_month.active_sector_etf`. The `active_sector` field in `target_allocation.json` is not maintained — ignore it.
+
 ---
 
 ## Available MCP Tools & Their Purpose
@@ -195,7 +223,7 @@ Full definition in `target_allocation.json`. Monthly breakdown:
 | `mcp__ad803142-91ca-4bc8-81fc-95453421df05__search_files` | Search Google Drive |
 | `mcp__scheduled-tasks__create_scheduled_task` | Set up recurring skills |
 | `mcp__scheduled-tasks__list_scheduled_tasks` | Check scheduled tasks |
-| `mcp__shell__run_command` | Fetch NSE/BSE FII/DII data |
+| `mcp__shell__run_command` | Fetch NSE/BSE FII/DII data (use this, not Bash curl — Cloudflare) |
 
 **Use only after explicit "confirm" from Mahantesh in chat:**
 - `mcp__kite__place_gtt_order` — place GTT buy/sell orders after confirmation
@@ -215,18 +243,21 @@ Full definition in `target_allocation.json`. Monthly breakdown:
 |---|---|---|
 | `target_allocation.json` | Target % per bucket | Manual |
 | `approved_instruments.json` | Instrument whitelist with tokens | Manual |
-| `watchlist.json` | Instruments monitored daily | SKILL-01 / SKILL-04 |
+| `watchlist.json` | Instruments monitored daily with tokens | SKILL-01 / SKILL-04 |
 | `daily_signal.json` | Today's buy/sell/hold recommendations | SKILL-02 every 8 AM |
 | `sector_rotation.json` | Monthly sector scores + active sector | SKILL-04 1st of month |
 | `portfolio_state.json` | Budget tracker, trailing stops, FD calendar, execution log | SKILL-06 + execution confirmations |
 | `paper_trades.json` | Full execution log (confirmed by Mahantesh) | Execution confirmations |
 | `rebalancing_report.json` | Quarterly drift report | SKILL-05 quarterly |
 | `tax_report.json` | Annual LTCG + harvesting report | SKILL-07 March |
+| `SKILL.md` | Skill execution prompts (e.g. SKILL-05 quarterly rebalancer) | Manual |
 
 ### Data Source Rules
 - **Kite holdings + cash** → always fetch live via `mcp__kite__get_holdings` + `mcp__kite__get_margins`. Never use stale static values.
 - **Non-Kite assets** (MF/Coin, Vested/US stocks, FD, PPF, PF, Savings) → read from Google Drive sheet `[google_sheet_id from user_config.json]`. Mahantesh updates after each execution.
 - **Budget tracking + trailing stops** → `portfolio_state.json` is source of truth (Kite has no concept of these).
+- **Active sector ETF** → `sector_rotation.json` is authoritative. Do not use `target_allocation.json` for this.
+- **Instrument tokens** → `watchlist.json` and `approved_instruments.json` have the numeric tokens needed for `mcp__kite__get_historical_data`.
 
 ---
 
@@ -248,6 +279,8 @@ Read this for rebalancing, tax analysis, and portfolio-wide allocation checks.
 | `SKILL-05: quarterly-rebalancer` | 1st Jan/Apr/Jul/Oct 8:00 AM | Drift report, rebalancing recommendations |
 | `SKILL-06: portfolio-dashboard` | Every Sunday 9:00 AM | Weekly P&L, XIRR, trailing stops, budget |
 | `SKILL-07: annual-tax-agent` | 15th March 8:00 AM | LTCG, harvesting, FD maturity actions |
+
+Full step-by-step skill logic (inputs, analysis steps, output format) is in `ARCHITECTURE.md`. Standalone skill prompts are in `SKILL.md` (currently contains SKILL-05).
 
 ---
 

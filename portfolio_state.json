@@ -1,33 +1,37 @@
 {
   "_comment": "Master state file. Holdings/cash = live from Kite MCP. Non-Kite assets = Google Drive sheet [google_sheet_id from user_config.json]. This file tracks: budget, trailing stops, FD calendar, execution log.",
-  "last_updated": "2026-04-24",
+  "last_updated": "2026-05-08",
   "mode": "advisory",
 
   "monthly_budget": {
     "total_inr": 400000,
-    "month": "2026-04",
-    "deployed_inr": 299251,
-    "_deployed_note": "₹279,348 through Apr 22 + Apr 23 GTTs all fired at Apr 24 open: NIFTYBEES 31×₹273.76=₹8,487 (T1 Apr 24), GOLDBEES 25×₹124.08=₹3,102, JUNIORBEES 4×₹759.65=₹3,039, PSUBNKBEES 32×₹98.11=₹3,140, ICICIB22 17×₹125.59=₹2,135. All GTTs fired confirmed (none active in get_gtts).",
-    "remaining_inr": 100749,
-    "trading_days_total": 20,
-    "trading_days_elapsed": 15,
-    "trading_days_remaining": 4,
-    "daily_pacing_target_inr": 25187,
-    "full_deploy_deadline": "2026-04-30",
-    "pace_status": "ON TRACK — ₹25,187/day for 4 remaining days (Apr 25, 28, 29, 30). Gold bucket behind — prioritising GOLDBEES.",
+    "month": "2026-05",
+    "deployed_inr": 20431,
+    "_deployed_note": "May 7 DAY 3: ₹20,431 deployed. May 5 GTTs fired May 6: NIFTYBEES 31 (~₹8,424) + CPSEETF 33 (~₹3,546) + PSUBNKBEES 34 (~₹3,185) + GOLDBEES 26 (~₹3,166) + ICICIB22 17 (~₹2,110). ITBEES 1500 units SOLD May 6 (proceeds ~₹48,270). May 7 GTTs placed today: 317961869/870/872/873/875/876 (~₹24,741 queued).",
+    "remaining_inr": 379569,
+    "trading_days_total": 19,
+    "trading_days_elapsed": 3,
+    "trading_days_remaining": 16,
+    "daily_pacing_target_inr": 23723,
+    "full_deploy_deadline": "2026-05-30",
+    "pace_status": "MAY DAY 4 — ₹20,431 deployed of ₹4,00,000. ON TRACK. May 8 new GTTs placed: 318173888/890/891/892/893 (~₹24,412). May 7 carry GTTs still active (~₹24,745). Total queued ~₹49,157.",
     "bucket_deployed": {
-      "_note": "Approximate April 2026 deployments. Gold underreported — GOLDBEES 60 settled + 25 T1 = ~₹10,604 deployed in April. Mahantesh to reconcile at month-end.",
-      "large_cap_inr": 41206,
-      "mid_small_inr": 10525,
-      "sector_inr": 7195,
-      "gold_inr": 10604,
-      "international_inr": 7110,
+      "_note": "Updated May 7. May 6 GTT fires confirmed via T1 holdings.",
+      "large_cap_inr": 8424,
+      "mid_small_inr": 0,
+      "sector_cpseetf_inr": 3546,
+      "sector_psubnkbees_inr": 3185,
+      "gold_inr": 3166,
+      "international_inr": 2110,
       "debt_liquid_inr": 0
     },
     "bucket_target_inr": {
-      "large_cap_inr": 160000,
+      "large_cap_inr": 190000,
+      "_large_cap_note": "₹160k base + ₹30k redirect from PSUBNKBEES (SKILL-04 May rotation)",
       "mid_small_inr": 60000,
-      "sector_inr": 60000,
+      "sector_cpseetf_inr": 60000,
+      "sector_psubnkbees_inr": 30000,
+      "_sector_note": "CPSEETF new active sector ₹60k. PSUBNKBEES reduced to ₹30k/month.",
       "gold_inr": 60000,
       "international_inr": 40000,
       "debt_liquid_inr": 20000
@@ -35,11 +39,10 @@
   },
 
   "kite_account": {
-    "_synced": "2026-04-24 via SKILL-02",
+    "_synced": "2026-05-08 via SKILL-02",
     "user_id": "[KITE_ACCOUNT_ID]",
-    "available_cash_inr": 155137.70,
-    "holdings_value_inr": 538408,
-    "total_equity_inr": 693546
+    "available_cash_inr": 131706.70,
+    "holdings_note": "Fetch live via mcp__kite__get_holdings. ITBEES 1500 units SOLD May 6. NIFTYBEES 677 total (646+31 T1), JUNIORBEES 148 settled, CPSEETF 33 T1 (new position BSE), PSUBNKBEES 266 total (232+34 T1), GOLDBEES 889 total (863+26 T1), ICICIB22 126 total (109+17 T1). RELIANCE 22 settled, stop GTT317591231 active at ₹1,346."
   },
 
   "kite_holdings_snapshot": {
@@ -69,38 +72,50 @@
   "trailing_stops": {
     "_note": "Set at -8% from peak for positions with >15% gain. Ratchet up every 5% gain. Updated by SKILL-06 weekly.",
     "positions": [
-      { "symbol": "AXISBANK",  "entry": 755,    "peak": 1379.6,  "stop": 1269, "gtt_id": 316237772, "current_ltp": 1369.6,  "pnl_pct": 81.4,  "buffer_pct": 7.34, "status": "SAFE" },
-      { "symbol": "ICICIBANK", "entry": 731,    "peak": 1388.4,  "stop": 1278, "gtt_id": 316059663, "current_ltp": 1347.75, "pnl_pct": 84.4,  "buffer_pct": 5.18, "status": "⚠ WATCH — buffer tightening. Peak 1388, now 1347." },
-      { "symbol": "RELIANCE",  "entry": 962.32, "peak": 1362.9,  "stop": 1256, "gtt_id": 316059664, "current_ltp": 1343.1,  "pnl_pct": 39.6,  "buffer_pct": 6.48, "status": "SAFE" },
-      { "symbol": "TMCV",      "entry": 260.76, "peak": 447.8,   "stop": 412,  "gtt_id": 316237771, "current_ltp": 431.7,   "pnl_pct": 65.6,  "buffer_pct": 4.56, "status": "⚠ WATCH — -3.60% Apr 24. Crude $106 = CV sector headwind. Buffer tightening." }
-    ]
+      { "symbol": "RELIANCE",  "entry": 962.32, "peak": 1463.10, "stop": 1346, "gtt_id": 317591231, "limit": 1333, "current_ltp": 1463.10, "pnl_pct": 52.0, "buffer_pct": 8.0,  "status": "✅ RATCHETED May 5. Cancelled GTT317175294 (stop 1312). New GTT317591231 placed (trigger 1346, limit 1333). New peak ₹1,463.10." },
+      { "symbol": "AXISBANK",  "entry": 755,    "peak": 1379.6,  "stop": 1269, "gtt_id": 316237772, "current_ltp": 1275.10, "pnl_pct": 68.1, "buffer_pct": null, "status": "✅ STOPPED OUT — confirmed absent from live holdings May 5. GTT316237772 not active. Gain ~68% (₹5,140 LTCG)." },
+      { "symbol": "TMCV",      "entry": 260.76, "peak": 447.8,   "stop": 412,  "gtt_id": 316237771, "current_ltp": 412.90,  "pnl_pct": 57.9, "buffer_pct": null, "status": "✅ STOPPED OUT — confirmed absent from live holdings May 5. GTT316237771 not active. Gain ~58% (₹6,503 LTCG)." },
+      { "symbol": "ICICIBANK", "entry": 731,    "peak": 1388.4,  "stop": 1278, "gtt_id": null,       "current_ltp": null,   "pnl_pct": 74.8, "buffer_pct": null, "status": "✅ STOPPED OUT — confirmed sold (flagged Apr 30, confirmed absent May 5). Gain ~74.8% (₹5,470 LTCG)." }
+    ],
+    "ltcg_realised_fy2026": {
+      "_note": "Running tally of LTCG gains realised. Annual exemption ₹1.25L.",
+      "axisbank_gain_inr": 5140,
+      "tmcv_gain_inr": 6503,
+      "icicibank_gain_inr": 5470,
+      "total_realised_inr": 17113,
+      "exemption_limit_inr": 125000,
+      "headroom_inr": 107887
+    }
   },
 
   "signals": {
     "_note": "Updated daily by SKILL-02. FII/DII from NSE API. Macro from Yahoo Finance.",
-    "fii_stance": "BUYER",
-    "dii_stance": "SELLER",
-    "last_fii_net_crore": 941.35,
-    "last_dii_net_crore": -3254.71,
-    "active_sector_etf": "NSE:PSUBNKBEES",
-    "active_sector_score": 8.4,
-    "signal_date": "2026-04-24",
+    "fii_stance": "SELLER",
+    "dii_stance": "BUYER",
+    "last_fii_net_crore": -340.89,
+    "last_dii_net_crore": 441.07,
+    "active_sector_etf": "NSE:CPSEETF",
+    "active_sector_score": 9.0,
+    "prev_sector_etf": "NSE:PSUBNKBEES",
+    "prev_sector_score": 6.8,
+    "signal_date": "2026-05-08",
     "macro": {
-      "_note": "DXY/US10yr/Oil fetched live by SKILL-02 Apr 24. India10yr updated manually when RBI changes rate.",
-      "dxy": 98.82,
-      "dxy_5d": [98.05, 98.41, 98.59, 98.82],
-      "dxy_signal": "BULLISH (below 100) — but RISING. Tailwind eroding.",
-      "us_10yr_yield_pct": 4.323,
+      "_note": "DXY/US10yr/Oil fetched live by SKILL-02 May 8. India10yr static 7%.",
+      "dxy": 98.228,
+      "dxy_5d": [98.47, 98.48, 98.02, 98.23, 98.228],
+      "dxy_signal": "BULLISH (below 100) — gently falling from 98.47. EM/India tailwind intact.",
+      "us_10yr_yield_pct": 4.392,
+      "us_10yr_5d": [4.378, 4.446, 4.416, 4.356, 4.392],
       "india_10yr_yield_pct": 7.0,
-      "yield_spread_pct": 2.677,
-      "yield_spread_zone": "2-3% = FII CAUTIOUS — NARROWING",
-      "brent_crude_usd": 106.16,
-      "brent_5d": [95.48, 98.48, 101.91, 106.16],
-      "oil_signal": "⚠⚠ MAJOR SPIKE — $106.16/barrel. +12.9% in 4 days. India CAD/rupee/inflation risk.",
+      "yield_spread_pct": 2.608,
+      "yield_spread_zone": "2-3% = FII CAUTIOUS — marginal improvement from 2.554 (May 5). Spread widening = mild FII recovery signal.",
+      "brent_crude_usd": 102.41,
+      "brent_5d": [114.44, 109.87, 101.27, 102.41],
+      "oil_signal": "⚠ SHARP DROP — $114 → $102 in 4 days (-10.2%). Still above $90 but falling. India macro POSITIVE (CAD relief, rupee support). CPSEETF short-term noise (ONGC earnings) — structural thesis intact.",
       "cape_ratio": 33,
       "cape_avg": 25,
       "cape_signal": "ELEVATED — favour systematic, not lumpsum aggression",
-      "evi_zone": "NEUTRAL (market recovered from sub-100 in early Apr 2026)"
+      "evi_zone": "NEUTRAL — check iciciprumf.com monthly"
     }
   },
 
