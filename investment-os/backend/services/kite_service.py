@@ -162,6 +162,14 @@ class KiteService:
             logger.error(f"Kite get_margins failed: {e}")
             return {}
 
+    def get_historical_data(self, instrument_token: int, from_date: str, to_date: str, interval: str = "day") -> list[dict]:
+        kite = self._get_kite()
+        try:
+            candles = kite.historical_data(instrument_token, from_date, to_date, interval)
+            return candles
+        except Exception as e:
+            raise RuntimeError(f"Kite historical_data failed for token {instrument_token}: {e}") from e
+
 
 def _classify_instrument(ticker: str, instrument_type: str) -> str:
     ticker_upper = ticker.upper()

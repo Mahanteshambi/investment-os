@@ -9,7 +9,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 from database.connection import get_connection, close_connection
-from routers import holdings, portfolio, snapshots, sync, intelligence
+from routers import holdings, portfolio, snapshots, sync, intelligence, sector_rotation
 from scheduler.jobs import start_scheduler, stop_scheduler
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(name)s — %(message)s")
@@ -51,6 +51,7 @@ from fastapi import APIRouter
 from models.schemas import AgentSignal
 
 app.include_router(intelligence.router)
+app.include_router(sector_rotation.router)
 
 agents_router = APIRouter(prefix="/api/agents", tags=["agents"])
 

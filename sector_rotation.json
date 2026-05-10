@@ -1,63 +1,242 @@
 {
-  "_schema": "v2 — current_month + rolling 12-month history. SKILL-04 appends to history on 1st of month.",
+  "_schema": "v3 — 12-sector universe. current_month + rolling 12-month history. SKILL-04 appends to history on 1st of month.",
   "_history_purpose": "2-consecutive-month exit rule, sector momentum trend, rotation pattern analysis",
 
   "current_month": {
-    "month": "2026-04",
-    "generated_date": "2026-04-17",
-    "active_sector_etf": "NSE:PSUBNKBEES",
-    "active_sector_score": 8.4,
+    "month": "2026-05",
+    "generated_date": "2026-05-07",
+    "active_sector_etf": "NSE:CPSEETF",
+    "active_sector_score": 9.0,
     "active_sector_allocation": "full",
+    "rotation_decision": "NO ROTATION — CPSEETF remains #1 at 9.0. RSI cooled from 78.6 to 57.5 (healthy, not bearish — room to run). Top challengers: PHARMABEES (8.8), MODEFENCE (8.6, new), METALIETF (8.0, new). Rotation threshold not met.",
     "scores": [
       {
-        "sector": "PSU Banking", "etf": "NSE:PSUBNKBEES", "token": 3848193,
-        "current_price": 98.11,
-        "technical_score": 9.0, "fundamental_score": 10.0, "fii_dii_score": 6.0,
-        "composite_score": 8.4, "decision": "BUY", "monthly_allocation_inr": 60000,
-        "technical_detail": { "price_vs_200dma": "ABOVE +3", "price_vs_50dma": "ABOVE +2", "rsi14": 61.1, "52w_position_pct": 66, "vol_ratio_20d_60d": 0.91 },
-        "notes": "NEW ACTIVE SECTOR. Rotating from BANKBEES. PSU banks at multi-year profitability highs."
-      },
-      {
-        "sector": "Pharma", "etf": "NSE:PHARMABEES", "token": 1273089,
-        "current_price": 23.05,
-        "technical_score": 8.5, "fundamental_score": 8.0, "fii_dii_score": 7.0,
-        "composite_score": 7.9, "decision": "BUY", "monthly_allocation_inr": 0,
-        "notes": "Backup sector. HOLD existing 2000 units."
-      },
-      {
+        "rank": 1,
         "sector": "PSU/CPSE", "etf": "NSE:CPSEETF", "token": 595969,
-        "current_price": 105.02,
-        "technical_score": 9.0, "fundamental_score": 8.0, "fii_dii_score": 6.0,
-        "composite_score": 7.8, "decision": "BUY", "monthly_allocation_inr": 0,
-        "notes": "Strong #3. At 52-week high. Monitor for next month."
+        "current_price": 106.70,
+        "technical_score": 9.0, "fundamental_score": 9.0, "fii_dii_score": 9.0,
+        "composite_score": 9.0, "decision": "BUY", "monthly_allocation_inr": 60000,
+        "technical_detail": {
+          "price_vs_200dma": "ABOVE 200-DMA ~95.35 (+11.9%) +3",
+          "price_vs_50dma": "ABOVE 50-DMA ~103.53 (+3.1%) +2",
+          "rsi14": 57.5,
+          "52w_position_pct": 90.6,
+          "vol_ratio_20d_60d": 0.81
+        },
+        "notes": "ACTIVE SECTOR. RSI cooled from 78.6 (May 5) to 57.5 — healthy consolidation, not trend break. Price slipped from 108.01→106.70 on mild 2-day correction. Still +11.9% above 200-DMA, in top decile of 52-week range. DXY 98.90 = structural tailwind. Oil $111 = ONGC/OIL earnings boost. FII+DII both buying. CAPE 33 = favour value (CPSE = value play). Continue full ₹60K allocation."
       },
       {
+        "rank": 2,
+        "sector": "Pharma", "etf": "NSE:PHARMABEES", "token": 1273089,
+        "current_price": 24.82,
+        "technical_score": 10.0, "fundamental_score": 7.5, "fii_dii_score": 8.5,
+        "composite_score": 8.8, "decision": "HOLD", "monthly_allocation_inr": 0,
+        "technical_detail": {
+          "price_vs_200dma": "ABOVE 200-DMA ~22.94 (+8.2%) +3",
+          "price_vs_50dma": "ABOVE 50-DMA ~23.03 (+7.8%) +2",
+          "rsi14": 75.6,
+          "52w_position_pct": 100.0,
+          "vol_ratio_20d_60d": 1.36
+        },
+        "notes": "Strong #2, gap narrowing (was 9.1 May 5, now 8.8). At 52-WEEK HIGH (24.82). RSI 75.6 bullish. Volume surge (ratio 1.36). US generic pharma cycle recovery, PLI tailwinds, rupee depreciation = export revenue boost. HOLD existing 2000 units. If CPSEETF target met early in month, add PHARMABEES. Next rotation candidate if CPSEETF drops below 8.5."
+      },
+      {
+        "rank": 3,
+        "sector": "Defence", "etf": "NSE:MODEFENCE", "token": 6385665,
+        "current_price": 100.47,
+        "technical_score": 9.5, "fundamental_score": 8.5, "fii_dii_score": 7.5,
+        "composite_score": 8.6, "decision": "WATCH", "monthly_allocation_inr": 0,
+        "technical_detail": {
+          "price_vs_200dma": "ABOVE 200-DMA ~87.95 (+14.2%) +3",
+          "price_vs_50dma": "ABOVE 50-DMA ~90.42 (+11.1%) +2",
+          "rsi14": 71.4,
+          "52w_position_pct": 100.0,
+          "vol_ratio_20d_60d": 0.92
+        },
+        "notes": "NEW IN UNIVERSE. Surprise #3 at 8.6. At 52-WEEK HIGH, +14.2% above 200-DMA. RSI 71.4 (bullish without being overbought). HAL/BEL/BEML record order books. India defence indigenisation push, export target ₹35,000 cr. India-Pakistan geopolitical tension = structural demand. Record budget defence allocation. NOT in active portfolio yet — strong candidate for next rotation if CPSEETF weakens."
+      },
+      {
+        "rank": 4,
+        "sector": "Metal", "etf": "NSE:METALIETF", "token": 6364417,
+        "current_price": 13.22,
+        "technical_score": 9.5, "fundamental_score": 7.0, "fii_dii_score": 7.0,
+        "composite_score": 8.0, "decision": "WATCH", "monthly_allocation_inr": 0,
+        "technical_detail": {
+          "price_vs_200dma": "ABOVE 200-DMA ~10.85 (+21.8%) +3",
+          "price_vs_50dma": "ABOVE 50-DMA ~12.15 (+8.8%) +2",
+          "rsi14": 66.4,
+          "52w_position_pct": 100.0,
+          "vol_ratio_20d_60d": 0.90
+        },
+        "notes": "NEW IN UNIVERSE. #4 at 8.0. At 52-WEEK HIGH, +21.8% above 200-DMA — strongest DMA outperformance in universe. China stimulus driving steel/copper/aluminium cycle. India domestic steel demand strong (infra push). RSI 66.4 — room to run. CYCLICAL RISK: China stimulus reversal or global demand softness = sharp drawdown. WATCH, do not act until CPSEETF rotation threshold triggered."
+      },
+      {
+        "rank": 5,
+        "sector": "Energy", "etf": "NSE:ENERGY", "token": 194503681,
+        "current_price": 40.95,
+        "technical_score": 8.0, "fundamental_score": 7.5, "fii_dii_score": 7.5,
+        "composite_score": 7.7, "decision": "WATCH", "monthly_allocation_inr": 0,
+        "technical_detail": {
+          "price_vs_200dma": "N/A — insufficient history (~117 candles, ETF listed Nov 2025)",
+          "price_vs_50dma": "ABOVE 50-DMA ~37.38 (+9.6%) +2",
+          "rsi14": 74.5,
+          "52w_position_pct": 97.1,
+          "vol_ratio_20d_60d": 0.80
+        },
+        "notes": "NEW IN UNIVERSE. #5 at 7.7. Limited history (Nov 2025 launch — 200DMA unavailable, scored neutral). Near 52-week high, RSI 74.5. Oil $111 = direct E&P earnings play (ONGC, Oil India). CAUTION: Heavy composition overlap with CPSEETF (both hold ONGC/OIL India). Not recommended while CPSEETF is active — would be redundant exposure. Revisit only if CPSEETF exits rotation."
+      },
+      {
+        "rank": 6,
+        "sector": "Infrastructure", "etf": "NSE:INFRABEES", "token": 5138433,
+        "current_price": 975.70,
+        "technical_score": 8.0, "fundamental_score": 7.5, "fii_dii_score": 7.0,
+        "composite_score": 7.6, "decision": "HOLD", "monthly_allocation_inr": 0,
+        "technical_detail": {
+          "price_vs_200dma": "ABOVE 200-DMA ~956.92 (+2.0%) +2.5",
+          "price_vs_50dma": "ABOVE 50-DMA ~945.66 (+3.2%) +2",
+          "rsi14": 62.0,
+          "52w_position_pct": 73.2,
+          "vol_ratio_20d_60d": 0.78
+        },
+        "notes": "NEW IN UNIVERSE. #6 at 7.6. Above both DMAs, RSI 62 (bullish). India govt capex record ₹11.1L cr budget. PM Gati Shakti, National Infrastructure Pipeline. Roads/rail/ports all accelerating. NOT in active portfolio — steady candidate if sector rotation opens up."
+      },
+      {
+        "rank": 7,
+        "sector": "Auto", "etf": "NSE:AUTOBEES", "token": 2017281,
+        "current_price": 275.36,
+        "technical_score": 7.5, "fundamental_score": 6.5, "fii_dii_score": 6.5,
+        "composite_score": 6.9, "decision": "HOLD", "monthly_allocation_inr": 0,
+        "technical_detail": {
+          "price_vs_200dma": "ABOVE 200-DMA ~272.11 (+1.2%) +2",
+          "price_vs_50dma": "ABOVE 50-DMA ~267.99 (+2.8%) +2",
+          "rsi14": 59.1,
+          "52w_position_pct": 69.2,
+          "vol_ratio_20d_60d": 1.13
+        },
+        "notes": "NEW IN UNIVERSE. #7 at 6.9. Above both DMAs, RSI 59 (healthy). Strong domestic 2-wheeler and PV demand. Rural recovery driving entry-level segments. Oil $111 = input cost pressure for OEMs. EV transition risk medium-term. Decent but not compelling vs CPSEETF/PHARMABEES. Not in active portfolio."
+      },
+      {
+        "rank": 8,
+        "sector": "PSU Banking", "etf": "NSE:PSUBNKBEES", "token": 3848193,
+        "current_price": 96.45,
+        "technical_score": 6.0, "fundamental_score": 7.0, "fii_dii_score": 7.5,
+        "composite_score": 6.8, "decision": "HOLD", "monthly_allocation_inr": 30000,
+        "technical_detail": {
+          "price_vs_200dma": "ABOVE 200-DMA ~90.56 (+6.5%) +3",
+          "price_vs_50dma": "BELOW 50-DMA ~98.49 (-2.1%) 0",
+          "rsi14": 49.5,
+          "52w_position_pct": 67.6,
+          "vol_ratio_20d_60d": 0.93
+        },
+        "notes": "PREVIOUS ACTIVE SECTOR. Score held at 6.8 (unchanged from May 5 despite RSI recovery 35.5→49.5 — FII/DII score normalised). Price recovering: 94.14→96.45. Still below 50-DMA. Above 200-DMA = structural floor. HOLD ₹30,000/month (reduced per exit_alert). NPA cycle improving, PSU recap support. Conservative GTT triggers only — see feedback."
+      },
+      {
+        "rank": 9,
+        "sector": "Realty", "etf": "NSE:MOREALTY", "token": 5935105,
+        "current_price": 82.01,
+        "technical_score": 6.5, "fundamental_score": 6.5, "fii_dii_score": 6.0,
+        "composite_score": 6.3, "decision": "HOLD", "monthly_allocation_inr": 0,
+        "technical_detail": {
+          "price_vs_200dma": "BELOW 200-DMA ~85.82 (-4.4%) +0.5",
+          "price_vs_50dma": "ABOVE 50-DMA ~75.30 (+8.9%) +2",
+          "rsi14": 63.4,
+          "52w_position_pct": 43.8,
+          "vol_ratio_20d_60d": 1.27
+        },
+        "notes": "NEW IN UNIVERSE. #9 at 6.3. Below 200-DMA but strong 50-DMA recovery (+8.9%). India residential demand very strong — Prestige/DLF/Godrej record bookings. RSI 63 and volume surge (1.27) suggest accumulation. But 52-week position only 43.8% — still in recovery mode. Not compelling vs higher-ranked sectors."
+      },
+      {
+        "rank": 10,
         "sector": "Banking", "etf": "NSE:BANKBEES", "token": 2928385,
-        "current_price": 579.79,
-        "technical_score": 5.0, "fundamental_score": 7.0, "fii_dii_score": 5.0,
-        "composite_score": 5.6, "decision": "HOLD", "monthly_allocation_inr": 30000,
-        "notes": "PREVIOUS ACTIVE SECTOR. Score dropped to HOLD. Monitor for upgrade."
+        "current_price": 577.50,
+        "technical_score": 4.0, "fundamental_score": 6.0, "fii_dii_score": 7.5,
+        "composite_score": 5.7, "decision": "HOLD", "monthly_allocation_inr": 0,
+        "technical_detail": {
+          "price_vs_200dma": "BELOW 200-DMA ~590.29 (-2.2%) +0.5",
+          "price_vs_50dma": "BELOW 50-DMA ~578.62 (-0.2%) +0.5",
+          "rsi14": 52.9,
+          "52w_position_pct": 49.2,
+          "vol_ratio_20d_60d": 1.09
+        },
+        "notes": "HOLD. Score unchanged at 5.7. Improved vs April (RSI 40→52.9, 52w 38.6%→49.2%) but still below both DMAs. FII May reversal a positive signal. RBI rate cut cycle beginning = medium-term positive. Watch for recovery above 50-DMA ~578.62 as confirmation signal. No new allocation."
       },
       {
+        "rank": 11,
+        "sector": "BFSI", "etf": "NSE:BFSI", "token": 1336321,
+        "current_price": 27.26,
+        "technical_score": 5.0, "fundamental_score": 6.0, "fii_dii_score": 6.0,
+        "composite_score": 5.6, "decision": "HOLD", "monthly_allocation_inr": 0,
+        "technical_detail": {
+          "price_vs_200dma": "BELOW 200-DMA ~27.72 (-1.7%) +1",
+          "price_vs_50dma": "ABOVE 50-DMA ~27.00 (+1.0%) +1.5",
+          "rsi14": 55.3,
+          "52w_position_pct": 57.6,
+          "vol_ratio_20d_60d": 0.77
+        },
+        "notes": "NEW IN UNIVERSE. #11 at 5.6. Marginally below 200-DMA, above 50-DMA. Insurance and NBFC recovery underway but mixed signals. Lower priority vs BANKBEES given similar exposure. Not in active portfolio."
+      },
+      {
+        "rank": 12,
         "sector": "IT", "etf": "NSE:ITBEES", "token": 4885505,
-        "current_price": 34.74,
-        "technical_score": 2.0, "fundamental_score": 4.0, "fii_dii_score": 3.0,
-        "composite_score": 2.9, "decision": "AVOID", "monthly_allocation_inr": 0,
-        "consecutive_below4_months": 1,
-        "notes": "AVOID — MONTH 1 of sub-4 watch. STOP NEW BUYS. If May also below 4 → trailing stop + exit."
+        "current_price": 32.36,
+        "technical_score": 1.5, "fundamental_score": 2.0, "fii_dii_score": 3.0,
+        "composite_score": 2.1, "decision": "EXITED", "monthly_allocation_inr": 0,
+        "consecutive_below4_months": 3,
+        "notes": "✅ POSITION EXITED — 1500 units sold May 7, 2026 (3 sell orders: 1334+150+16 qty). 3rd consecutive month sub-4 (Mar: implied, Apr: 2.9, May: 2.1). DeepSeek structural disruption to IT demand + US tariff headwinds. Proceeds ~₹48,000 redeployed to CPSEETF GTT buys. No re-entry until score sustains above 6 for 2+ months."
       }
     ],
-    "exit_alerts": [
-      { "symbol": "ITBEES", "alert_type": "SCORE_BELOW_4_FIRST_MONTH", "score": 2.9, "consecutive_months": 1, "action": "STOP NEW BUYS. Watch May — 2nd month triggers exit." },
-      { "symbol": "BANKBEES", "alert_type": "ROTATION_OUT", "score": 5.6, "action": "Reduce to HOLD allocation ₹30,000." }
-    ],
-    "previous_month_sector": "NSE:BANKBEES",
-    "rotation_happened": true
+    "fii_dii_data": {
+      "date": "2026-05-04",
+      "fii_net_crore": 2835.62,
+      "dii_net_crore": 4764.16,
+      "fii_stance": "BUYER",
+      "dii_stance": "BUYER",
+      "signal": "BOTH BUYING — major reversal from April. FII returned as net buyer on first day of May."
+    },
+    "macro_context": {
+      "source": "Last known Apr 30 (Yahoo Finance rate-limited May 5)",
+      "dxy": 98.90,
+      "dxy_signal": "BULLISH (below 100) — tailwind for CPSE real assets and EM inflows",
+      "us_10yr_pct": 4.418,
+      "india_10yr_pct": 7.0,
+      "yield_spread_pct": 2.582,
+      "yield_spread_zone": "2-3% = FII cautious (but May 4 reversal signals improvement)",
+      "brent_crude_usd": 111.19,
+      "oil_signal": "HIGH — headwind for consumption/auto/banking but EARNINGS BOOST for CPSEETF (ONGC, OIL India, ENERGY ETF). Confirms CPSEETF over BANKBEES/AUTOBEES.",
+      "cape_ratio": 33,
+      "valuation_overlay": "ELEVATED CAPE — favour value/real-asset sectors. CPSEETF and METALIETF (value/commodity) preferred over high-PE IT/growth."
+    },
+    "previous_month_sector": "NSE:PSUBNKBEES",
+    "rotation_happened": true,
+    "rotation_reason": "PSUBNKBEES RSI dropped to 35.5 May 5, below 50-DMA, price pulled back 14% from Feb peak. CPSEETF at 52-week high with perfect technicals + oil tailwind + DXY tailwind."
   },
 
   "history": [
     {
-      "_note": "Compact monthly summary — enough to enforce 2-consecutive-month exit rule and score trends",
+      "_note": "May 2026 — updated May 7 with full 12-sector universe",
+      "month": "2026-05",
+      "active_sector_etf": "NSE:CPSEETF",
+      "scores": {
+        "CPSEETF": 9.0,
+        "PHARMABEES": 8.8,
+        "MODEFENCE": 8.6,
+        "METALIETF": 8.0,
+        "ENERGY": 7.7,
+        "INFRABEES": 7.6,
+        "AUTOBEES": 6.9,
+        "PSUBNKBEES": 6.8,
+        "MOREALTY": 6.3,
+        "BANKBEES": 5.7,
+        "BFSI": 5.6,
+        "ITBEES": 2.1
+      },
+      "below4_sectors": ["ITBEES"],
+      "rotation_from": "NSE:PSUBNKBEES",
+      "rotation_to": "NSE:CPSEETF",
+      "itbees_status": "EXITED — sold 1500 units May 7"
+    },
+    {
+      "_note": "April 2026 compact entry (5-sector universe)",
       "month": "2026-04",
       "active_sector_etf": "NSE:PSUBNKBEES",
       "scores": {
@@ -73,10 +252,52 @@
     }
   ],
 
+  "exit_alerts": [
+    {
+      "symbol": "ITBEES",
+      "alert_type": "SCORE_BELOW_4_CONSECUTIVE_3_MONTHS",
+      "score_apr": 2.9,
+      "score_may": 2.1,
+      "consecutive_months": 3,
+      "status": "EXECUTED",
+      "execution_date": "2026-05-07",
+      "qty_sold": 1500,
+      "sell_orders": "3 orders: 1334 + 150 + 16 units",
+      "note": "Position fully exited. Proceeds ~₹48,000 redeployed to CPSEETF GTT buys. No further action needed."
+    },
+    {
+      "symbol": "PSUBNKBEES",
+      "alert_type": "ROTATION_OUT",
+      "score_prev": 8.4,
+      "score_current": 6.8,
+      "action": "Reduce allocation from ₹60,000 to ₹30,000/month. Redirect ₹30,000 to Large Cap (NIFTYBEES). Do NOT sell existing holdings — still HOLD range and above 200-DMA.",
+      "conviction_note": "Low personal conviction — use deep-dip GTT triggers only. Do not chase if fills missed."
+    }
+  ],
+
+  "watch_candidates": [
+    {
+      "etf": "NSE:MODEFENCE", "score": 8.6,
+      "trigger_condition": "Promote to active consideration if CPSEETF drops below 8.0 for 1 month",
+      "note": "Strongest new entrant. Defence cycle is multi-year structural theme."
+    },
+    {
+      "etf": "NSE:METALIETF", "score": 8.0,
+      "trigger_condition": "Promote to active consideration if CPSEETF drops below 8.0 and METALIETF sustains above 7.5",
+      "note": "Strong technically but cyclical. China demand reversal = sharp risk. Treat as secondary candidate."
+    },
+    {
+      "etf": "NSE:ENERGY", "score": 7.7,
+      "trigger_condition": "Only relevant if CPSEETF exits rotation — heavy overlap with CPSE holdings (ONGC, OIL)",
+      "note": "200DMA unavailable due to short ETF history (launched Nov 2025)."
+    }
+  ],
+
   "_history_rules": {
     "max_entries": 12,
     "on_overflow": "drop oldest entry (keep rolling 12 months)",
     "updated_by": "SKILL-04 on 1st of every month — append to history[], update current_month{}",
+    "sector_universe": "12 sectors as of May 2026: CPSEETF, PHARMABEES, MODEFENCE, METALIETF, ENERGY, INFRABEES, AUTOBEES, PSUBNKBEES, MOREALTY, BANKBEES, BFSI, ITBEES",
     "critical_use": "consecutive_below4 check: count how many months a sector appears in below4_sectors[] across history entries"
   }
 }

@@ -76,6 +76,20 @@ export async function getMFFactsheets(isin: string) {
   return fetchJSON(`/api/mf/factsheets/${isin}`)
 }
 
+export async function getSectorRotation(): Promise<import("@/types").SectorRotation> {
+  return fetchJSON("/api/sector-rotation")
+}
+
+export async function syncSectorRotation(): Promise<{
+  status: string
+  synced_at: string
+  sectors_updated: number
+  errors: string[]
+  data: import("@/types").SectorRotation
+}> {
+  return fetchJSON("/api/sector-rotation/sync", { method: "POST" })
+}
+
 export async function getKiteLoginUrl(): Promise<{ login_url: string }> {
   return fetchJSON("/api/sync/kite/login-url")
 }

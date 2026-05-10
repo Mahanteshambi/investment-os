@@ -183,47 +183,114 @@ TRAILING STOPS (active positions)
 **Purpose:** Score all sectors, decide active sector ETF for the month, check exits
 
 ```
-SECTORS TO ANALYSE:
-  Banking (BANKBEES), IT (ITBEES), Pharma (PHARMABEES),
-  PSU/CPSE (CPSEETF), PSU Banking (PSUBNKBEES),
-  FMCG, Auto, Infrastructure, Energy
-  Global: Nasdaq (ICICIB22), Emerging Markets
+12-SECTOR UNIVERSE (as of May 2026):
+  Symbol       Token       Sector
+  CPSEETF      595969      PSU/CPSE (NTPC, ONGC, OIL India, Coal India, BEL)
+  PHARMABEES   1273089     Pharma
+  MODEFENCE    6385665     Defence
+  METALIETF    6364417     Metal
+  ENERGY       194503681   Energy/Oil & Gas (listed Nov 2025 — <200 candles)
+  INFRABEES    5138433     Infrastructure
+  AUTOBEES     2017281     Auto
+  PSUBNKBEES   3848193     PSU Banking
+  MOREALTY     5935105     Realty
+  BANKBEES     2928385     Banking (private + public)
+  BFSI         1336321     BFSI (broad financials)
+  ITBEES       4885505     IT
 
-PER SECTOR (spawn AGENT-01 for fundamental, AGENT-02 for technical, AGENT-04 for macro):
+DATA FETCH (per sector):
+  mcp__kite__get_historical_data(
+    instrument_token = <token above>,
+    from_date = "YYYY-MM-DD 09:15:00",   # ~13 months back for 200-DMA headroom
+    to_date   = "YYYY-MM-DD 15:30:00",   # today
+    interval  = "day"
+  )
+  Extract: closes[], volumes[]
 
-  FUNDAMENTAL (30% weight):
-    - PE ratio vs 5-year average (overvalued/undervalued)
-    - Earnings growth trend (last 2 quarters)
-    - Policy tailwinds: RBI, govt spending, PLI schemes, budget allocations
-    - Score: 1–10
+TECHNICAL SCORE (40% weight, max 10):
 
-  TECHNICAL (40% weight):
-    - Fetch 200-day history via Kite get_historical_data
-    - Price vs 200-DMA, 50-DMA
-    - RSI-14: >60 bullish, <40 bearish
-    - 52-week position: near high/mid/low
-    - Volume: 20-day avg vs 60-day avg
-    - Score: 1–10
+  Component 1 — Price vs 200-DMA (max 3.0):
+    200-DMA = mean(last 200 closes). Skip if <200 candles → score 1.5 (neutral)
+    vs200 = (current_price / 200dma - 1) * 100
+    vs200 ≥ +5%  → 3.0
+    vs200 +2–5%  → 2.5
+    vs200 0–+2%  → 2.0
+    vs200 -2–0%  → 1.0
+    vs200 -5–-2% → 0.5
+    vs200 < -5%  → 0.0
 
-  FII/DII FLOW (30% weight):
-    - Net FII buying/selling in sector (from weekly FII data)
-    - Consecutive days of institutional accumulation
-    - Score: 1–10
+  Component 2 — Price vs 50-DMA (max 2.0):
+    50-DMA = mean(last 50 closes)
+    vs50 ≥ +2%   → 2.0
+    vs50 0–+2%   → 1.5
+    vs50 -2–0%   → 0.5
+    vs50 < -2%   → 0.0
 
-  COMPOSITE SCORE = (Fundamental*0.3) + (Technical*0.4) + (FII_DII*0.3)
+  Component 3 — RSI-14 (max 2.0):
+    Use Wilder's RSI (exponential smoothing, NOT simple avg):
+      gains[i] = max(close[i] - close[i-1], 0)
+      losses[i] = max(close[i-1] - close[i], 0)
+      seed avg_gain = mean(gains[:14]), avg_loss = mean(losses[:14])
+      then: avg_gain = (avg_gain * 13 + gains[i]) / 14  (for i=14 onward)
+      RSI = 100 - 100 / (1 + avg_gain / avg_loss)
+    RSI ≥ 70     → 2.0
+    RSI 60–70    → 2.0
+    RSI 50–60    → 1.5
+    RSI 40–50    → 1.0
+    RSI 30–40    → 0.5
+    RSI < 30     → 0.0
 
-  DECISION:
-    Score ≥ 7: BUY — full ₹60,000/month
-    Score 5–6: HOLD — ₹30,000/month, balance to Large Cap
-    Score < 5: AVOID — ₹0, redirect to Large Cap
+  Component 4 — 52-week position % (max 2.0):
+    Uses last 252 trading days (or all available if <252)
+    pos = (current - low_252) / (high_252 - low_252) * 100
+    pos ≥ 80%   → 2.0
+    pos 60–80%  → 1.5
+    pos 40–60%  → 1.0
+    pos 25–40%  → 0.5
+    pos < 25%   → 0.0
+
+  Component 5 — Volume ratio 20d/60d (max 1.0):
+    ratio = mean(last 20 volumes) / mean(last 60 volumes)
+    ratio ≥ 1.2  → 1.0
+    ratio 0.8–1.2 → 0.5
+    ratio < 0.8  → 0.0
+
+  technical_score = sum of 5 components (max 10.0)
+
+FUNDAMENTAL SCORE (30% weight, max 10):
+  Qualitative overlay — assess each sector against current macro:
+  Key macro inputs (fetch or use latest known values):
+    - DXY: <100 = bullish EM/real assets; >100 = headwind
+    - Brent crude: >$90 = bad for consumption/autos, good for E&P (CPSEETF/ENERGY)
+    - CAPE ratio: >30 = elevated, favour value sectors
+    - RBI policy: rate cut cycle = banking positive; tightening = banking negative
+  Sector-specific: PE vs history, earnings trend, policy tailwinds (PLI, budget, capex)
+  Score 1–10 using judgement.
+
+FII/DII SCORE (30% weight, max 10):
+  Inputs: NSE FII/DII data (https://www.nseindia.com/api/fiidiiTradeReact)
+  Both buying = 9–10; one buying = 6–7; both selling = 2–3
+  Apply sector preference (FII favours pharma/IT/banks; DII favours domestic)
+  Score 1–10.
+
+COMPOSITE SCORE = technical*0.4 + fundamental*0.3 + fii_dii*0.3
+
+DECISION THRESHOLDS:
+  composite ≥ 7.0 → BUY  — full ₹60,000/month if active sector
+  composite 5–6.9 → HOLD — ₹30,000/month, balance to Large Cap
+  composite < 5.0 → AVOID — ₹0, redirect entirely to Large Cap
+
+ROTATION RULE:
+  Rotate active sector when: top-ranked sector score exceeds current active by ≥1.0 point
+  Do NOT rotate on a 0.2–0.5 point gap — requires clear leadership change
 
 EXIT CHECKS:
-  - Previous month's active sector: has score dropped below 4?
-    → Yes: recommend stopping new buys, set trailing stop
-  - Any sector ETF position with >15% gain: set trailing stop at peak - 8%
+  - Any sector with score < 4 for 2 consecutive months → stop new buys + trailing stop exit
+  - Track consecutive_below4 via history[].below4_sectors[] array in sector_rotation.json
+  - Any sector ETF position with >15% gain → set trailing stop at peak - 8%
 
 OUTPUTS:
-  - sector_rotation.json (all scores + active_sector_etf for this month)
+  - sector_rotation.json (update current_month{} with all 12 scores, append compact entry to history[])
   - watchlist.json updated (active sector ETF marked)
   - Print: Sector Scorecard table + rotation recommendation
 ```

@@ -4,6 +4,13 @@
 # macOS
 .DS_Store
 
+# Secrets and machine-specific config
+.env
+.mcp.json
+
+# Package manager cache
+.pnpm-store/
+
 # Sensitive runtime data (optional — remove lines below if you want these tracked)
 # paper_trades.json
 # portfolio_state.json
