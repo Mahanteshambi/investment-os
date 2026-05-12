@@ -3,10 +3,10 @@
   "_history_purpose": "FII/DII trend, macro trend (DXY/oil/yield), signal pattern, budget pace tracking",
 
   "current": {
-    "date": "2026-05-08",
-    "generated_at": "2026-05-08T08:00:00+08:00",
-    "next_market_open": "2026-05-08 11:45 MYT — Day 4 of May trading (Friday)",
-    "data_as_of": "2026-05-07 (last trading session close) + FII/DII May 7",
+    "date": "2026-05-12",
+    "generated_at": "2026-05-12T08:00:00+08:00",
+    "next_market_open": "2026-05-12 11:45 MYT — Day 6 of May trading (Monday)",
+    "data_as_of": "2026-05-11 FII/DII + 2026-05-08 last Kite close (Kite session unavailable today)",
 
     "fii_net_crore": -340.89,
     "dii_net_crore": 441.07,

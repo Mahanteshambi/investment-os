@@ -33,16 +33,40 @@ I am the **investment brain and Kite executor**.
 
 ---
 
+## Execution Style — Sequential, Never Parallel
+
+**CRITICAL: Always execute SKILL-02 steps one at a time. Never batch all data fetches into one parallel call.**
+
+Reason: Parallel tool calls bloat context, cause stuck/wrong responses, and waste tokens.
+
+Correct order for SKILL-02:
+1. Login (if session expired) → confirm login works before proceeding
+2. Fetch LTPs → report result
+3. Fetch OHLC → report result
+4. Fetch holdings → report result
+5. Fetch margins → report result
+6. Fetch GTTs → report result
+7. Fetch FII/DII → report result
+8. Fetch macro (DXY, Oil, US10yr) — one curl at a time → report each
+9. Compile and print brief
+10. Wait for "confirm" before placing any orders
+11. Place GTTs one at a time, report each result
+
+**Never combine steps 2–8 into a single parallel block. One tool call per step.**
+
+---
+
 ## Session Start Checklist
 
 Every time a new session starts in this project, I must:
 
-1. Read `portfolio_state.json` — budget tracker, month progress, trailing stops, FD calendar
-2. Call `mcp__kite__get_holdings` + `mcp__kite__get_margins` — live Kite positions and cash (NOT from static file)
-3. Read Google Drive sheet (id: `[google_sheet_id from user_config.json]`) — non-Kite assets (MF/Coin, Vested/US, FD, PPF, PF, Savings). Mahantesh updates this manually after executions.
-4. Read `daily_signal.json` — latest recommendations (if exists)
-5. Read `sector_rotation.json` — current active sector and scores (if exists)
-6. Print a 5-line context brief:
+1. Call `mcp__kite__login` first — always. Kite sessions expire daily. Get link, wait for "logged in" confirmation before fetching any data.
+2. Read `portfolio_state.json` — budget tracker, month progress, trailing stops, FD calendar
+3. Call `mcp__kite__get_holdings` — live Kite positions (NOT from static file)
+4. Call `mcp__kite__get_margins` — live cash (NOT from static file)
+5. Read `daily_signal.json` — latest recommendations (if exists)
+6. Read `sector_rotation.json` — current active sector and scores (if exists)
+7. Print a 5-line context brief:
    ```
    Date: [today] | Days left in month: [X] | Budget remaining: ₹X.XXL of ₹4L
    FII/DII: [stance] | Active sector: [ETF name] (score: X/10)
