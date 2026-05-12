@@ -47,6 +47,9 @@ app.include_router(holdings.router)
 app.include_router(snapshots.router)
 app.include_router(sync.router)
 
+from routers import agent_chat
+app.include_router(agent_chat.router)
+
 from fastapi import APIRouter
 from models.schemas import AgentSignal
 

@@ -12,7 +12,7 @@ const navItems = [
   { href: "/holdings", label: "Holdings", icon: BriefcaseBusiness },
   { href: "/intelligence", label: "MF Intelligence", icon: Shield },
   { href: "/sector-rotation", label: "Sector Rotation", icon: RotateCcw },
-  { href: "/analysis", label: "Analysis", icon: FlaskConical, disabled: true },
+  { href: "/analysis", label: "Analysis", icon: FlaskConical },
 ]
 
 export function Sidebar() {

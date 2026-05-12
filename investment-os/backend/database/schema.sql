@@ -130,3 +130,15 @@ CREATE TABLE IF NOT EXISTS mf_alerts (
     alert_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     is_read BOOLEAN DEFAULT FALSE
 );
+
+-- Kite Historical Data (OHLCV)
+CREATE TABLE IF NOT EXISTS historical_prices (
+    symbol VARCHAR NOT NULL,
+    price_date DATE NOT NULL,
+    open_price DECIMAL(18,4),
+    high_price DECIMAL(18,4),
+    low_price DECIMAL(18,4),
+    close_price DECIMAL(18,4),
+    volume BIGINT,
+    PRIMARY KEY (symbol, price_date)
+);
