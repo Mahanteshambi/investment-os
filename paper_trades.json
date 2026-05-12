@@ -195,6 +195,43 @@
 
   "trade_log": [
     {
+      "timestamp": "2026-05-13T14:00:00+08:00",
+      "action": "GTT_PLACED_REAL",
+      "session": "SKILL-02 May 13 | DIP ACCELERATION | Confirmed by Mahantesh",
+      "note_context": "May Day 8. Market crash: NIFTYBEES -1.87%, JUNIORBEES -2.42%, RELIANCE -1.74%. All instruments >2% below May-open — dip rule triggered. Brent $108.06 (spiking). DXY 98.40. US10yr 4.449% (spread 2.55%, approaching FII danger <2.5%). FII May12: -1,959 Cr (slowing). DII May12: +7,990 Cr (massive). Today GTT fires: NIFTYBEES 38 + JUNIORBEES 9 + ICICIB22 21 + PSUBNKBEES 17 = ₹21,095. Cancelled broken GTT 317175289 (limit < trigger). Deployed 1.5x normal pace.",
+      "today_fires_confirmed": [
+        {"gtt_id": 318601467, "symbol": "NSE:NIFTYBEES",  "qty": 38, "trigger": 268.75, "est_inr": 10213, "status": "FIRED", "fired_date": "2026-05-13", "fired_time": "09:16 IST"},
+        {"gtt_id": 318601469, "symbol": "NSE:JUNIORBEES", "qty": 5,  "trigger": 756.70, "est_inr": 3784,  "status": "FIRED", "fired_date": "2026-05-13", "fired_time": "09:17 IST"},
+        {"gtt_id": 317591219, "symbol": "NSE:JUNIORBEES", "qty": 4,  "trigger": 755.42, "est_inr": 3022,  "status": "FIRED", "fired_date": "2026-05-13", "fired_time": "09:22 IST"},
+        {"gtt_id": 318601494, "symbol": "NSE:PSUBNKBEES", "qty": 17, "trigger": 90.47,  "est_inr": 1538,  "status": "FIRED", "fired_date": "2026-05-13", "fired_time": "11:13 IST"},
+        {"gtt_id": 318601477, "symbol": "NSE:ICICIB22",   "qty": 21, "trigger": 120.59, "est_inr": 2532,  "status": "FIRED", "fired_date": "2026-05-13", "fired_time": "12:37 IST"}
+      ],
+      "cancelled_gtts": [
+        {"gtt_id": 317175289, "symbol": "NSE:GOLDBEES", "qty": 38, "trigger": 124.00, "reason": "Limit 123.90 < trigger 124.00 — bad limit, would not fill on bounce. Replaced with 318800065."}
+      ],
+      "buy_gtts": [
+        {"gtt_id": 318800052, "symbol": "NSE:NIFTYBEES",  "qty": 75, "trigger": 263.72, "limit": 267.68, "est_inr": 19779, "bucket": "Large Cap",         "status": "GTT_PLACED", "note": "1.5x normal — NIFTYBEES below avg cost 269.27"},
+        {"gtt_id": 318800055, "symbol": "NSE:JUNIORBEES", "qty": 10, "trigger": 736.79, "limit": 747.84, "est_inr": 7368,  "bucket": "Mid/Small",         "status": "GTT_PLACED", "note": "2x normal — -4.5% from May open"},
+        {"gtt_id": 318800060, "symbol": "NSE:CPSEETF",    "qty": 50, "trigger": 104.48, "limit": 106.05, "est_inr": 5224,  "bucket": "Sector (CPSE)",     "status": "GTT_PLACED", "note": "Oil $108 = CPSEETF thesis strengthened. Existing 318601471 (37 units @104.79) also active."},
+        {"gtt_id": 318800065, "symbol": "NSE:GOLDBEES",   "qty": 32, "trigger": 124.00, "limit": 125.86, "est_inr": 3968,  "bucket": "Gold",              "status": "GTT_PLACED", "note": "Replaces cancelled 317175289. Fixed limit > trigger."},
+        {"gtt_id": 318800070, "symbol": "NSE:ICICIB22",   "qty": 21, "trigger": 119.50, "limit": 121.29, "est_inr": 2510,  "bucket": "International",     "status": "GTT_PLACED"},
+        {"gtt_id": 318800074, "symbol": "NSE:PSUBNKBEES", "qty": 17, "trigger": 89.18,  "limit": 90.52,  "est_inr": 1516,  "bucket": "Sector (PSU Bank)", "status": "GTT_PLACED"}
+      ],
+      "carry_gtts_active": [
+        {"gtt_id": 318601471, "symbol": "NSE:CPSEETF",    "qty": 37, "trigger": 104.79, "note": "Missed today by ₹0.01 (low 104.80). Likely fires tomorrow."},
+        {"gtt_id": 318601474, "symbol": "NSE:GOLDBEES",   "qty": 31, "trigger": 122.63, "note": "Backup dip buy"},
+        {"gtt_id": 317961875, "symbol": "NSE:GOLDBEES",   "qty": 27, "trigger": 121.55, "note": "Deep backup"},
+        {"gtt_id": 316824233, "symbol": "NSE:LIQUIDBEES", "qty": 2,  "trigger": 994.99, "note": "Carry-over"},
+        {"gtt_id": 317591231, "symbol": "NSE:RELIANCE",   "qty": 22, "trigger": 1346,   "limit": 1333, "transaction_type": "SELL", "note": "CRITICAL — LTP 1364, buffer 1.32%. Intraday low 1360.30 today."}
+      ],
+      "total_new_buy_queued_inr": 40365,
+      "today_fires_total_inr": 21089,
+      "may_budget_deployed_inr_est": 104000,
+      "may_budget_remaining_inr_est": 296000,
+      "kite_cash_inr": 64685,
+      "macro_context": "Brent $108.06 (spiking, +$7 in 5 days). DXY 98.40 (rising). US10yr 4.449%. Yield spread 2.55% (FII danger zone approaching). CPSEETF thesis strengthened by oil+geopolitics. Gold +1.1% (safe haven). Market broad selloff."
+    },
+    {
       "timestamp": "2026-05-12T20:00:00+08:00",
       "action": "GTT_PLACED_REAL",
       "session": "SKILL-02 May 12 | Confirmed by Mahantesh",

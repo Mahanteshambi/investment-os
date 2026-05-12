@@ -6,15 +6,15 @@
   "monthly_budget": {
     "total_inr": 400000,
     "month": "2026-05",
-    "deployed_inr": 62000,
-    "_deployed_note": "May 12 DAY 7 (estimate). May 11 fires confirmed: NIFTYBEES 39 (~₹10,567) + JUNIORBEES 5 (~₹3,793) + GOLDBEES 28 (~₹3,469). Earlier fires: May 8 batch 318173888/890/891/892/893 (~₹24,412), May 7 batch mostly fired. Total est ~₹62,000. May 12 GTTs placed: 318601467/469/471/474/477/494 (~₹25,745 queued for May 13).",
-    "remaining_inr": 338000,
+    "deployed_inr": 104000,
+    "_deployed_note": "May 13 DAY 8. Today fires confirmed: NIFTYBEES 38+JUNIORBEES 9+ICICIB22 21+PSUBNKBEES 17 = ₹21,089. Total est ~₹1,04,000. May 13 GTTs placed (dip acceleration): 318800052/055/060/065/070/074 (~₹40,365 queued for May 14). Cancelled broken GTT 317175289.",
+    "remaining_inr": 296000,
     "trading_days_total": 19,
-    "trading_days_elapsed": 7,
-    "trading_days_remaining": 12,
-    "daily_pacing_target_inr": 26000,
+    "trading_days_elapsed": 8,
+    "trading_days_remaining": 11,
+    "daily_pacing_target_inr": 26909,
     "full_deploy_deadline": "2026-05-30",
-    "pace_status": "MAY DAY 7 — ~₹62,000 deployed of ₹4,00,000. ON TRACK. May 12 GTTs placed: 318601467/469/471/474/477/494 (~₹25,745 queued for May 13).",
+    "pace_status": "MAY DAY 8 — ~₹1,04,000 deployed of ₹4,00,000. DIP ACCELERATION active. May 13 GTTs: 318800052/055/060/065/070/074 (~₹40,365 queued). All instruments >2% below May-open.",
     "bucket_deployed": {
       "_note": "Updated May 7. May 6 GTT fires confirmed via T1 holdings.",
       "large_cap_inr": 8424,
@@ -39,9 +39,9 @@
   },
 
   "kite_account": {
-    "_synced": "2026-05-12 via SKILL-02",
+    "_synced": "2026-05-13 via SKILL-02",
     "user_id": "[KITE_ACCOUNT_ID]",
-    "available_cash_inr": 85780.10,
+    "available_cash_inr": 64685,
     "holdings_note": "Fetch live via mcp__kite__get_holdings. ITBEES 1500 units SOLD May 6. NIFTYBEES 677 total (646+31 T1), JUNIORBEES 148 settled, CPSEETF 33 T1 (new position BSE), PSUBNKBEES 266 total (232+34 T1), GOLDBEES 889 total (863+26 T1), ICICIB22 126 total (109+17 T1). RELIANCE 22 settled, stop GTT317591231 active at ₹1,346."
   },
 

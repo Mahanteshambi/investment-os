@@ -142,3 +142,18 @@ CREATE TABLE IF NOT EXISTS historical_prices (
     volume BIGINT,
     PRIMARY KEY (symbol, price_date)
 );
+
+CREATE TABLE IF NOT EXISTS macro_data (
+    date DATE NOT NULL,
+    metric VARCHAR NOT NULL,
+    value DECIMAL(18,4),
+    PRIMARY KEY (date, metric)
+);
+
+CREATE TABLE IF NOT EXISTS news_data (
+    id VARCHAR PRIMARY KEY,
+    date DATE NOT NULL,
+    title VARCHAR NOT NULL,
+    source VARCHAR,
+    description TEXT
+);
