@@ -6,23 +6,24 @@
   "monthly_budget": {
     "total_inr": 400000,
     "month": "2026-05",
-    "deployed_inr": 104000,
-    "_deployed_note": "May 13 DAY 8. Today fires confirmed: NIFTYBEES 38+JUNIORBEES 9+ICICIB22 21+PSUBNKBEES 17 = ₹21,089. Total est ~₹1,04,000. May 13 GTTs placed (dip acceleration): 318800052/055/060/065/070/074 (~₹40,365 queued for May 14). Cancelled broken GTT 317175289.",
-    "remaining_inr": 296000,
+    "deployed_inr": 144282,
+    "_deployed_note": "May 14 DAY 10. May 13 fires CONFIRMED: NIFTYBEES 75u@~267.68(₹20,076) + JUNIORBEES 10u@~747.84(₹7,478) + CPSEETF 37u@104.84(₹3,879)+50u@104.57(₹5,229) + ICICIB22 21u@~121.29(₹2,547) + PSUBNKBEES 17u@~90.52(₹1,539) = ₹40,748. Total deployed ₹1,44,282. GOLDBEES surged +5.7% to ₹131.74. RELIANCE stop at 0.95% buffer — imminent.",
+    "remaining_inr": 255718,
     "trading_days_total": 19,
-    "trading_days_elapsed": 8,
-    "trading_days_remaining": 11,
-    "daily_pacing_target_inr": 26909,
+    "trading_days_elapsed": 10,
+    "trading_days_remaining": 10,
+    "daily_pacing_target_inr": 25572,
     "full_deploy_deadline": "2026-05-30",
-    "pace_status": "MAY DAY 8 — ~₹1,04,000 deployed of ₹4,00,000. DIP ACCELERATION active. May 13 GTTs: 318800052/055/060/065/070/074 (~₹40,365 queued). All instruments >2% below May-open.",
+    "pace_status": "MAY DAY 10 — ₹1,44,282 deployed (36%) of ₹4,00,000. BEHIND pace ~₹66K. Cash ₹24,399 = constraint. Add ₹50-70K to Kite to accelerate. Today GTTs pending: ₹23,850.",
     "bucket_deployed": {
       "_note": "Updated May 7. May 6 GTT fires confirmed via T1 holdings.",
-      "large_cap_inr": 8424,
-      "mid_small_inr": 0,
-      "sector_cpseetf_inr": 3546,
-      "sector_psubnkbees_inr": 3185,
+      "_updated": "2026-05-14 — May 13 fires confirmed",
+      "large_cap_inr": 28500,
+      "mid_small_inr": 7478,
+      "sector_cpseetf_inr": 12654,
+      "sector_psubnkbees_inr": 4724,
       "gold_inr": 3166,
-      "international_inr": 2110,
+      "international_inr": 4657,
       "debt_liquid_inr": 0
     },
     "bucket_target_inr": {
@@ -39,10 +40,10 @@
   },
 
   "kite_account": {
-    "_synced": "2026-05-13 via SKILL-02",
+    "_synced": "2026-05-14 via SKILL-02",
     "user_id": "[KITE_ACCOUNT_ID]",
-    "available_cash_inr": 64685,
-    "holdings_note": "Fetch live via mcp__kite__get_holdings. ITBEES 1500 units SOLD May 6. NIFTYBEES 677 total (646+31 T1), JUNIORBEES 148 settled, CPSEETF 33 T1 (new position BSE), PSUBNKBEES 266 total (232+34 T1), GOLDBEES 889 total (863+26 T1), ICICIB22 126 total (109+17 T1). RELIANCE 22 settled, stop GTT317591231 active at ₹1,346."
+    "available_cash_inr": 24399,
+    "holdings_note": "May 14 live. NIFTYBEES 795 total (757+38 T1). JUNIORBEES 167 (158+9 T1). CPSEETF 184 total (97 settled + 87 May13 fires: 37@104.84+50@104.57, new avg ~105.92). PSUBNKBEES 300 (283+17 T1). GOLDBEES 917 — SURGED ₹131.74 (+5.7% May14). ICICIB22 184 (163+21 T1). RELIANCE 22 settled, stop GTT317591231 ACTIVE at ₹1,346 (buffer 0.95% — IMMINENT)."
   },
 
   "kite_holdings_snapshot": {

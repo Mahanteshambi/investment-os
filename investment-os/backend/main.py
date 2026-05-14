@@ -5,8 +5,10 @@ from datetime import datetime
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from dotenv import load_dotenv
+import nest_asyncio
 
 load_dotenv()
+nest_asyncio.apply()
 
 from database.connection import get_connection, close_connection
 from routers import holdings, portfolio, snapshots, sync, intelligence, sector_rotation

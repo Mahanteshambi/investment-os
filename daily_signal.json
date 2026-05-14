@@ -3,199 +3,236 @@
   "_history_purpose": "FII/DII trend, macro trend (DXY/oil/yield), signal pattern, budget pace tracking",
 
   "current": {
-    "date": "2026-05-12",
-    "generated_at": "2026-05-12T08:00:00+08:00",
-    "next_market_open": "2026-05-12 11:45 MYT — Day 6 of May trading (Monday)",
-    "data_as_of": "2026-05-11 FII/DII + 2026-05-08 last Kite close (Kite session unavailable today)",
+    "date": "2026-05-14",
+    "generated_at": "2026-05-14T08:00:00+08:00",
+    "next_market_open": "2026-05-14 11:45 MYT — Day 10 of May trading (Thursday)",
+    "data_as_of": "2026-05-13 Kite close + live FII/DII + live macro",
 
-    "fii_net_crore": -340.89,
-    "dii_net_crore": 441.07,
+    "fii_net_crore": -4703.15,
+    "dii_net_crore": 5869.05,
     "fii_stance": "SELLER",
     "dii_stance": "BUYER",
-    "note_fii_dii": "May 7 data — FII mild SELLER -₹341 Cr. After big reversal May 4 (+₹2,836 Cr), FII returned to mild selling. NOT panic selling — likely profit booking. DII continues buying +₹441 Cr. DII provides floor support. Mixed signals: watch for FII to return to buying next week.",
+    "note_fii_dii": "May 13 data — FII HEAVY SELLER -₹4,703 Cr (4th consecutive selling day, ACCELERATING from -₹1,959 Cr May 12). DII STRONG BUYER +₹5,869 Cr. FII selling intensifying vs previous days. Yield spread at 2.519% approaching 2.5% FII exodus floor. GOLDBEES +5.7% single-session = flight-to-safety signal; gold surge confirms institutional risk-off mood.",
 
     "macro": {
-      "_note": "DXY/Brent/US10yr fetched live May 8 via Yahoo Finance. India10yr static 7%.",
-      "dxy": 98.228,
-      "dxy_5d": [98.47, 98.48, 98.02, 98.23, 98.228],
-      "dxy_signal": "BULLISH (below 100) — gently declining from 98.47 peak. Falling DXY = tailwind for India/EM/gold. Trend intact.",
-      "us_10yr_pct": 4.392,
-      "us_10yr_5d": [4.378, 4.446, 4.416, 4.356, 4.392],
+      "_note": "DXY/Brent/US10yr fetched live May 14 via Yahoo Finance. India10yr static 7%.",
+      "dxy": 98.459,
+      "dxy_5d": [97.84, 97.94, 98.304, 98.459],
+      "dxy_signal": "BULLISH (below 100) — creeping up from 97.84 to 98.46. Still below 100. EM tailwind intact but directionally rising = mild headwind building.",
+      "us_10yr_pct": 4.481,
+      "us_10yr_5d": [4.392, 4.364, 4.41, 4.463, 4.481],
       "india_10yr_yield_pct": 7.0,
-      "yield_spread_pct": 2.608,
-      "yield_spread_zone": "2-3% = FII CAUTIOUS — marginal improvement from 2.554 (May 5). US yields off peak 4.446 to 4.392 = slight positive. Spread widening = mild FII recovery signal.",
-      "brent_crude_usd": 102.41,
-      "brent_5d": [114.44, 109.87, 101.27, 102.41],
-      "oil_signal": "⚠ SHARP DROP — $114.44 → $102.41 in 4 days (-10.2%). Still above $90 danger zone but momentum clearly down. POSITIVE for India CAD/rupee/inflation. Slight headwind for CPSEETF oil-linked earnings (ONGC/OIL India) but PSU capex thesis intact. Net: good for India macro.",
+      "yield_spread_pct": 2.519,
+      "yield_spread_zone": "⚠ DANGER APPROACHING — 2.519% (down from 2.537 May 13). US 10yr at new recent high 4.481%. Spread now within 0.02% of 2.5% FII exodus floor. Critical watch level.",
+      "brent_crude_usd": 105.59,
+      "brent_5d": [101.29, 104.21, 107.35, 105.59],
+      "oil_signal": "⚠ ELEVATED — pulled back from $107.35 peak to $105.59. Still well above $90 danger zone. India CAD risk elevated. CPSEETF (ONGC/OIL India) short-term earnings tailwind intact.",
       "cape_ratio": 33,
       "cape_avg": 25,
       "cape_signal": "ELEVATED — systematic SIP, not lumpsum aggression",
       "evi_zone": "NEUTRAL — check iciciprumf.com monthly"
     },
 
-    "global_signal": "CAUTIOUS-NEUTRAL",
-    "global_signal_reason": "FII mild selling after May 4 big buy. DII holding the floor. Oil crashing (-10%) = India macro positive. DXY falling = EM tailwind. US yields off peak. Net: cautious but constructive. Continue SIP deployment, prioritise dip-triggered GTTs.",
+    "global_signal": "CAUTIOUS-BEARISH",
+    "global_signal_reason": "FII selling ACCELERATING (-₹4,703 Cr, 4th consecutive day). GOLDBEES +5.7% in single session = flight-to-safety surge = institutional fear indicator. Yield spread 2.519% near 2.5% danger floor. US 10yr at new recent high 4.481%. DII +₹5,869 Cr absorbing FII. All core ETFs 3-5% below May open. RELIANCE stop buffer 0.95% — imminent. Cash constraint (₹24,399) limits today's deployment.",
 
     "instrument_analysis": {
       "NIFTYBEES": {
-        "may_open": 273.45,
-        "prev_close": 275.17,
-        "ltp": 275.17,
-        "dip_pct_from_may_open": -0.63,
-        "dma_20": 273.25,
-        "momentum": "BULLISH (price ₹275.17 > 20-DMA ₹273.25)",
-        "signal": "SIP — above May open. No dip threshold crossed. FII mild selling = GTT conservative trigger justified.",
-        "qty_settled": 677, "avg_cost": 268.90,
-        "unrealised_pnl_pct": 2.3,
-        "new_gtt": {"trigger": 273.8, "limit": 278.0, "qty": 41, "est_inr": 11226, "bucket": "Large Cap", "status": "RECOMMENDED"}
+        "may_open": 273.45, "prev_close": 265.05, "ltp": 265.44,
+        "dip_pct_from_may_open": 2.93,
+        "momentum": "BEARISH (LTP 265.44 < May open 273.45, -2.93%)",
+        "signal": "STRONG BUY — 2.93% below May open. New GTT recommended: trigger 264.1, limit 268.1, qty 53.",
+        "qty": 795, "avg_cost": 269.26, "unrealised_pnl_pct": -1.4,
+        "new_gtt": {"trigger": 264.1, "limit": 268.1, "qty": 53, "est_inr": 13997}
       },
       "JUNIORBEES": {
-        "may_open": 775.38,
-        "prev_close": 774.97,
-        "ltp": 774.97,
-        "dip_pct_from_may_open": 0.05,
-        "dma_20": 751.58,
-        "momentum": "BULLISH (price ₹774.97 > 20-DMA ₹751.58, +3.1%)",
-        "signal": "SIP — essentially at May open (0.05% dip, below 2% threshold). Strong 20-DMA support +3.1% above.",
-        "qty_settled": 148, "avg_cost": 709.37,
-        "unrealised_pnl_pct": 9.3,
-        "new_gtt": {"trigger": 771.1, "limit": 782.7, "qty": 5, "est_inr": 3856, "bucket": "Mid/Small", "status": "RECOMMENDED"},
-        "carry_gtts": [
-          {"gtt_id": 317961870, "trigger": 758.67, "qty": 5, "note": "May 7 carry — fires on deeper dip"},
-          {"gtt_id": 317591219, "trigger": 755.42, "qty": 4, "note": "May 5 carry"}
-        ]
+        "may_open": 775.38, "prev_close": 740.49, "ltp": 745.86,
+        "dip_pct_from_may_open": 3.81,
+        "momentum": "BEARISH (LTP 745.86 < May open 775.38, -3.81%)",
+        "signal": "STRONG BUY — 3.81% below May open. GTT triggered May 13 (10 units filled, T1=9). New GTT: trigger 742.1, limit 753.2, qty 6.",
+        "qty": 167, "avg_cost": 715.24, "unrealised_pnl_pct": 4.3,
+        "may13_fire": {"gtt_id": 318800055, "status": "triggered", "qty_t1": 9},
+        "new_gtt": {"trigger": 742.1, "limit": 753.2, "qty": 6, "est_inr": 4453}
       },
       "CPSEETF": {
-        "may_open": 108.01,
-        "prev_close": 106.94,
-        "ltp": 106.94,
-        "dip_pct_from_may_open": 0.99,
-        "dma_20": 106.31,
-        "momentum": "SLIGHTLY BULLISH (price ₹106.94 > 20-DMA ₹106.31)",
-        "signal": "SIP — 0.99% dip from May open (below 2% threshold). Oil drop may weigh on ONGC/OIL India component. PSU capex story intact. Full ₹60k/month allocation (score 9.0). Active sector.",
-        "qty_settled": 33, "avg_cost": 107.56,
-        "unrealised_pnl_pct": -0.58,
-        "new_gtt": {"trigger": 106.4, "limit": 108.0, "qty": 33, "est_inr": 3511, "bucket": "Sector (active)", "status": "RECOMMENDED"},
-        "carry_gtt": {"gtt_id": 317961872, "exchange": "BSE", "trigger": 106.14, "qty": 31, "note": "May 7 BSE carry — fires on deeper dip"}
-      },
-      "PSUBNKBEES": {
-        "may_open": 94.68,
-        "prev_close": 96.16,
-        "ltp": 96.16,
-        "dip_pct_from_may_open": -1.56,
-        "dma_20": 97.18,
-        "momentum": "BEARISH (price ₹96.16 < 20-DMA ₹97.18)",
-        "signal": "HOLD — ABOVE May open (-1.56% = LTP above month start), below 20-DMA. Low personal conviction. May 7 carry GTT at 93.44 (deep dip) still active. Do NOT place new GTT — only fire on deep dip. Reduced ₹30k/month allocation.",
-        "qty_settled": 266, "avg_cost": 96.71,
-        "unrealised_pnl_pct": -0.57,
-        "active_carry_gtt": {"gtt_id": 317961873, "trigger": 93.44, "limit": 94.84, "qty": 17, "note": "2.8% dip required — appropriate for low conviction. Keep active."},
-        "new_gtt": null
+        "may_open": 110.50, "prev_close": 105.00, "ltp": 105.47,
+        "dip_pct_from_may_open": 4.55,
+        "momentum": "BEARISH (LTP 105.47 < May open 110.50, -4.55%)",
+        "signal": "STRONG BUY — 4.55% below May open. ACTIVE SECTOR score 9.0. May 13 GTTs TRIGGERED (status confirmed) but T1=0 — VERIFY in Kite orders tab. New GTT: trigger 104.9, limit 106.5, qty 40.",
+        "qty": 97, "avg_cost": 107.02, "unrealised_pnl_pct": -1.5,
+        "_note": "⚠ ANOMALY: GTTs 318601471+318800060 triggered but CPSEETF T1=0. Check Kite orders.",
+        "may13_gtts": [
+          {"gtt_id": 318601471, "status": "triggered", "qty": 37, "note": "VERIFY FILL"},
+          {"gtt_id": 318800060, "status": "triggered", "qty": 50, "note": "VERIFY FILL"}
+        ],
+        "new_gtt": {"trigger": 104.9, "limit": 106.5, "qty": 40, "est_inr": 4196}
       },
       "GOLDBEES": {
-        "may_open": 123.38,
-        "prev_close": 124.47,
-        "ltp": 124.47,
-        "dip_pct_from_may_open": -0.88,
-        "dma_20": 123.93,
-        "momentum": "BULLISH (price ₹124.47 > 20-DMA ₹123.93)",
-        "signal": "SIP — above May open. Oil falling = lower inflation fears = mild headwind for gold, but DXY falling offsets. Gold still strong on safe-haven / DXY tailwind. Continue accumulation.",
-        "qty_settled": 889, "avg_cost": 118.39,
-        "unrealised_pnl_pct": 5.1,
-        "new_gtt": {"trigger": 123.9, "limit": 125.8, "qty": 28, "est_inr": 3469, "bucket": "Gold", "status": "RECOMMENDED"},
-        "carry_gtts": [
-          {"gtt_id": 317961875, "trigger": 121.55, "qty": 27, "note": "May 7 carry"},
-          {"gtt_id": 317175289, "trigger": 120.97, "qty": 38, "note": "April carry — deep dip"}
+        "may_open": 123.38, "prev_close": 124.61, "ltp": 131.74,
+        "dip_pct_from_may_open": -6.78,
+        "momentum": "BULLISH SURGE (LTP 131.74 > May open 123.38, +6.78%)",
+        "signal": "NO NEW GTTs — ABOVE May open by 6.78%. Single-session surge +5.7% = flight-to-safety. 3 existing catch GTTs remain (at 124, 122.63, 121.55). Watch: trailing stop triggers at ₹136.34 (15% gain from avg ₹118.56).",
+        "qty": 917, "avg_cost": 118.56, "unrealised_pnl_pct": 11.1,
+        "trailing_stop_trigger_at": 136.34,
+        "existing_gtts": [
+          {"gtt_id": 318800065, "trigger": 124.00, "limit": 125.86, "qty": 32, "note": "5.9% below LTP — deep catch"},
+          {"gtt_id": 318601474, "trigger": 122.63, "limit": 124.47, "qty": 31, "note": "7.0% below LTP — deeper catch"},
+          {"gtt_id": 317961875, "trigger": 121.55, "limit": 123.37, "qty": 27, "note": "7.7% below LTP — deepest catch"}
         ]
       },
       "ICICIB22": {
-        "may_open": 124.73,
-        "prev_close": 124.32,
-        "ltp": 124.32,
-        "dip_pct_from_may_open": 0.33,
-        "dma_20": 124.29,
-        "momentum": "FLAT (price ₹124.32 ≈ 20-DMA ₹124.29)",
-        "signal": "SIP — Nasdaq 100 exposure. DXY falling = tailwind. US10yr off peak. Continue accumulation.",
-        "qty_settled": 126, "avg_cost": 124.72,
-        "unrealised_pnl_pct": -0.32,
-        "new_gtt": {"trigger": 123.7, "limit": 125.6, "qty": 19, "est_inr": 2350, "bucket": "International", "status": "RECOMMENDED"},
-        "carry_gtt": {"gtt_id": 317961876, "trigger": 123.64, "qty": 18, "note": "May 7 carry — similar level, DCA"}
+        "may_open": 125.71, "prev_close": 120.10, "ltp": 120.99,
+        "dip_pct_from_may_open": 3.76,
+        "momentum": "BEARISH (LTP 120.99 < May open 125.71, -3.76%)",
+        "signal": "STRONG BUY — 3.76% below May open. May 13 GTT triggered (21 units, T1=21 confirmed). New GTT: trigger 120.4, limit 122.2, qty 10.",
+        "qty": 184, "avg_cost": 124.06, "unrealised_pnl_pct": -2.5,
+        "may13_fire": {"gtt_id": 318800070, "status": "triggered", "qty_t1": 21},
+        "new_gtt": {"trigger": 120.4, "limit": 122.2, "qty": 10, "est_inr": 1204}
+      },
+      "PSUBNKBEES": {
+        "may_open": 94.68, "prev_close": 89.65, "ltp": 89.61,
+        "dip_pct_from_may_open": 5.36,
+        "momentum": "BEARISH (LTP 89.61 < May open 94.68, -5.36%)",
+        "signal": "SKIP — low conviction + cash constraint today. May 13 GTT triggered (17 units, T1=17 confirmed). No new GTT today.",
+        "qty": 300, "avg_cost": 96.17, "unrealised_pnl_pct": -6.8,
+        "may13_fire": {"gtt_id": 318800074, "status": "triggered", "qty_t1": 17}
       },
       "RELIANCE": {
-        "prev_close": 1437.90,
-        "ltp": 1436.20,
-        "entry": 962.32,
-        "peak": 1463.10,
-        "stop": 1346,
-        "gtt_id": 317591231,
-        "buffer_pct": 6.3,
-        "unrealised_pnl_pct": 49.2,
-        "signal": "HOLD — trailing stop INTACT. LTP ₹1,436.20 below peak ₹1,463.10. No ratchet needed. Buffer 6.3% to stop — comfortable. Oil drop may weigh on Reliance (petrochem/Jio not directly affected). Monitor.",
+        "prev_close": 1364, "ltp": 1358.80, "entry": 962.32,
+        "peak": 1463.10, "stop": 1346, "gtt_id": 317591231,
+        "buffer_pct": 0.95,
+        "unrealised_pnl_pct": 41.2,
+        "signal": "⚠️ IMMINENT — trailing stop buffer 0.95% (was 1.32% yesterday, tightening). LTP ₹1,358.80, stop ₹1,346. FII -₹4,703 Cr + GOLD SURGE = risk-off. HIGH PROBABILITY of firing today at market open. GTT 317591231 ACTIVE. If fired: gain ₹8,151 LTCG, total ₹25,264 (₹1.25L exemption = ZERO TAX). Proceeds → LIQUIDBEES.",
         "ratchet_needed": false,
-        "next_ratchet_at": 1463.11
+        "if_stop_fires": {"sell_qty": 22, "limit_price": 1333, "proceeds_inr": 29326, "gain_inr": 8151, "ltcg_tax": "NIL", "proceeds_to": "LIQUIDBEES", "cash_after_fire": 53725}
       },
-      "PHARMABEES": {"ltp": 24.79, "avg_cost": 23.07, "unrealised_pnl_pct": 7.5, "sector_score": 8.8, "signal": "HOLD — #2 sector score. At 52-week highs. No new buy allocation (CPSEETF is active). Protect existing 2000-unit position."},
-      "BANKBEES": {"ltp": 577.66, "avg_cost": 579.26, "unrealised_pnl_pct": -0.3, "sector_score": 5.7, "signal": "HOLD — Below 50-DMA. Score 5.7. No allocation."},
-      "HDFCBANK": {"ltp": 796.05, "avg_cost": 841.0, "unrealised_pnl_pct": -5.3, "signal": "HOLD — long-term position, loss -5.3%. No exit rule triggered."},
-      "HINDUNILVR": {"ltp": 2272.20, "avg_cost": 2479.0, "unrealised_pnl_pct": -8.3, "signal": "HOLD — approaching -10% loss (no exit rule). FMCG defensive but inflation falling = mixed."},
-      "KOTAKBANK": {"ltp": 379.40, "avg_cost": 348.65, "unrealised_pnl_pct": 8.8, "signal": "HOLD — +8.8%, approaching trailing stop consideration at +15%."}
+      "PHARMABEES": {"ltp": 24.53, "avg_cost": 23.07, "unrealised_pnl_pct": 6.3, "sector_score": 8.8, "signal": "HOLD — #2 sector score 8.8. No new buy (CPSEETF active). Hold 2000 units."},
+      "BANKBEES": {"ltp": 552.14, "avg_cost": 579.26, "unrealised_pnl_pct": -4.7, "sector_score": 5.7, "signal": "HOLD — score 5.7. Below both DMAs. No allocation."},
+      "HDFCBANK": {"ltp": 749.60, "avg_cost": 841.0, "unrealised_pnl_pct": -10.8, "signal": "HOLD — loss -10.8%. Long-term, no exit rule."},
+      "HINDUNILVR": {"ltp": 2267.75, "avg_cost": 2479.0, "unrealised_pnl_pct": -8.6, "signal": "HOLD — loss -8.6%. FMCG defensive. No exit rule."},
+      "KOTAKBANK": {"ltp": 378.0, "avg_cost": 348.65, "unrealised_pnl_pct": 8.4, "signal": "HOLD — +8.4%, approaching +15% trailing stop trigger at ₹401."}
     },
 
     "buy_recommendations": [
-      {"rank": 1, "symbol": "NSE:NIFTYBEES",  "action": "GTT BUY", "trigger": 273.8, "limit": 278.0, "qty": 41, "est_total_inr": 11226, "bucket": "Large Cap",       "signal": "SIP", "status": "NEW — place today"},
-      {"rank": 2, "symbol": "NSE:JUNIORBEES", "action": "GTT BUY", "trigger": 771.1, "limit": 782.7, "qty": 5,  "est_total_inr": 3856,  "bucket": "Mid/Small",       "signal": "SIP", "status": "NEW — place today"},
-      {"rank": 3, "symbol": "NSE:CPSEETF",    "action": "GTT BUY", "trigger": 106.4, "limit": 108.0, "qty": 33, "est_total_inr": 3511,  "bucket": "Sector (active)", "signal": "SIP — active sector", "status": "NEW — place today"},
-      {"rank": 4, "symbol": "NSE:GOLDBEES",   "action": "GTT BUY", "trigger": 123.9, "limit": 125.8, "qty": 28, "est_total_inr": 3469,  "bucket": "Gold",            "signal": "SIP", "status": "NEW — place today"},
-      {"rank": 5, "symbol": "NSE:ICICIB22",   "action": "GTT BUY", "trigger": 123.7, "limit": 125.6, "qty": 19, "est_total_inr": 2350,  "bucket": "International",   "signal": "SIP", "status": "NEW — place today"}
-    ],
-
-    "carry_gtts_active": [
-      {"gtt_id": 317961869, "symbol": "NIFTYBEES",  "trigger": 270.94, "qty": 39, "note": "May 7 carry — fires on -1.5% dip from today"},
-      {"gtt_id": 317961870, "symbol": "JUNIORBEES", "trigger": 758.67, "qty": 5,  "note": "May 7 carry"},
-      {"gtt_id": 317961872, "symbol": "CPSEETF",    "trigger": 106.14, "qty": 31, "note": "May 7 BSE carry"},
-      {"gtt_id": 317961873, "symbol": "PSUBNKBEES", "trigger": 93.44,  "qty": 17, "note": "May 7 carry — 2.8% dip required, low conviction"},
-      {"gtt_id": 317961875, "symbol": "GOLDBEES",   "trigger": 121.55, "qty": 27, "note": "May 7 carry"},
-      {"gtt_id": 317961876, "symbol": "ICICIB22",   "trigger": 123.64, "qty": 18, "note": "May 7 carry"},
-      {"gtt_id": 317591219, "symbol": "JUNIORBEES", "trigger": 755.42, "qty": 4,  "note": "May 5 carry"},
-      {"gtt_id": 317175289, "symbol": "GOLDBEES",   "trigger": 120.97, "qty": 38, "note": "April carry — deep dip"},
-      {"gtt_id": 316824233, "symbol": "LIQUIDBEES", "trigger": 994.99, "qty": 2,  "note": "April carry"},
-      {"gtt_id": 317591231, "symbol": "RELIANCE",   "trigger": 1346,   "qty": 22, "note": "SELL — trailing stop"}
+      {"rank": 1, "symbol": "NSE:NIFTYBEES",  "action": "GTT BUY (NEW)", "trigger": 264.1, "limit": 268.1, "qty": 53,  "est_total_inr": 13997, "bucket": "Large Cap",       "signal": "STRONG BUY", "dip_pct": 2.93, "status": "PENDING CONFIRM"},
+      {"rank": 2, "symbol": "NSE:CPSEETF",    "action": "GTT BUY (NEW)", "trigger": 104.9, "limit": 106.5, "qty": 40,  "est_total_inr": 4196,  "bucket": "Sector (active)", "signal": "STRONG BUY", "dip_pct": 4.55, "status": "PENDING CONFIRM"},
+      {"rank": 3, "symbol": "NSE:JUNIORBEES", "action": "GTT BUY (NEW)", "trigger": 742.1, "limit": 753.2, "qty": 6,   "est_total_inr": 4453,  "bucket": "Mid/Small",       "signal": "STRONG BUY", "dip_pct": 3.81, "status": "PENDING CONFIRM"},
+      {"rank": 4, "symbol": "NSE:ICICIB22",   "action": "GTT BUY (NEW)", "trigger": 120.4, "limit": 122.2, "qty": 10,  "est_total_inr": 1204,  "bucket": "International",   "signal": "STRONG BUY", "dip_pct": 3.76, "status": "PENDING CONFIRM"}
     ],
 
     "trailing_stop_status": [
-      {"symbol": "RELIANCE",  "entry": 962.32, "peak": 1463.10, "stop": 1346, "gtt_id": 317591231, "current_ltp": 1436.20, "pnl_pct": 49.2, "buffer_pct": 6.3, "status": "INTACT — no ratchet (LTP below peak). Monitor."},
+      {"symbol": "RELIANCE", "entry": 962.32, "peak": 1463.10, "stop": 1346, "gtt_id": 317591231, "current_ltp": 1358.80, "pnl_pct": 41.2, "buffer_pct": 0.95, "status": "⚠️ IMMINENT — 0.95% buffer (was 1.32% yesterday). FII -4703Cr + gold surge = risk-off. HIGH PROBABILITY of firing at market open today. DO NOT cancel."},
       {"symbol": "AXISBANK",  "status": "✅ STOPPED OUT (confirmed)"},
       {"symbol": "TMCV",      "status": "✅ STOPPED OUT (confirmed)"},
       {"symbol": "ICICIBANK", "status": "✅ STOPPED OUT (confirmed)"},
       {"symbol": "ITBEES",    "status": "✅ EXITED — sold May 7, 1500 units"}
     ],
 
-    "total_gtt_inr_today": 24412,
-    "_gtt_breakdown": "NIFTYBEES 11226 + JUNIORBEES 3856 + CPSEETF 3511 + GOLDBEES 3469 + ICICIB22 2350 = 24412",
+    "may13_gtt_fires_confirmed": {
+      "NIFTYBEES_318800052": "TRIGGERED — 75 units, T1=38 in holdings (partial T1 likely due to settlement)",
+      "JUNIORBEES_318800055": "TRIGGERED — 10 units, T1=9 confirmed",
+      "CPSEETF_318601471": "TRIGGERED — 37 units, T1=0 ⚠ VERIFY",
+      "CPSEETF_318800060": "TRIGGERED — 50 units, T1=0 ⚠ VERIFY",
+      "ICICIB22_318800070": "TRIGGERED — 21 units, T1=21 confirmed",
+      "PSUBNKBEES_318800074": "TRIGGERED — 17 units, T1=17 confirmed",
+      "total_debit_inr": 40282
+    },
 
-    "hold_list": ["PHARMABEES", "BANKBEES", "HDFCBANK", "HINDUNILVR", "KOTAKBANK", "RELIANCE", "PSUBNKBEES"],
-    "exit_alerts": [],
+    "total_gtt_inr_today": 23850,
+    "_gtt_breakdown": "NIFTYBEES 13997 + CPSEETF 4196 + JUNIORBEES 4453 + ICICIB22 1204 = 23850 (cash-constrained, within ₹24,399 available)",
+
+    "hold_list": ["PHARMABEES", "BANKBEES", "HDFCBANK", "HINDUNILVR", "KOTAKBANK", "GOLDBEES"],
+    "exit_alerts": ["RELIANCE_STOP_IMMINENT_095PCT_BUFFER", "CPSEETF_GTT_T1_ANOMALY_VERIFY"],
 
     "budget_status": {
       "total_budget_inr": 400000,
       "month": "2026-05",
-      "deployed_inr": 20431,
-      "remaining_inr": 379569,
-      "trading_day": 4,
-      "trading_days_remaining": 16,
-      "daily_target_inr": 23723,
-      "today_gtt_inr": 24412,
-      "queued_carry_gtts_inr": 34354,
-      "pace": "MAY DAY 4 — ₹20,431 confirmed deployed (5.1%). Today's new GTTs: ₹24,412. Carry GTTs queued: ~₹34,354. ON TRACK.",
+      "deployed_inr": 144282,
+      "_deployed_note": "₹104K prior + ₹40,282 May 13 GTT fires (confirmed via margin debits)",
+      "remaining_inr": 255718,
+      "trading_day": 10,
+      "trading_days_remaining": 10,
+      "daily_target_inr": 25572,
+      "today_gtt_inr": 23850,
+      "kite_cash_inr": 24399,
+      "pace": "MAY DAY 10 — ₹1,44,282 deployed (36%). Target by day 10: ₹2,10,526. BEHIND pace by ~₹66K. Cash constraint ₹24,399 limits today's GTTs to ₹23,850. Add ₹50-70K to Kite to accelerate.",
       "dip_threshold_active": true,
-      "dip_threshold_pct": 2.0
+      "dip_threshold_pct": 2.0,
+      "behind_pace_inr": 66244
     },
 
     "active_sector_etf": "NSE:CPSEETF",
     "active_sector_score": 9.0,
-    "key_macro_flag": "OIL_CRASH_114_TO_102_IN_4_DAYS"
+    "key_macro_flags": [
+      "FII_SELLING_ACCELERATING_4703CR_4TH_CONSECUTIVE_DAY",
+      "GOLDBEES_SURGED_5PCT_SINGLE_SESSION_131_74_FLIGHT_TO_SAFETY",
+      "YIELD_SPREAD_2519_APPROACHING_25PCT_DANGER_FLOOR",
+      "US10YR_NEW_RECENT_HIGH_4481",
+      "RELIANCE_STOP_IMMINENT_095PCT_BUFFER",
+      "OIL_ELEVATED_10559_WELL_ABOVE_90",
+      "CASH_CONSTRAINT_24399_LIMITS_DEPLOYMENT_TODAY",
+      "CPSEETF_GTT_T1_ANOMALY_VERIFY_FILL_STATUS",
+      "ALL_ETFS_3TO5PCT_BELOW_MAY_OPEN_DIP_ACTIVE"
+    ]
   },
 
   "history": [
+    {
+      "date": "2026-05-14",
+      "fii_net_crore": -4703.15,
+      "dii_net_crore": 5869.05,
+      "fii_stance": "SELLER",
+      "dii_stance": "BUYER",
+      "macro": {"dxy": 98.459, "us_10yr": 4.481, "brent_usd": 105.59, "yield_spread": 2.519},
+      "global_signal": "CAUTIOUS-BEARISH",
+      "buy_signals": ["NIFTYBEES", "JUNIORBEES", "CPSEETF", "ICICIB22"],
+      "exit_alerts": ["RELIANCE_STOP_IMMINENT_095PCT", "CPSEETF_GTT_T1_ANOMALY"],
+      "below4_sectors": [],
+      "niftybees_ltp": 265.44,
+      "goldbees_ltp": 131.74,
+      "total_gtt_inr": 23850,
+      "budget_remaining_inr": 255718,
+      "kite_cash_inr": 24399,
+      "pace": "MAY DAY 10 — ₹1,44,282 deployed. Daily target ₹25,572. BEHIND ~₹66K. Cash ₹24,399 constraint.",
+      "flags": [
+        "FII_SELLING_ACCELERATING_4703CR_4TH_DAY",
+        "GOLDBEES_5PCT_SURGE_131_74_FLIGHT_TO_SAFETY",
+        "YIELD_SPREAD_2519_NEAR_DANGER_FLOOR",
+        "US10YR_NEW_HIGH_4481",
+        "RELIANCE_STOP_095PCT_IMMINENT",
+        "OIL_10559_ELEVATED",
+        "CASH_CONSTRAINED_24399",
+        "MAY13_ALL_6_GTTS_TRIGGERED_40282_DEPLOYED"
+      ]
+    },
+    {
+      "date": "2026-05-13",
+      "fii_net_crore": -1959.39,
+      "dii_net_crore": 7990.32,
+      "fii_stance": "SELLER",
+      "dii_stance": "BUYER",
+      "macro": {"dxy": 98.304, "us_10yr": 4.463, "brent_usd": 107.35, "yield_spread": 2.537},
+      "global_signal": "CAUTIOUS-BEARISH",
+      "buy_signals": ["NIFTYBEES", "JUNIORBEES", "CPSEETF", "ICICIB22", "PSUBNKBEES"],
+      "exit_alerts": ["RELIANCE_STOP_CRITICAL_132PCT"],
+      "below4_sectors": [],
+      "niftybees_ltp": 265.05,
+      "goldbees_ltp": 124.61,
+      "total_gtt_inr": 44242,
+      "budget_remaining_inr": 296000,
+      "kite_cash_inr": 64681,
+      "pace": "MAY DAY 9 — ₹1,04,000 deployed. Daily target ₹26,909. BEHIND ~₹85K. Carry GTTs ₹44K active.",
+      "flags": [
+        "OIL_RESPIKING_107_35_PLUS7PCT_4DAYS",
+        "US10YR_RISING_TO_4463_NEW_RECENT_HIGH",
+        "YIELD_SPREAD_NARROWING_2537",
+        "DII_MEGA_BUYER_7990CR_LARGEST_IN_MONTHS",
+        "FII_SELLER_1959CR_4TH_CONSECUTIVE_SELLING_DAY",
+        "RELIANCE_TRAILING_STOP_CRITICAL_132PCT_BUFFER",
+        "ALL_ETFS_3TO5PCT_BELOW_MAY_OPEN_DIP_ACCEL_ACTIVE",
+        "6_CARRY_GTTS_WITHIN_05PCT_OF_LTP_MAY_ALL_FIRE_TODAY"
+      ]
+    },
     {
       "date": "2026-05-08",
       "fii_net_crore": -340.89,

@@ -23,6 +23,7 @@ dependencies = [
     "google-adk>=1.33.0",
     "yfinance>=1.3.0",
     "pandas>=3.0.3",
+    "nest-asyncio>=1.6.0",
 ]
 
 [project.scripts]
