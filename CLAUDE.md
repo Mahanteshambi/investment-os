@@ -223,12 +223,21 @@ Full definition in `target_allocation.json`. Monthly breakdown:
 |---|---|---|---|---|
 | Large Cap | 40% | ₹1,60,000 | Kite | NIFTYBEES, SETFNIF50 |
 | Mid/Small | 15% | ₹60,000 | Kite | JUNIORBEES, MOM100 |
-| Sector (rotation) | 15% | ₹60,000 | Kite | Active sector ETF (per SKILL-04) |
+| Sector — Active | ~7.5% | ₹30,000 | Kite | Active sector ETF (per SKILL-04) |
+| Sector — Secondary | ~7.5% | ₹30,000 | Kite | MODEFENCE (from Jun 2026; was PSUBNKBEES until May 15 — STOPPED) |
 | Gold | 15% | ₹60,000 | Kite | GOLDBEES |
 | International | 10% | ₹40,000 | Kite + Coin | ICICIB22 + Motilal/Mirae global MF |
 | Debt/Liquid | 5% | ₹20,000 | Kite / FD | LIQUIDBEES or FD renewal |
 
 **Active sector ETF:** Always read from `sector_rotation.json` → `current_month.active_sector_etf`. The `active_sector` field in `target_allocation.json` is not maintained — ignore it.
+
+**Sector allocation (updated May 15 2026):** Sector bucket = ₹60,000 total, split between:
+- Active sector ETF (CPSEETF May; PHARMABEES likely June) — ₹30,000
+- MODEFENCE — ₹30,000 from June 2026 (freed from PSUBNKBEES which was stopped May 15, score 5.8)
+
+**PSUBNKBEES status:** STOPPED May 15 2026. Score collapsed 6.8 → 5.8. No new buys. Hold existing 300 units. Exit if score falls below 5 for 2 consecutive months.
+
+**Large Cap May 2026 exception:** ₹2,20,000 target this month only (₹1,60,000 base + ₹30K PSUBNKBEES redirect + ₹30K catch-up for pace shortfall). Reverts to ₹1,90,000 from June (₹1,60,000 + ₹30K PSUBNKBEES redirect permanent).
 
 ---
 

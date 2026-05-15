@@ -1,23 +1,23 @@
 {
   "_comment": "Master state file. Holdings/cash = live from Kite MCP. Non-Kite assets = Google Drive sheet [google_sheet_id from user_config.json]. This file tracks: budget, trailing stops, FD calendar, execution log.",
-  "last_updated": "2026-05-12",
+  "last_updated": "2026-05-15",
   "mode": "advisory",
 
   "monthly_budget": {
     "total_inr": 400000,
     "month": "2026-05",
     "deployed_inr": 144282,
-    "_deployed_note": "May 14 DAY 10. May 13 fires CONFIRMED: NIFTYBEES 75u@~267.68(₹20,076) + JUNIORBEES 10u@~747.84(₹7,478) + CPSEETF 37u@104.84(₹3,879)+50u@104.57(₹5,229) + ICICIB22 21u@~121.29(₹2,547) + PSUBNKBEES 17u@~90.52(₹1,539) = ₹40,748. Total deployed ₹1,44,282. GOLDBEES surged +5.7% to ₹131.74. RELIANCE stop at 0.95% buffer — imminent.",
+    "_deployed_note": "May 15 DAY 11. FINAL 8-DAY PHASE ACTIVATED. ₹25K cash transfer pending from Mahantesh. 5 fresh GTTs placed (319264910/912/915/916/920) totalling ₹46,812 queued. PSUBNKBEES STOPPED — score collapsed 6.8→5.8. Capital redirected to Large Cap. MODEFENCE approved — June allocation from freed PSUBNKBEES budget.",
     "remaining_inr": 255718,
     "trading_days_total": 19,
-    "trading_days_elapsed": 10,
-    "trading_days_remaining": 10,
-    "daily_pacing_target_inr": 25572,
+    "trading_days_elapsed": 11,
+    "trading_days_remaining": 8,
+    "daily_pacing_target_inr": 28413,
     "full_deploy_deadline": "2026-05-30",
-    "pace_status": "MAY DAY 10 — ₹1,44,282 deployed (36%) of ₹4,00,000. BEHIND pace ~₹66K. Cash ₹24,399 = constraint. Add ₹50-70K to Kite to accelerate. Today GTTs pending: ₹23,850.",
+    "pace_status": "MAY DAY 11 — ₹1,44,282 deployed (36%) of ₹4,00,000. BEHIND pace ~₹87K. FINAL 8-DAY RULE ACTIVE — dip condition waived. Cash ₹49,391 (after ₹25K transfer). 5 GTTs queued ₹46,812. Need ~₹28K/day to catch up.",
     "bucket_deployed": {
-      "_note": "Updated May 7. May 6 GTT fires confirmed via T1 holdings.",
-      "_updated": "2026-05-14 — May 13 fires confirmed",
+      "_note": "Updated May 15. PSUBNKBEES stopped — no new buys.",
+      "_updated": "2026-05-15 — final 8-day phase, PSUBNKBEES stopped",
       "large_cap_inr": 28500,
       "mid_small_inr": 7478,
       "sector_cpseetf_inr": 12654,
@@ -27,12 +27,14 @@
       "debt_liquid_inr": 0
     },
     "bucket_target_inr": {
-      "large_cap_inr": 190000,
-      "_large_cap_note": "₹160k base + ₹30k redirect from PSUBNKBEES (SKILL-04 May rotation)",
+      "large_cap_inr": 220000,
+      "_large_cap_note": "₹160k base + ₹30k PSUBNKBEES redirect (stopped May 15) + ₹30k catch-up buffer for pace shortfall",
       "mid_small_inr": 60000,
       "sector_cpseetf_inr": 60000,
-      "sector_psubnkbees_inr": 30000,
-      "_sector_note": "CPSEETF new active sector ₹60k. PSUBNKBEES reduced to ₹30k/month.",
+      "sector_psubnkbees_inr": 0,
+      "_psubnkbees_note": "STOPPED May 15. Score collapsed 6.8→5.8 in 8 days (-5.77% price). No new buys. Watch for exit if score < 5.",
+      "sector_modefence_inr": 0,
+      "_modefence_note": "JUNE 2026 allocation starts. Budget ₹30,000/month (freed from PSUBNKBEES). Approved May 15 — score 8.7, exceptional relative strength during FII sell-off. Start date: Jun 1 SKILL-04.",
       "gold_inr": 60000,
       "international_inr": 40000,
       "debt_liquid_inr": 20000
@@ -40,10 +42,11 @@
   },
 
   "kite_account": {
-    "_synced": "2026-05-14 via SKILL-02",
+    "_synced": "2026-05-15 via SKILL-02",
     "user_id": "[KITE_ACCOUNT_ID]",
-    "available_cash_inr": 24399,
-    "holdings_note": "May 14 live. NIFTYBEES 795 total (757+38 T1). JUNIORBEES 167 (158+9 T1). CPSEETF 184 total (97 settled + 87 May13 fires: 37@104.84+50@104.57, new avg ~105.92). PSUBNKBEES 300 (283+17 T1). GOLDBEES 917 — SURGED ₹131.74 (+5.7% May14). ICICIB22 184 (163+21 T1). RELIANCE 22 settled, stop GTT317591231 ACTIVE at ₹1,346 (buffer 0.95% — IMMINENT)."
+    "available_cash_inr": 49391,
+    "_cash_note": "₹24,391 settled + ₹25,000 pending transfer from Mahantesh. 5 GTTs queued ₹46,812 — will draw down on firing.",
+    "holdings_note": "May 15 live. NIFTYBEES 795 total. JUNIORBEES 167. CPSEETF 184. PSUBNKBEES 300 (STOPPED — no new buys). GOLDBEES 917 @ ₹131.78 — trailing stop watch at ₹136.34 (15% gain threshold). ICICIB22 184. RELIANCE 22 settled, stop GTT317591231 ACTIVE at ₹1,346 (buffer 1.17% — critical). 5 new GTTs pending: 319264910/912/915/916/920."
   },
 
   "kite_holdings_snapshot": {
@@ -73,7 +76,7 @@
   "trailing_stops": {
     "_note": "Set at -8% from peak for positions with >15% gain. Ratchet up every 5% gain. Updated by SKILL-06 weekly.",
     "positions": [
-      { "symbol": "RELIANCE",  "entry": 962.32, "peak": 1463.10, "stop": 1346, "gtt_id": 317591231, "limit": 1333, "current_ltp": 1385.30, "pnl_pct": 43.96, "buffer_pct": 2.84, "status": "⚠️ CRITICAL May 12. LTP 1385.30, down 5.3% from peak. Today intraday low 1382 (only 36pts above stop 1346). GTT317591231 ACTIVE. May fire tomorrow if market continues weak." },
+      { "symbol": "RELIANCE",  "entry": 962.32, "peak": 1463.10, "stop": 1346, "gtt_id": 317591231, "limit": 1333, "current_ltp": 1361.75, "pnl_pct": 41.5, "buffer_pct": 1.17, "status": "⚠️ CRITICAL May 15. LTP 1361.75, only 1.17% above stop 1346 (15.75pts). GTT317591231 ACTIVE. Market bounce today (FII reversal +₹187 Cr) gave slight relief. If Monday opens weak, stop fires. GOLDBEES trailing stop watch: 15% threshold at ₹136.34 (current ₹131.78, 3.5% away — set GTT SELL when it hits ₹136.34)." },
       { "symbol": "AXISBANK",  "entry": 755,    "peak": 1379.6,  "stop": 1269, "gtt_id": 316237772, "current_ltp": 1275.10, "pnl_pct": 68.1, "buffer_pct": null, "status": "✅ STOPPED OUT — confirmed absent from live holdings May 5. GTT316237772 not active. Gain ~68% (₹5,140 LTCG)." },
       { "symbol": "TMCV",      "entry": 260.76, "peak": 447.8,   "stop": 412,  "gtt_id": 316237771, "current_ltp": 412.90,  "pnl_pct": 57.9, "buffer_pct": null, "status": "✅ STOPPED OUT — confirmed absent from live holdings May 5. GTT316237771 not active. Gain ~58% (₹6,503 LTCG)." },
       { "symbol": "ICICIBANK", "entry": 731,    "peak": 1388.4,  "stop": 1278, "gtt_id": null,       "current_ltp": null,   "pnl_pct": 74.8, "buffer_pct": null, "status": "✅ STOPPED OUT — confirmed sold (flagged Apr 30, confirmed absent May 5). Gain ~74.8% (₹5,470 LTCG)." }
@@ -91,28 +94,29 @@
 
   "signals": {
     "_note": "Updated daily by SKILL-02. FII/DII from NSE API. Macro from Yahoo Finance.",
-    "fii_stance": "SELLER",
+    "fii_stance": "BUYER",
     "dii_stance": "BUYER",
-    "last_fii_net_crore": -8437.56,
-    "last_dii_net_crore": 5939.65,
+    "last_fii_net_crore": 187,
+    "last_dii_net_crore": 4200,
+    "_fii_note": "May 14 FII turned buyer +₹187 Cr — ends 4-day selling streak. Conflicting data (NSE API vs daily_signal.json May 14 record of -4,703 Cr). Using reversal signal cautiously.",
     "active_sector_etf": "NSE:CPSEETF",
-    "active_sector_score": 9.0,
+    "active_sector_score": 8.9,
+    "active_sector_june_challenger": "NSE:PHARMABEES",
+    "active_sector_june_challenger_score": 9.0,
+    "_june_note": "PHARMABEES overtook CPSEETF in mid-month pulse (9.0 vs 8.9). Full SKILL-04 June 1 will confirm. MODEFENCE (8.7) starts June allocation from PSUBNKBEES freed budget.",
     "prev_sector_etf": "NSE:PSUBNKBEES",
-    "prev_sector_score": 6.8,
-    "signal_date": "2026-05-12",
+    "prev_sector_score": 5.8,
+    "signal_date": "2026-05-15",
     "macro": {
-      "_note": "DXY/US10yr/Oil fetched live by SKILL-02 May 12. India10yr static 7%.",
-      "dxy": 98.015,
-      "dxy_5d": [98.02, 98.25, 97.84, 98.015],
-      "dxy_signal": "BULLISH (below 100) — stable around 98. EM/India tailwind intact.",
-      "us_10yr_yield_pct": 4.41,
-      "us_10yr_5d": [4.416, 4.356, 4.392, 4.364, 4.41],
+      "_note": "DXY/US10yr/Oil fetched live by SKILL-02 May 15. India10yr static 7%.",
+      "dxy": 98.982,
+      "dxy_signal": "CAUTIOUS — 98.982. Rising trend. Watch: if DXY > 100, EM headwind strengthens.",
+      "us_10yr_yield_pct": 4.461,
       "india_10yr_yield_pct": 7.0,
-      "yield_spread_pct": 2.59,
-      "yield_spread_zone": "2-3% = FII CAUTIOUS — unchanged. FII heavy seller May 11 (-8,437 Cr).",
-      "brent_crude_usd": 104.75,
-      "brent_5d": [101.27, 100.06, 101.29, 104.75],
-      "oil_signal": "⚠ SPIKING — $100 → $104.75 (+4.7% in 3 days). Above $90 threshold. India CAD risk. CPSEETF (ONGC/OIL) short-term noise — structural thesis intact.",
+      "yield_spread_pct": 2.539,
+      "yield_spread_zone": "2-3% = FII CAUTIOUS. Spread 2.539% approaching danger floor (2.5%). FII reversal today gives brief relief.",
+      "brent_crude_usd": 106.48,
+      "oil_signal": "⚠ ELEVATED — $106.48. Well above $90 threshold. India CAD + inflation risk. CPSEETF structural thesis intact despite oil noise.",
       "cape_ratio": 33,
       "cape_avg": 25,
       "cape_signal": "ELEVATED — favour systematic, not lumpsum aggression",

@@ -10,14 +10,17 @@
   ],
 
   "sector_rotation_watch": [
-    { "symbol": "NSE:BANKBEES",   "token": 2928385, "sector": "Banking", "current_score": 5.7, "decision": "HOLD" },
-    { "symbol": "NSE:ITBEES",     "token": 4885505, "sector": "IT",      "current_score": 2.4, "decision": "⚠️ EXIT NOW — 2 consecutive months below 4" },
-    { "symbol": "NSE:PHARMABEES", "token": 1273089, "sector": "Pharma",  "current_score": 9.1, "decision": "BUY (backup #2)" },
-    { "symbol": "NSE:CPSEETF",    "token": 595969,  "sector": "PSU/CPSE","current_score": 10.0, "decision": "BUY — ACTIVE SECTOR" },
-    { "symbol": "NSE:PSUBNKBEES", "token": 3848193, "sector": "PSU Bank","current_score": 6.8, "decision": "HOLD — reduced to ₹30k/month" },
+    { "symbol": "NSE:PHARMABEES", "token": 1273089, "sector": "Pharma",  "current_score": 9.0, "decision": "HOLD existing 2000u — #1 by mid-month pulse. Active next month if CPSEETF drops below 8.5." },
+    { "symbol": "NSE:CPSEETF",    "token": 595969,  "sector": "PSU/CPSE","current_score": 8.9, "decision": "BUY — ACTIVE SECTOR May 2026" },
+    { "symbol": "NSE:MODEFENCE",  "token": 6385665, "sector": "Defence", "current_score": 8.7, "decision": "WATCH → BUY from June 2026. Approved May 15. Budget: freed ₹30K from PSUBNKBEES." },
+    { "symbol": "NSE:METALIETF",  "token": 6364417, "sector": "Metal",   "current_score": 8.3, "decision": "WATCH — China stimulus driving +3.3% in 8 days. Monitor for June rotation." },
+    { "symbol": "NSE:BANKBEES",   "token": 2928385, "sector": "Banking", "current_score": 5.2, "decision": "HOLD existing — no new allocation. Below both DMAs." },
+    { "symbol": "NSE:PSUBNKBEES", "token": 3848193, "sector": "PSU Bank","current_score": 5.8, "decision": "STOPPED — score dropped 6.8→5.8 in 8 days. No new buys. Watch for exit if score falls below 5." },
+    { "symbol": "NSE:ITBEES",     "token": 4885505, "sector": "IT",      "current_score": 1.8, "decision": "EXITED May 7. Score 1.8. Do not re-enter until score sustains above 6 for 2+ months." },
     { "symbol": "NSE:MOM100",     "token": 5484289, "sector": "Momentum","current_score": null, "decision": "NOT SCORED" }
   ],
 
   "active_sector_etf": "NSE:CPSEETF",
-  "_note": "Updated 2026-05-05 by SKILL-04. Rotated FROM PSUBNKBEES TO CPSEETF for May 2026. ITBEES exit rule triggered (2 consecutive months sub-4)."
+  "last_updated": "2026-05-15",
+  "_note": "Mid-month pulse May 15. PHARMABEES overtook CPSEETF in score (9.0 vs 8.9). MODEFENCE approved and added. PSUBNKBEES stopped — score collapsed to 5.8. METALIETF rising — watch for June."
 }

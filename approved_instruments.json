@@ -76,6 +76,17 @@
       "approved": true
     },
     {
+      "symbol": "NSE:MODEFENCE",
+      "token": 6385665,
+      "name": "Mirae Asset Nifty India Defence ETF",
+      "bucket": "Sectoral — Defence",
+      "expense_ratio_pct": 0.35,
+      "tracks": "Nifty India Defence",
+      "approved": true,
+      "_approved_date": "2026-05-15",
+      "_approved_reason": "Mid-month sector pulse: score 8.7 (ranked #3 in universe). Strong relative strength — held 52-week highs during May FII sell-off (-5.8% Nifty, MODEFENCE flat). Multi-year structural theme: India defence budget ₹6.2L cr, HAL/BEL/BEML record order books, indigenisation mandate. Recommended start: June 2026 allocation. Freed PSUBNKBEES ₹30K budget redirected here."
+    },
+    {
       "symbol": "NSE:PSUBNKBEES",
       "token": 3848193,
       "name": "Nippon India ETF PSU Bank BeES",

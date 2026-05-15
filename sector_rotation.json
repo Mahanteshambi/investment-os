@@ -275,16 +275,36 @@
     }
   ],
 
+  "mid_month_pulse_may15": {
+    "_note": "Mid-month sector check triggered by user. Live LTPs vs May 7 baseline. Not a full SKILL-04 run.",
+    "date": "2026-05-15",
+    "updated_scores": {
+      "PHARMABEES": {"may7": 8.8, "may15": 9.0, "ltp_change_pct": 1.57, "signal": "↑ NEW 52-WEEK HIGH ₹25.21. Overtook CPSEETF. Active sector candidate for June."},
+      "CPSEETF":    {"may7": 9.0, "may15": 8.9, "ltp_change_pct": -0.56, "signal": "↓ slight. Thesis intact. Oil $106 = ONGC earnings boost. Still #1 active sector."},
+      "MODEFENCE":  {"may7": 8.6, "may15": 8.7, "ltp_change_pct": 0.40, "signal": "↑ Held near 52W highs during FII sell-off. APPROVED and added to watchlist. Start June."},
+      "METALIETF":  {"may7": 8.0, "may15": 8.3, "ltp_change_pct": 3.33, "signal": "↑ China stimulus driving. Watch for June."},
+      "INFRABEES":  {"may7": 7.6, "may15": 7.4, "ltp_change_pct": -0.95, "signal": "↓ slight. Stable."},
+      "AUTOBEES":   {"may7": 6.9, "may15": 6.5, "ltp_change_pct": -2.81, "signal": "↓ Oil headwind."},
+      "PSUBNKBEES": {"may7": 6.8, "may15": 5.8, "ltp_change_pct": -5.77, "signal": "↓↓ COLLAPSED. New buys STOPPED May 15. Watch for exit if score < 5."},
+      "MOREALTY":   {"may7": 6.3, "may15": 5.5, "ltp_change_pct": -6.19, "signal": "↓↓ Significant correction. Good we have no position."},
+      "BANKBEES":   {"may7": 5.7, "may15": 5.2, "ltp_change_pct": -3.26, "signal": "↓ Weak. No allocation."},
+      "BFSI":       {"may7": 5.6, "may15": 5.2, "ltp_change_pct": -3.30, "signal": "↓ Weak."},
+      "ITBEES":     {"may7": 2.1, "may15": 1.8, "ltp_change_pct": -6.37, "signal": "↓ Exited. Confirms right call."}
+    },
+    "june_rotation_preview": "PHARMABEES (9.0) likely challenges CPSEETF (8.9) for active sector in June SKILL-04. If confirmed, redirect sector bucket to PHARMABEES. MODEFENCE (8.7) enters as secondary allocation using freed PSUBNKBEES budget."
+  },
+
   "watch_candidates": [
     {
-      "etf": "NSE:MODEFENCE", "score": 8.6,
-      "trigger_condition": "Promote to active consideration if CPSEETF drops below 8.0 for 1 month",
-      "note": "Strongest new entrant. Defence cycle is multi-year structural theme."
+      "etf": "NSE:MODEFENCE", "score": 8.7,
+      "status": "APPROVED — added to approved_instruments.json May 15",
+      "trigger_condition": "Start June 2026 with ₹30K freed from PSUBNKBEES. Increase if CPSEETF drops below 8.5.",
+      "note": "Held 52W highs during May FII sell-off. Defence cycle multi-year structural. HAL/BEL/BEML record orders."
     },
     {
-      "etf": "NSE:METALIETF", "score": 8.0,
-      "trigger_condition": "Promote to active consideration if CPSEETF drops below 8.0 and METALIETF sustains above 7.5",
-      "note": "Strong technically but cyclical. China demand reversal = sharp risk. Treat as secondary candidate."
+      "etf": "NSE:METALIETF", "score": 8.3,
+      "trigger_condition": "Add to approved_instruments.json if score sustains above 8.0 in June SKILL-04",
+      "note": "China stimulus driving +3.3% in 8 days. Cyclical risk: China reversal = sharp drawdown."
     },
     {
       "etf": "NSE:ENERGY", "score": 7.7,
