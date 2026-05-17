@@ -1,5 +1,5 @@
 """
-Transactions router — buy/sell history, CSV import, temporal analytics.
+Transactions router — buy/sell history, CSV import, temporal analytics, XIRR, P&L.
 """
 from datetime import date, datetime
 from typing import Optional
@@ -7,6 +7,33 @@ import uuid
 
 from fastapi import APIRouter, HTTPException, Query
 from pydantic import BaseModel
+
+
+# ── XIRR helper ────────────────────────────────────────────────────────────
+
+def _xirr(cashflows: list[tuple]) -> Optional[float]:
+    """
+    Calculate XIRR from list of (date, amount) tuples.
+    Buys = negative amounts, sells/terminal = positive amounts.
+    Returns annualised rate or None if insufficient data.
+    """
+    if not cashflows or len(cashflows) < 2:
+        return None
+    dates = [cf[0] for cf in cashflows]
+    amounts = [float(cf[1]) for cf in cashflows]
+    if not any(a < 0 for a in amounts) or not any(a > 0 for a in amounts):
+        return None
+    min_date = min(dates)
+    years = [(d - min_date).days / 365.0 for d in dates]
+
+    def npv(rate: float) -> float:
+        return sum(a / (1 + rate) ** t for a, t in zip(amounts, years))
+
+    try:
+        from scipy.optimize import brentq
+        return brentq(npv, -0.9999, 100.0, maxiter=1000)
+    except Exception:
+        return None
 
 from database.connection import get_db
 
@@ -233,3 +260,132 @@ def bulk_import(req: BulkImportRequest):
             errors.append(f"{t.ticker} {t.transaction_date}: {e}")
 
     return BulkImportResponse(inserted=inserted, skipped=skipped, errors=errors)
+
+
+@router.get("/xirr")
+def get_xirr():
+    """
+    Compute overall XIRR and per-bucket XIRR using transaction cashflows
+    + current holdings value as terminal cashflow.
+    """
+    db = get_db()
+    today = date.today()
+
+    # All transactions (buy = negative cashflow, sell = positive)
+    txns = db.execute("""
+        SELECT transaction_date, transaction_type,
+               COALESCE(amount, quantity * price, 0) AS amount,
+               COALESCE(bucket, 'Other') AS bucket
+        FROM transactions
+        WHERE COALESCE(amount, quantity * price, 0) > 0
+        ORDER BY transaction_date ASC
+    """).fetchall()
+
+    # Only use holdings for tickers that appear in transactions (scope terminal value correctly)
+    holdings = db.execute("""
+        SELECT
+            UPPER(COALESCE(h.ticker, h.asset_name)) AS ticker,
+            COALESCE(h.current_value, 0)             AS current_value
+        FROM holdings h
+        WHERE h.current_value IS NOT NULL AND h.current_value > 0
+          AND UPPER(COALESCE(h.ticker, h.asset_name)) IN (
+              SELECT DISTINCT UPPER(COALESCE(ticker, asset_name)) FROM transactions
+          )
+    """).fetchall()
+
+    # Build ticker → current_value lookup
+    holding_map: dict[str, float] = {r[0]: float(r[1]) for r in holdings}
+
+    # Build per-bucket current values from holdings using BUCKET_MAP
+    bucket_current: dict[str, float] = {}
+    for ticker, val in holding_map.items():
+        b = BUCKET_MAP.get(ticker, "Other")
+        bucket_current[b] = bucket_current.get(b, 0.0) + val
+
+    total_current = sum(bucket_current.values())
+
+    # ── Overall XIRR ─────────────────────────────────────────────────────
+    all_cfs: list[tuple] = []
+    for txn_date, txn_type, amount, _ in txns:
+        sign = -1 if txn_type == "buy" else 1
+        all_cfs.append((txn_date, sign * float(amount)))
+    if total_current > 0:
+        all_cfs.append((today, total_current))
+    overall = _xirr(all_cfs)
+
+    # ── Per-bucket XIRR ───────────────────────────────────────────────────
+    from collections import defaultdict
+    bucket_cfs: dict[str, list] = defaultdict(list)
+    for txn_date, txn_type, amount, bucket in txns:
+        sign = -1 if txn_type == "buy" else 1
+        bucket_cfs[bucket].append((txn_date, sign * float(amount)))
+    for b, val in bucket_current.items():
+        if val > 0:
+            bucket_cfs[b].append((today, val))
+
+    per_bucket = {b: _xirr(cfs) for b, cfs in bucket_cfs.items()}
+
+    return {
+        "overall_xirr": round(overall * 100, 2) if overall is not None else None,
+        "per_bucket": {
+            b: round(v * 100, 2) if v is not None else None
+            for b, v in per_bucket.items()
+        },
+        "total_current_value": round(total_current, 2),
+    }
+
+
+@router.get("/pnl-by-symbol")
+def get_pnl_by_symbol():
+    """
+    Per-ticker P&L summary: total invested, total redeemed, current value,
+    net return, return %, avg cost.
+    """
+    db = get_db()
+
+    txns = db.execute("""
+        SELECT
+            COALESCE(ticker, asset_name)                              AS symbol,
+            COALESCE(bucket, 'Other')                                 AS bucket,
+            SUM(CASE WHEN transaction_type='buy'  THEN COALESCE(amount, quantity*price, 0) ELSE 0 END) AS invested,
+            SUM(CASE WHEN transaction_type='sell' THEN COALESCE(amount, quantity*price, 0) ELSE 0 END) AS redeemed,
+            SUM(CASE WHEN transaction_type='buy'  THEN quantity ELSE -quantity END)                    AS net_qty,
+            COUNT(*) FILTER (WHERE transaction_type='buy')                                             AS buy_count,
+            COUNT(*) FILTER (WHERE transaction_type='sell')                                            AS sell_count,
+            MIN(transaction_date)                                     AS first_trade,
+            MAX(transaction_date)                                     AS last_trade
+        FROM transactions
+        GROUP BY symbol, bucket
+        ORDER BY invested DESC
+    """).fetchall()
+
+    holdings = db.execute("""
+        SELECT UPPER(COALESCE(ticker, asset_name)), current_value, current_price, avg_cost
+        FROM holdings
+        WHERE current_value IS NOT NULL
+    """).fetchall()
+    holding_map = {r[0]: {"current_value": float(r[1] or 0), "current_price": r[2], "avg_cost": r[3]}
+                   for r in holdings}
+
+    result = []
+    for symbol, bucket, invested, redeemed, net_qty, buy_count, sell_count, first_trade, last_trade in txns:
+        invested = float(invested or 0)
+        redeemed = float(redeemed or 0)
+        current = holding_map.get(symbol.upper(), {}).get("current_value", 0.0)
+        total_return = redeemed + current - invested
+        return_pct = (total_return / invested * 100) if invested > 0 else 0
+        result.append({
+            "symbol": symbol,
+            "bucket": bucket,
+            "invested": round(invested, 2),
+            "redeemed": round(redeemed, 2),
+            "current_value": round(current, 2),
+            "total_return": round(total_return, 2),
+            "return_pct": round(return_pct, 2),
+            "net_qty": round(float(net_qty or 0), 4),
+            "buy_count": buy_count,
+            "sell_count": sell_count,
+            "first_trade": str(first_trade) if first_trade else None,
+            "last_trade": str(last_trade) if last_trade else None,
+        })
+    return result

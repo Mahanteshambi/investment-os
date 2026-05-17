@@ -80,6 +80,31 @@ export async function getDeploymentSeries(): Promise<import("@/types").Deploymen
   return fetchJSON("/api/transactions/deployment-series")
 }
 
+export async function getTransactionXirr(): Promise<{
+  overall_xirr: number | null
+  per_bucket: Record<string, number | null>
+  total_current_value: number
+}> {
+  return fetchJSON("/api/transactions/xirr")
+}
+
+export async function getPnlBySymbol(): Promise<Array<{
+  symbol: string
+  bucket: string
+  invested: number
+  redeemed: number
+  current_value: number
+  total_return: number
+  return_pct: number
+  net_qty: number
+  buy_count: number
+  sell_count: number
+  first_trade: string | null
+  last_trade: string | null
+}>> {
+  return fetchJSON("/api/transactions/pnl-by-symbol")
+}
+
 export async function bulkImportTransactions(
   transactions: import("@/types").TransactionIn[]
 ): Promise<{ inserted: number; skipped: number; errors: string[] }> {

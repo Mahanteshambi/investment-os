@@ -6,7 +6,8 @@ import {
   AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer
 } from "recharts"
 import {
-  getTransactions, getTransactionSummary, getDeploymentSeries, bulkImportTransactions
+  getTransactions, getTransactionSummary, getDeploymentSeries,
+  bulkImportTransactions, getTransactionXirr, getPnlBySymbol,
 } from "@/lib/api"
 import type { Transaction, DeploymentPoint, TransactionIn } from "@/types"
 
@@ -39,9 +40,13 @@ function fmtINR(n: number | null | undefined) {
   return `₹${fmt(n)}`
 }
 
+function fmtPct(n: number | null | undefined) {
+  if (n == null) return "—"
+  return `${n >= 0 ? "+" : ""}${n.toFixed(1)}%`
+}
+
 // ── Deployment chart data transformation ─────────────────────────────────────
 function buildChartData(series: DeploymentPoint[]): Record<string, number | string>[] {
-  // Group by date, pivot buckets into columns
   const byDate: Record<string, Record<string, number>> = {}
   for (const pt of series) {
     if (!byDate[pt.date]) byDate[pt.date] = {}
@@ -52,7 +57,7 @@ function buildChartData(series: DeploymentPoint[]): Record<string, number | stri
     .map(([date, buckets]) => ({ date, ...buckets }))
 }
 
-// ── CSV parser (Zerodha Console P&L format) ──────────────────────────────────
+// ── CSV parser (Zerodha Tradebook format) ─────────────────────────────────────
 function parseZerodhaCsv(text: string): TransactionIn[] {
   const lines = text.split("\n").map(l => l.trim()).filter(Boolean)
   if (lines.length < 2) return []
@@ -70,7 +75,6 @@ function parseZerodhaCsv(text: string): TransactionIn[] {
     const price = parseFloat(row["price"] || row["avg_price"] || "0")
     const rawDate = row["trade_date"] || row["date"] || ""
 
-    // Parse date — supports DD-MM-YYYY and YYYY-MM-DD
     let txnDate = rawDate
     if (/^\d{2}-\d{2}-\d{4}/.test(rawDate)) {
       const [d, m, y] = rawDate.split("-")
@@ -94,6 +98,150 @@ function parseZerodhaCsv(text: string): TransactionIn[] {
     })
   }
   return results
+}
+
+// ── XIRR cards ────────────────────────────────────────────────────────────────
+function XirrCards() {
+  const { data, isLoading } = useQuery({
+    queryKey: ["transactionXirr"],
+    queryFn: getTransactionXirr,
+  })
+  if (isLoading) return null
+  if (!data) return null
+
+  const topBuckets = Object.entries(data.per_bucket)
+    .filter(([, v]) => v != null)
+    .sort(([, a], [, b]) => (b ?? 0) - (a ?? 0))
+    .slice(0, 4)
+
+  return (
+    <div className="bg-gray-900 rounded-xl border border-gray-800 p-5 mb-6">
+      <div className="flex items-center gap-3 mb-4">
+        <h2 className="text-sm font-medium text-gray-300">Portfolio XIRR</h2>
+        <span className="text-xs text-gray-600">annualised return on invested capital</span>
+      </div>
+      <div className="flex flex-wrap gap-6">
+        <div>
+          <p className="text-xs text-gray-500 mb-0.5">Overall XIRR</p>
+          <p className={`text-2xl font-bold ${
+            (data.overall_xirr ?? 0) >= 0 ? "text-emerald-400" : "text-red-400"
+          }`}>
+            {data.overall_xirr != null
+              ? Math.abs(data.overall_xirr) > 500
+                ? `${data.overall_xirr >= 0 ? "+" : ""}${data.overall_xirr.toFixed(0)}%*`
+                : `${data.overall_xirr >= 0 ? "+" : ""}${data.overall_xirr.toFixed(1)}%`
+              : "—"}
+          </p>
+          <p className="text-xs text-gray-600 mt-0.5">
+            {Math.abs(data.overall_xirr ?? 0) > 200
+              ? "* extreme: portfolio < 6 months old"
+              : `current value ${fmtINR(data.total_current_value)}`}
+          </p>
+        </div>
+        <div className="border-l border-gray-800 pl-6 flex gap-6 flex-wrap">
+          {topBuckets.map(([bucket, xirr]) => (
+            <div key={bucket}>
+              <p className="text-xs mb-0.5" style={{ color: BUCKET_COLORS[bucket] || "#9ca3af" }}>
+                {bucket}
+              </p>
+              <p className={`text-lg font-semibold ${
+                (xirr ?? 0) >= 0 ? "text-emerald-400" : "text-red-400"
+              }`}>
+                {xirr != null ? `${xirr >= 0 ? "+" : ""}${xirr.toFixed(1)}%` : "—"}
+              </p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  )
+}
+
+// ── P&L by symbol table ───────────────────────────────────────────────────────
+function PnlTable() {
+  const { data = [], isLoading } = useQuery({
+    queryKey: ["pnlBySymbol"],
+    queryFn: getPnlBySymbol,
+  })
+  const [sortBy, setSortBy] = useState<"invested" | "return_pct" | "total_return">("invested")
+
+  if (isLoading) return <div className="text-gray-500 text-sm py-8 text-center">Loading…</div>
+  if (!data.length) return null
+
+  const sorted = [...data].sort((a, b) => b[sortBy] - a[sortBy])
+
+  return (
+    <div className="mb-6">
+      <div className="flex items-center justify-between mb-3">
+        <h2 className="text-sm font-medium text-gray-300">P&amp;L by Instrument</h2>
+        <div className="flex gap-2">
+          {(["invested", "return_pct", "total_return"] as const).map(s => (
+            <button
+              key={s}
+              onClick={() => setSortBy(s)}
+              className={`text-xs px-2 py-1 rounded ${
+                sortBy === s ? "bg-indigo-700 text-white" : "bg-gray-800 text-gray-400 hover:text-gray-200"
+              }`}
+            >
+              {s === "invested" ? "By Size" : s === "return_pct" ? "By Return %" : "By P&L ₹"}
+            </button>
+          ))}
+        </div>
+      </div>
+      <div className="overflow-x-auto rounded-xl border border-gray-800">
+        <table className="w-full text-sm">
+          <thead>
+            <tr className="border-b border-gray-800 bg-gray-900">
+              {["Symbol", "Bucket", "Invested", "Redeemed", "Current", "P&L ₹", "Return %", "Qty Held", "Trades"].map(h => (
+                <th key={h} className="px-4 py-3 text-left text-xs font-medium text-gray-400">{h}</th>
+              ))}
+            </tr>
+          </thead>
+          <tbody>
+            {sorted.map(row => (
+              <tr key={row.symbol} className="border-b border-gray-800/50 hover:bg-gray-900/60 transition-colors">
+                <td className="px-4 py-3 font-medium text-white">{row.symbol}</td>
+                <td className="px-4 py-3">
+                  {row.bucket && (
+                    <span
+                      className="text-xs px-2 py-0.5 rounded-full font-medium"
+                      style={{
+                        background: (BUCKET_COLORS[row.bucket] || "#94a3b8") + "22",
+                        color: BUCKET_COLORS[row.bucket] || "#94a3b8",
+                      }}
+                    >
+                      {row.bucket}
+                    </span>
+                  )}
+                </td>
+                <td className="px-4 py-3 text-gray-300 text-right">{fmtINR(row.invested)}</td>
+                <td className="px-4 py-3 text-gray-400 text-right">{row.redeemed > 0 ? fmtINR(row.redeemed) : "—"}</td>
+                <td className="px-4 py-3 text-gray-300 text-right">
+                  {row.current_value > 0 ? fmtINR(row.current_value) : <span className="text-gray-600">no data</span>}
+                </td>
+                <td className={`px-4 py-3 text-right font-medium ${
+                  row.total_return > 0 ? "text-emerald-400" : row.total_return < 0 ? "text-red-400" : "text-gray-500"
+                }`}>
+                  {row.current_value > 0 || row.redeemed > 0
+                    ? (row.total_return >= 0 ? "+" : "") + fmtINR(row.total_return)
+                    : "—"}
+                </td>
+                <td className={`px-4 py-3 text-right font-semibold ${
+                  row.return_pct > 0 ? "text-emerald-400" : row.return_pct < 0 ? "text-red-400" : "text-gray-500"
+                }`}>
+                  {row.current_value > 0 || row.redeemed > 0 ? fmtPct(row.return_pct) : "—"}
+                </td>
+                <td className="px-4 py-3 text-gray-400 text-right">{row.net_qty > 0 ? fmt(row.net_qty, 0) : "—"}</td>
+                <td className="px-4 py-3 text-gray-500 text-xs">
+                  {row.buy_count}B {row.sell_count > 0 ? `${row.sell_count}S` : ""}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  )
 }
 
 // ── Summary cards ─────────────────────────────────────────────────────────────
@@ -138,8 +286,11 @@ function DeploymentChart() {
 
   return (
     <div className="bg-gray-900 rounded-xl p-6 border border-gray-800 mb-6">
-      <h2 className="text-sm font-medium text-gray-300 mb-4">Cumulative Deployment by Bucket</h2>
-      <ResponsiveContainer width="100%" height={280}>
+      <div className="flex items-center gap-3 mb-1">
+        <h2 className="text-sm font-medium text-gray-300">Capital Deployed Over Time</h2>
+        <span className="text-xs text-gray-600">cumulative buy amounts by bucket — shows pacing, not P&L</span>
+      </div>
+      <ResponsiveContainer width="100%" height={260}>
         <AreaChart data={chartData} margin={{ top: 4, right: 16, bottom: 0, left: 0 }}>
           <defs>
             {activeBuckets.map(b => (
@@ -160,7 +311,8 @@ function DeploymentChart() {
           <Tooltip
             contentStyle={{ background: "#111827", border: "1px solid #374151", borderRadius: 8 }}
             labelStyle={{ color: "#9ca3af", fontSize: 12 }}
-            formatter={(v: number, name: string) => [fmtINR(v), name]}
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            formatter={(v: any) => [fmtINR(v as number), ""]}
           />
           <Legend wrapperStyle={{ fontSize: 12, color: "#9ca3af" }} />
           {activeBuckets.map(b => (
@@ -258,6 +410,8 @@ function CsvImport() {
       qc.invalidateQueries({ queryKey: ["transactions"] })
       qc.invalidateQueries({ queryKey: ["txnSummary"] })
       qc.invalidateQueries({ queryKey: ["deploymentSeries"] })
+      qc.invalidateQueries({ queryKey: ["transactionXirr"] })
+      qc.invalidateQueries({ queryKey: ["pnlBySymbol"] })
     },
     onError: (e: Error) => setStatus(`❌ ${e.message}`),
   })
@@ -293,48 +447,64 @@ function CsvImport() {
 // ── Page ──────────────────────────────────────────────────────────────────────
 export default function TransactionsPage() {
   const [filters, setFilters] = useState({ ticker: "", type: "", bucket: "" })
+  const [showRawTrades, setShowRawTrades] = useState(false)
 
   return (
     <div className="p-6 max-w-7xl mx-auto">
       <div className="flex items-center justify-between mb-6">
         <div>
           <h1 className="text-2xl font-bold text-white">Transactions</h1>
-          <p className="text-sm text-gray-400 mt-0.5">Buy &amp; sell history with temporal deployment view</p>
+          <p className="text-sm text-gray-400 mt-0.5">XIRR, P&amp;L by instrument, deployment history</p>
         </div>
         <CsvImport />
       </div>
 
       <SummaryCards />
+      <XirrCards />
+      <PnlTable />
       <DeploymentChart />
 
-      {/* Filters */}
-      <div className="flex flex-wrap gap-3 mb-4">
-        <input
-          placeholder="Filter by symbol…"
-          value={filters.ticker}
-          onChange={e => setFilters(f => ({ ...f, ticker: e.target.value }))}
-          className="bg-gray-900 border border-gray-700 rounded-lg px-3 py-1.5 text-sm text-white placeholder-gray-500 focus:outline-none focus:border-indigo-500 w-40"
-        />
-        <select
-          value={filters.type}
-          onChange={e => setFilters(f => ({ ...f, type: e.target.value }))}
-          className="bg-gray-900 border border-gray-700 rounded-lg px-3 py-1.5 text-sm text-white focus:outline-none focus:border-indigo-500"
+      {/* Raw trade log — collapsible */}
+      <div className="mb-4">
+        <button
+          onClick={() => setShowRawTrades(v => !v)}
+          className="text-sm text-gray-400 hover:text-gray-200 flex items-center gap-2"
         >
-          <option value="">All types</option>
-          <option value="buy">Buy</option>
-          <option value="sell">Sell</option>
-        </select>
-        <select
-          value={filters.bucket}
-          onChange={e => setFilters(f => ({ ...f, bucket: e.target.value }))}
-          className="bg-gray-900 border border-gray-700 rounded-lg px-3 py-1.5 text-sm text-white focus:outline-none focus:border-indigo-500"
-        >
-          <option value="">All buckets</option>
-          {BUCKETS.map(b => <option key={b} value={b}>{b}</option>)}
-        </select>
+          <span className={`transition-transform ${showRawTrades ? "rotate-90" : ""}`}>▶</span>
+          Raw trade log ({showRawTrades ? "hide" : "show"})
+        </button>
       </div>
 
-      <TransactionTable filters={filters} />
+      {showRawTrades && (
+        <>
+          <div className="flex flex-wrap gap-3 mb-4">
+            <input
+              placeholder="Filter by symbol…"
+              value={filters.ticker}
+              onChange={e => setFilters(f => ({ ...f, ticker: e.target.value }))}
+              className="bg-gray-900 border border-gray-700 rounded-lg px-3 py-1.5 text-sm text-white placeholder-gray-500 focus:outline-none focus:border-indigo-500 w-40"
+            />
+            <select
+              value={filters.type}
+              onChange={e => setFilters(f => ({ ...f, type: e.target.value }))}
+              className="bg-gray-900 border border-gray-700 rounded-lg px-3 py-1.5 text-sm text-white focus:outline-none focus:border-indigo-500"
+            >
+              <option value="">All types</option>
+              <option value="buy">Buy</option>
+              <option value="sell">Sell</option>
+            </select>
+            <select
+              value={filters.bucket}
+              onChange={e => setFilters(f => ({ ...f, bucket: e.target.value }))}
+              className="bg-gray-900 border border-gray-700 rounded-lg px-3 py-1.5 text-sm text-white focus:outline-none focus:border-indigo-500"
+            >
+              <option value="">All buckets</option>
+              {BUCKETS.map(b => <option key={b} value={b}>{b}</option>)}
+            </select>
+          </div>
+          <TransactionTable filters={filters} />
+        </>
+      )}
     </div>
   )
 }
