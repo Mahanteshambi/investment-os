@@ -47,14 +47,6 @@ export interface AllocationBreakdown {
   by_sector: Array<{ sector: string; value: number; pct: number }>
 }
 
-export interface AgentSignal {
-  agent_name: string
-  signal_type: string
-  signal_value: 'bullish' | 'bearish' | 'neutral' | 'action_needed'
-  summary: string
-  created_at: string
-}
-
 export interface SyncResponse {
   status: string
   sources_synced: string[]

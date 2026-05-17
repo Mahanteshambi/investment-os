@@ -1,5 +1,4 @@
 import type {
-  AgentSignal,
   AllocationBreakdown,
   DailySnapshot,
   HoldingFilters,
@@ -53,10 +52,6 @@ export async function triggerSync(sources: string[]): Promise<SyncResponse> {
 
 export async function getSyncStatus(): Promise<SyncStatus[]> {
   return fetchJSON("/api/sync/status")
-}
-
-export async function getAgentSignals(): Promise<AgentSignal[]> {
-  return fetchJSON("/api/agents/signals")
 }
 
 // MF Intelligence

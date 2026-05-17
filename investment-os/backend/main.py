@@ -1,17 +1,14 @@
 import logging
 from contextlib import asynccontextmanager
-from datetime import datetime
 
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from dotenv import load_dotenv
-import nest_asyncio
 
 load_dotenv()
-nest_asyncio.apply()
 
 from database.connection import get_connection, close_connection
-from routers import holdings, portfolio, snapshots, sync, intelligence, sector_rotation
+from routers import holdings, portfolio, snapshots, sync, intelligence, sector_rotation, world_view
 from scheduler.jobs import start_scheduler, stop_scheduler
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(name)s — %(message)s")
@@ -48,48 +45,9 @@ app.include_router(portfolio.router)
 app.include_router(holdings.router)
 app.include_router(snapshots.router)
 app.include_router(sync.router)
-
-from routers import agent_chat, world_view
-app.include_router(agent_chat.router)
 app.include_router(world_view.router)
-
-from fastapi import APIRouter
-from models.schemas import AgentSignal
-
 app.include_router(intelligence.router)
 app.include_router(sector_rotation.router)
-
-agents_router = APIRouter(prefix="/api/agents", tags=["agents"])
-
-@agents_router.get("/signals", response_model=list[AgentSignal])
-def get_agent_signals():
-    now = datetime.now()
-    return [
-        AgentSignal(
-            agent_name="MarketAnalyst",
-            signal_type="market",
-            signal_value="neutral",
-            summary="Nifty 50 trading near 5-year median PE. FII flows cautious. No strong directional signal.",
-            created_at=now,
-        ),
-        AgentSignal(
-            agent_name="SectorRotation",
-            signal_type="sector",
-            signal_value="bullish",
-            summary="Banking sector score 7/10 — highest this month. Overweight BANKBEES.",
-            created_at=now,
-        ),
-        AgentSignal(
-            agent_name="Rebalancer",
-            signal_type="rebalance",
-            signal_value="action_needed",
-            summary="Gold allocation at 18% vs target 15%. Consider pausing GOLDBEES buys this week.",
-            created_at=now,
-        ),
-    ]
-
-
-app.include_router(agents_router)
 
 
 @app.get("/health")

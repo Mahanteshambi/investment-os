@@ -107,14 +107,6 @@ class KiteSessionResponse(BaseModel):
     expires_at: Optional[datetime] = None
 
 
-class AgentSignal(BaseModel):
-    agent_name: str
-    signal_type: str
-    signal_value: str  # 'bullish' | 'bearish' | 'neutral' | 'action_needed'
-    summary: str
-    created_at: datetime
-
-
 class AllocationBreakdown(BaseModel):
     by_class: dict[str, float]
     by_sector: list[dict]
