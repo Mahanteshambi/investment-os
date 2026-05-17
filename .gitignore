@@ -7,10 +7,13 @@
 # Secrets and machine-specific config
 .env
 .mcp.json
+user_config.json
+credentials/
 
 # Package manager cache
 .pnpm-store/
 
-# Sensitive runtime data (optional — remove lines below if you want these tracked)
-# paper_trades.json
-# portfolio_state.json
+# Runtime state — personal data, updated every session, never push
+portfolio_state.json
+paper_trades.json
+daily_signal.json
