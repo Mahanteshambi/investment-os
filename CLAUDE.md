@@ -272,18 +272,19 @@ Full definition in `target_allocation.json`. Monthly breakdown:
 
 ## State Files
 
-| File | Purpose | Updated by |
-|---|---|---|
-| `target_allocation.json` | Target % per bucket | Manual |
-| `approved_instruments.json` | Instrument whitelist with tokens | Manual |
-| `watchlist.json` | Instruments monitored daily with tokens | SKILL-01 / SKILL-04 |
-| `daily_signal.json` | Today's buy/sell/hold recommendations | SKILL-02 every 8 AM |
-| `sector_rotation.json` | Monthly sector scores + active sector | SKILL-04 1st of month |
-| `portfolio_state.json` | Budget tracker, trailing stops, FD calendar, execution log | SKILL-06 + execution confirmations |
-| `paper_trades.json` | Full execution log (confirmed by Mahantesh) | Execution confirmations |
-| `rebalancing_report.json` | Quarterly drift report | SKILL-05 quarterly |
-| `tax_report.json` | Annual LTCG + harvesting report | SKILL-07 March |
-| `SKILL.md` | Skill execution prompts (e.g. SKILL-05 quarterly rebalancer) | Manual |
+| File | Purpose | Updated by | Git |
+|---|---|---|---|
+| `target_allocation.json` | Target % per bucket | Manual | ✅ tracked |
+| `approved_instruments.json` | Instrument whitelist with tokens | Manual | ✅ tracked |
+| `watchlist.json` | Instruments monitored daily with tokens | SKILL-01 / SKILL-04 | ✅ tracked |
+| `sector_rotation.json` | Monthly sector scores + active sector | SKILL-04 1st of month | ✅ tracked |
+| `user_config.json` | Personal account IDs, sheet ID, owner name | Manual (first-time setup) | 🚫 gitignored |
+| `daily_signal.json` | Today's buy/sell/hold recommendations | SKILL-02 every 8 AM | 🚫 gitignored |
+| `portfolio_state.json` | Budget tracker, trailing stops, FD calendar, execution log | SKILL-06 + execution confirmations | 🚫 gitignored |
+| `paper_trades.json` | Full execution log (every GTT placed) | Execution confirmations | 🚫 gitignored |
+| `rebalancing_report.json` | Quarterly drift report | SKILL-05 quarterly | 🚫 gitignored |
+| `tax_report.json` | Annual LTCG + harvesting report | SKILL-07 March | 🚫 gitignored |
+| `SKILL.md` | Skill execution prompts (e.g. SKILL-05 quarterly rebalancer) | Manual | ✅ tracked |
 
 ### Data Source Rules
 - **Kite holdings + cash** → always fetch live via `mcp__kite__get_holdings` + `mcp__kite__get_margins`. Never use stale static values.

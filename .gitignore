@@ -17,3 +17,5 @@ credentials/
 portfolio_state.json
 paper_trades.json
 daily_signal.json
+rebalancing_report.json
+tax_report.json
