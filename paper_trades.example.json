@@ -1,0 +1,8 @@
+{
+  "account": {
+    "broker": "Zerodha Kite",
+    "user_id": "[YOUR_KITE_ACCOUNT_ID]",
+    "currency": "INR"
+  },
+  "trades": []
+}

@@ -1,0 +1,54 @@
+{
+  "_comment": "Master state file. Holdings/cash = live from Kite MCP. Non-Kite assets = Google Drive sheet (see user_config.json → google_sheet_id). Copy this file to portfolio_state.json and update via SKILL-02/SKILL-06.",
+  "last_updated": "YYYY-MM-DD",
+  "mode": "advisory",
+
+  "monthly_budget": {
+    "total_inr": 400000,
+    "month": "YYYY-MM",
+    "deployed_inr": 0,
+    "remaining_inr": 400000,
+    "trading_days_total": 19,
+    "trading_days_elapsed": 0,
+    "trading_days_remaining": 19,
+    "daily_pacing_target_inr": 21053,
+    "full_deploy_deadline": "YYYY-MM-30",
+    "pace_status": "Month start — no deployments yet.",
+    "bucket_deployed": {
+      "large_cap_inr": 0,
+      "mid_small_inr": 0,
+      "sector_active_inr": 0,
+      "gold_inr": 0,
+      "international_inr": 0,
+      "debt_liquid_inr": 0
+    },
+    "bucket_target_inr": {
+      "large_cap_inr": 160000,
+      "mid_small_inr": 60000,
+      "sector_active_inr": 30000,
+      "sector_secondary_inr": 30000,
+      "gold_inr": 60000,
+      "international_inr": 40000,
+      "debt_liquid_inr": 20000
+    }
+  },
+
+  "kite_account": {
+    "_synced": "never",
+    "user_id": "[YOUR_KITE_ACCOUNT_ID]",
+    "available_cash_inr": 0,
+    "holdings_note": "Fetch live via mcp__kite__get_holdings"
+  },
+
+  "trailing_stops": [],
+
+  "fd_calendar": [],
+
+  "scheduled_tasks": {
+    "SKILL-02_daily_brief": "weekdays 08:00 MYT",
+    "SKILL-04_sector_rotation": "1st of month 08:00 MYT",
+    "SKILL-05_quarterly_rebalancer": "1st Jan/Apr/Jul/Oct 08:00 MYT",
+    "SKILL-06_weekly_dashboard": "Sunday 09:00 MYT",
+    "SKILL-07_annual_tax": "15th March 08:00 MYT"
+  }
+}

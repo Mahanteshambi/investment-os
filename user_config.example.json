@@ -1,0 +1,13 @@
+{
+  "owner_name": "[YOUR_FIRST_NAME]",
+  "owner_full_name": "[YOUR_FULL_NAME]",
+  "owner_email": "[YOUR_EMAIL]",
+  "employer": "[YOUR_EMPLOYER]",
+  "spouse_name": "[SPOUSE_NAME_OR_null]",
+  "child_name": "[CHILD_NAME_OR_null]",
+  "kite_account_id": "[YOUR_ZERODHA_CLIENT_ID]",
+  "google_sheet_id": "[YOUR_GOOGLE_SHEET_ID]",
+  "timezone": "Asia/Kuala_Lumpur",
+  "base_currency": "INR",
+  "monthly_budget_inr": 400000
+}
