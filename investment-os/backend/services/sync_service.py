@@ -87,11 +87,69 @@ def take_daily_snapshot(conn: duckdb.DuckDBPyConnection) -> None:
     )
 
 
+BUCKET_MAP = {
+    "NIFTYBEES": "Large Cap", "SETFNIF50": "Large Cap",
+    "JUNIORBEES": "Mid/Small", "MOM100": "Mid/Small",
+    "CPSEETF": "Sector", "PHARMABEES": "Sector", "MODEFENCE": "Sector",
+    "PSUBNKBEES": "Sector", "ITBEES": "Sector", "BANKBEES": "Sector",
+    "GOLDBEES": "Gold",
+    "ICICIB22": "International",
+    "LIQUIDBEES": "Debt",
+}
+
+
+def _capture_kite_orders(conn: duckdb.DuckDBPyConnection) -> int:
+    """Capture today's completed Kite orders into transactions table."""
+    try:
+        orders = _kite_service.get_completed_orders()
+    except Exception as e:
+        logger.warning(f"Could not fetch Kite orders: {e}")
+        return 0
+
+    inserted = 0
+    for o in orders:
+        ticker = o.get("tradingsymbol", "")
+        txn_type = "buy" if o.get("transaction_type", "").upper() == "BUY" else "sell"
+        qty = float(o.get("filled_quantity") or o.get("quantity") or 0)
+        price = float(o.get("average_price") or 0)
+        order_id = str(o.get("order_id", ""))
+        txn_date = date.today()
+
+        # Skip if already captured
+        existing = conn.execute(
+            "SELECT id FROM transactions WHERE gtt_id = ? OR (transaction_date = ? AND ticker = ? AND transaction_type = ? AND quantity = ?)",
+            [order_id, txn_date, ticker, txn_type, qty]
+        ).fetchone()
+        if existing:
+            continue
+
+        bucket = BUCKET_MAP.get(ticker.upper(), "Other")
+        amount = qty * price + float(o.get("charges", 0) or 0)
+
+        conn.execute("""
+            INSERT INTO transactions
+                (id, transaction_date, asset_name, ticker, asset_class,
+                 transaction_type, quantity, price, amount, fees,
+                 bucket, gtt_id, exchange, source, notes)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+        """, [
+            str(uuid.uuid4()), txn_date, ticker, ticker, "etf",
+            txn_type, qty, price, amount, 0,
+            bucket, order_id, o.get("exchange", "NSE"), "kite", None,
+        ])
+        inserted += 1
+
+    return inserted
+
+
 def sync_kite() -> tuple[int, str | None]:
     conn = get_db()
     try:
         holdings = _kite_service.get_holdings()
         count = _upsert_holdings(conn, holdings, "kite")
+        captured = _capture_kite_orders(conn)
+        if captured:
+            logger.info(f"Captured {captured} new Kite orders into transactions")
         _write_sync_log(conn, "kite", "success", count, None)
         return count, None
     except Exception as e:

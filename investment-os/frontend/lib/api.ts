@@ -54,6 +54,41 @@ export async function getSyncStatus(): Promise<SyncStatus[]> {
   return fetchJSON("/api/sync/status")
 }
 
+// Transactions
+export async function getTransactions(params?: {
+  ticker?: string
+  transaction_type?: string
+  bucket?: string
+  from_date?: string
+  to_date?: string
+}): Promise<import("@/types").Transaction[]> {
+  const p = new URLSearchParams()
+  if (params?.ticker) p.set("ticker", params.ticker)
+  if (params?.transaction_type) p.set("transaction_type", params.transaction_type)
+  if (params?.bucket) p.set("bucket", params.bucket)
+  if (params?.from_date) p.set("from_date", params.from_date)
+  if (params?.to_date) p.set("to_date", params.to_date)
+  const qs = p.toString()
+  return fetchJSON(`/api/transactions${qs ? `?${qs}` : ""}`)
+}
+
+export async function getTransactionSummary(): Promise<import("@/types").TransactionSummary> {
+  return fetchJSON("/api/transactions/summary")
+}
+
+export async function getDeploymentSeries(): Promise<import("@/types").DeploymentPoint[]> {
+  return fetchJSON("/api/transactions/deployment-series")
+}
+
+export async function bulkImportTransactions(
+  transactions: import("@/types").TransactionIn[]
+): Promise<{ inserted: number; skipped: number; errors: string[] }> {
+  return fetchJSON("/api/transactions/bulk-import", {
+    method: "POST",
+    body: JSON.stringify({ transactions }),
+  })
+}
+
 // MF Intelligence
 export async function syncMFIntelligence() {
   return fetchJSON("/api/mf/sync", { method: "POST" })

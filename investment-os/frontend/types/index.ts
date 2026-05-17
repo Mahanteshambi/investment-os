@@ -63,6 +63,58 @@ export interface SyncStatus {
   error_message: string | null
 }
 
+export interface Transaction {
+  id: string
+  transaction_date: string
+  asset_name: string
+  ticker: string | null
+  asset_class: string
+  transaction_type: 'buy' | 'sell'
+  quantity: number | null
+  price: number | null
+  amount: number | null
+  fees: number
+  bucket: string | null
+  gtt_id: string | null
+  exchange: string | null
+  source: string | null
+  notes: string | null
+}
+
+export interface TransactionIn {
+  transaction_date: string
+  asset_name: string
+  ticker?: string
+  asset_class: string
+  transaction_type: string
+  quantity?: number
+  price?: number
+  amount?: number
+  fees?: number
+  bucket?: string
+  gtt_id?: string
+  exchange?: string
+  source?: string
+  notes?: string
+}
+
+export interface TransactionSummary {
+  total_buys: number
+  total_sells: number
+  total_deployed: number
+  total_redeemed: number
+  net_deployed: number
+  first_trade: string | null
+  last_trade: string | null
+}
+
+export interface DeploymentPoint {
+  date: string
+  bucket: string
+  amount: number
+  cumulative: number
+}
+
 export interface HoldingFilters {
   asset_class?: string
   source?: string

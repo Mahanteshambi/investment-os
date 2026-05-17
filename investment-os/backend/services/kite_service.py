@@ -162,6 +162,16 @@ class KiteService:
             logger.error(f"Kite get_margins failed: {e}")
             return {}
 
+    def get_completed_orders(self) -> list[dict]:
+        """Return today's completed (COMPLETE status) orders from Kite."""
+        kite = self._get_kite()
+        try:
+            orders = kite.orders()
+            return [o for o in orders if o.get("status") == "COMPLETE"]
+        except Exception as e:
+            logger.warning(f"Kite get_orders failed: {e}")
+            return []
+
     def get_historical_data(self, instrument_token: int, from_date: str, to_date: str, interval: str = "day") -> list[dict]:
         kite = self._get_kite()
         try:

@@ -15,6 +15,24 @@ def _run_migrations(conn: duckdb.DuckDBPyConnection) -> None:
         if stmt:
             conn.execute(stmt)
 
+    # Additive column migrations — safe to re-run (DuckDB ignores duplicate ADD COLUMN)
+    _add_column_if_missing(conn, "transactions", "bucket", "VARCHAR")
+    _add_column_if_missing(conn, "transactions", "gtt_id", "VARCHAR")
+    _add_column_if_missing(conn, "transactions", "exchange", "VARCHAR")
+
+
+def _add_column_if_missing(
+    conn: duckdb.DuckDBPyConnection, table: str, column: str, col_type: str
+) -> None:
+    existing = {
+        row[0]
+        for row in conn.execute(
+            f"SELECT column_name FROM information_schema.columns WHERE table_name = '{table}'"
+        ).fetchall()
+    }
+    if column not in existing:
+        conn.execute(f"ALTER TABLE {table} ADD COLUMN {column} {col_type}")
+
 
 def get_connection() -> duckdb.DuckDBPyConnection:
     global _connection

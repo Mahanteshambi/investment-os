@@ -2,7 +2,7 @@
 
 import Link from "next/link"
 import { usePathname } from "next/navigation"
-import { BarChart2, BriefcaseBusiness, FlaskConical, TrendingUp, Shield, RotateCcw, Globe } from "lucide-react"
+import { BarChart2, BriefcaseBusiness, FlaskConical, TrendingUp, Shield, RotateCcw, Globe, ArrowLeftRight } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { useQuery } from "@tanstack/react-query"
 import { getSyncStatus } from "@/lib/api"
@@ -13,6 +13,7 @@ const navItems = [
   { href: "/holdings", label: "Holdings", icon: BriefcaseBusiness },
   { href: "/intelligence", label: "MF Intelligence", icon: Shield },
   { href: "/sector-rotation", label: "Sector Rotation", icon: RotateCcw },
+  { href: "/transactions", label: "Transactions", icon: ArrowLeftRight },
   { href: "/analysis", label: "Analysis", icon: FlaskConical },
 ]
 
