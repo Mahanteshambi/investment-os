@@ -101,35 +101,71 @@ OUTPUTS:
 **Purpose:** Single daily recommendation covering all platforms — what to buy, sell, hold today
 
 ```
-INPUTS:
-  - NSE FII/DII API: curl "https://www.nseindia.com/api/fiidiiTradeReact"
-  - Kite get_ltp: all instruments in watchlist.json
-  - Kite get_historical_data: 30-day OHLCV for each instrument (token as number)
-  - sector_rotation.json: active sector ETF + score
-  - portfolio_state.json: remaining budget, trading days left, trailing stops, last 5 days of buys
-  - Global proxies: ICICIB22 price as Nasdaq proxy, GOLDBEES as gold/risk proxy
+INPUTS — fetch in this order, one at a time:
 
-ANALYSIS (spawn AGENT-02 for each instrument, AGENT-04 for macro):
-  Per instrument:
-    - dip_score: % below month-open price
-    - momentum: price vs 20-DMA (above/below)
-    - volume: 5-day avg vs 20-day avg (accumulation/distribution)
-    - trailing_stop_check: if held position, is price below trailing stop?
-    - signal: STRONG BUY / BUY / HOLD / REDUCE / EXIT
+  STEP 1 — Portfolio snapshot (replaces manual portfolio_state.json read + macro curls)
+    Run in investment-os/backend:
+      uv run python -c "
+      import sys; sys.path.insert(0,'src')
+      from investment_os.tools.analysis_tools import get_portfolio_snapshot
+      import json; print(json.dumps(get_portfolio_snapshot()))
+      "
+    Extract from result:
+      budget.*           → remaining_inr, trading_days_remaining, daily_target_inr, available_cash_inr
+      macro.*            → DXY, US10Y, BRENT (no curl needed)
+      trailing_stops[]   → active stops with stop_price, peak_price, status
+      active_sector_etf  → current active sector symbol
 
-  Sector allocation rule (read from sector_rotation.json):
-    - Score ≥ 7: full ₹60,000 → active sector ETF
+  STEP 2 — Sector rotation (replaces manual sector_rotation.json read)
+    Run:
+      uv run python -c "
+      import sys; sys.path.insert(0,'src')
+      from investment_os.tools.analysis_tools import get_sector_rotation_data
+      import json; print(json.dumps(get_sector_rotation_data()))
+      "
+    Extract: rotation_decision, sectors[0] (active), sectors where decision==BUY
+
+  STEP 3 — NSE FII/DII (still needed — not in DB yet)
+    mcp__shell__run_command with NSE API call
+    Extract: fii_net_inr, dii_net_inr, stance
+
+  STEP 4 — Screen for today's dip candidates
+    Run:
+      # Weeks 1–21 of month: dip ≥ 2%
+      # Final 8 trading days (day_of_month ≥ 22 OR trading_days_remaining ≤ 8): dip = 0
+      uv run python -c "
+      import sys; sys.path.insert(0,'src')
+      from investment_os.tools.analysis_tools import screen_undervalued
+      import json; print(json.dumps(screen_undervalued(min_dip_pct=2.0)))
+      "
+    Filter candidates: keep technical_signal in (BUY, HOLD, WATCH)
+    Exclude: PSUBNKBEES (stopped May 15 2026), ITBEES (exited)
+
+  STEP 5 — Technical confirmation for top 3 candidates only
+    For each shortlisted candidate:
+      uv run python -c "
+      import sys; sys.path.insert(0,'src')
+      from investment_os.tools.analysis_tools import get_technical_score
+      import json; print(json.dumps(get_technical_score('SYMBOL')))
+      "
+    Use: flags.oversold (bounce risk), indicators.rsi14, indicators.momentum_20d_pct
+
+  STEP 6 — Kite LTP for confirmation prices
+    mcp__kite__get_ltp for final price validation before GTT calculation
+
+ANALYSIS:
+  Sector allocation rule (from sector_rotation.json):
+    - Active sector score ≥ 7: full ₹60,000 → active sector ETF
     - Score 5–6: ₹30,000 → sector ETF + ₹30,000 → NIFTYBEES
     - Score < 5: skip sector ETF → redirect ₹60,000 → Large Cap
 
-  Exit checks:
-    - Any held position with trailing stop breached → EXIT recommendation
-    - Any sector with score < 4 for 2nd consecutive month → REDUCE recommendation
+  Trailing stop checks (from get_portfolio_snapshot() trailing_stops[]):
+    - If current LTP ≤ stop_price → EXIT recommendation + LTCG/STCG note
+    - Status already contains resolution if stopped out
 
-  Budget pacing:
-    - daily_target = remaining_budget / remaining_trading_days
-    - If behind pace (deployed < expected) → flag and increase today's recommendation
-    - Final 8 trading days: recommend full remaining split daily
+  Budget pacing (from get_portfolio_snapshot() budget.*):
+    - If trading_days_remaining ≤ 8 → final-week rule: deploy regardless of dip
+    - daily_target_inr already computed — use it directly
 
 OUTPUTS:
   - daily_signal.json (structured recommendations)
@@ -199,15 +235,41 @@ TRAILING STOPS (active positions)
   ITBEES       4885505     IT
 
 DATA FETCH (per sector):
-  mcp__kite__get_historical_data(
-    instrument_token = <token above>,
-    from_date = "YYYY-MM-DD 09:15:00",   # ~13 months back for 200-DMA headroom
-    to_date   = "YYYY-MM-DD 15:30:00",   # today
-    interval  = "day"
-  )
-  Extract: closes[], volumes[]
+
+  STEP 1 — Pre-computed technical scores (saves 12 Kite API calls)
+    Run once for all sector ETFs:
+      uv run python -c "
+      import sys; sys.path.insert(0,'src')
+      from investment_os.tools.analysis_tools import get_technical_score
+      import json
+      for sym in ['CPSEETF','PHARMABEES','MODEFENCE','METALIETF','ENERGY',
+                  'INFRABEES','AUTOBEES','PSUBNKBEES','MOREALTY','BANKBEES','BFSI','ITBEES']:
+          print(sym, json.dumps(get_technical_score(sym)))
+      "
+    Each result gives: score (0–10), rsi14, dma_20/50/200, momentum_20d_pct,
+    volume_ratio_20_60, week52_position_pct, flags
+
+    Use these as your technical_score baseline. Override only if:
+      - bars_used < 60 (run price ingestion first: run_daily_ingestion.py --prices-only)
+      - signal == NO_DATA
+      - You have conflicting Kite data from a manual OHLCV check
+
+  STEP 2 — Kite OHLCV (only if tool returns NO_DATA or bars_used < 60)
+    mcp__kite__get_historical_data(
+      instrument_token = <token above>,
+      from_date = "YYYY-MM-DD 09:15:00",   # ~13 months back for 200-DMA headroom
+      to_date   = "YYYY-MM-DD 15:30:00",   # today
+      interval  = "day"
+    )
+    Extract: closes[], volumes[]
+
+  NOTE: DMA-200 unavailable until Sep 2026 (need 200 bars; currently 167 seeded).
+        Tool uses 50-DMA as long-term reference in the interim. Manual DMA-200
+        calculation via Kite data is the override path when precision matters.
 
 TECHNICAL SCORE (40% weight, max 10):
+  Use get_technical_score() result directly when bars_used ≥ 60.
+  The scoring components below document what the tool computes:
 
   Component 1 — Price vs 200-DMA (max 3.0):
     200-DMA = mean(last 200 closes). Skip if <200 candles → score 1.5 (neutral)
@@ -288,6 +350,18 @@ EXIT CHECKS:
   - Any sector with score < 4 for 2 consecutive months → stop new buys + trailing stop exit
   - Track consecutive_below4 via history[].below4_sectors[] array in sector_rotation.json
   - Any sector ETF position with >15% gain → set trailing stop at peak - 8%
+
+PRE-WRITE VALIDATION (before updating sector_rotation.json):
+  Run live overlay to cross-check your hand-scored technicals:
+    uv run python -c "
+    import sys; sys.path.insert(0,'src')
+    from investment_os.tools.analysis_tools import get_sector_rotation_data
+    import json; print(json.dumps(get_sector_rotation_data(refresh_live=True)))
+    "
+  For each sector where live.rsi differs from your rsi14 by > 5 points:
+    → Recheck your manual calculation
+  For each sector where live.momentum_20d_pct contradicts your technical_score:
+    → Add a note in the sector's "notes" field explaining the discrepancy
 
 OUTPUTS:
   - sector_rotation.json (update current_month{} with all 12 scores, append compact entry to history[])

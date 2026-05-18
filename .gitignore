@@ -19,3 +19,9 @@ paper_trades.json
 daily_signal.json
 rebalancing_report.json
 tax_report.json
+
+# DuckDB database files — binary, not version controlled
+*.duckdb
+*.db
+investment-os/data/
+investment-os/backend/data/kite_token.json

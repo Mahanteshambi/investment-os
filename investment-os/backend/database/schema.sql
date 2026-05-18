@@ -157,3 +157,89 @@ CREATE TABLE IF NOT EXISTS news_data (
     source VARCHAR,
     description TEXT
 );
+
+CREATE TABLE IF NOT EXISTS intelligence_signals (
+    id VARCHAR PRIMARY KEY,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    signal_date DATE NOT NULL,
+    symbol VARCHAR NOT NULL,
+    bucket VARCHAR,
+    asset_type VARCHAR,
+    dip_pct DECIMAL(8,4),
+    momentum VARCHAR,
+    momentum_pct DECIMAL(8,4),
+    sector_score DECIMAL(5,2),
+    macro_fit VARCHAR,
+    trailing_stop_status VARCHAR,
+    trailing_stop_buffer_pct DECIMAL(8,4),
+    composite_signal VARCHAR NOT NULL,
+    signal_strength INTEGER,
+    reasoning TEXT,
+    raw_factors JSON
+);
+
+CREATE TABLE IF NOT EXISTS macro_regime_log (
+    id VARCHAR PRIMARY KEY,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    regime_date DATE NOT NULL,
+    regime VARCHAR NOT NULL,
+    confidence INTEGER,
+    dxy DECIMAL(8,4),
+    us10y DECIMAL(8,4),
+    brent DECIMAL(8,4),
+    yield_spread DECIMAL(8,4),
+    fii_net_crore DECIMAL(14,2),
+    fii_stance VARCHAR,
+    interpretation TEXT,
+    raw_signals JSON
+);
+
+-- ── Data Layer: Phase 1 additions ──────────────────────────────────────────
+
+-- Tickertape Pro / Screener.in CSV exports — one row per symbol per export
+CREATE TABLE IF NOT EXISTS screener_exports (
+    id VARCHAR PRIMARY KEY,
+    imported_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    source VARCHAR NOT NULL,                   -- 'tickertape' | 'screener_in' | 'manual'
+    symbol VARCHAR NOT NULL,
+    company_name VARCHAR,
+    sector VARCHAR,
+    market_cap_cr DECIMAL(18,2),
+    pe_ratio DECIMAL(10,4),
+    pb_ratio DECIMAL(10,4),
+    roce_pct DECIMAL(8,4),
+    roe_pct DECIMAL(8,4),
+    debt_to_equity DECIMAL(10,4),
+    revenue_growth_1y DECIMAL(8,4),
+    profit_growth_1y DECIMAL(8,4),
+    dividend_yield_pct DECIMAL(8,4),
+    score_raw DECIMAL(8,4),                    -- raw screener composite score if present
+    export_date DATE NOT NULL,
+    raw_row JSON,                              -- full CSV row kept for replay / re-processing
+    UNIQUE(symbol, export_date, source)
+);
+
+-- Fundamental snapshots — quarterly / annual / TTM per instrument per source
+CREATE TABLE IF NOT EXISTS fundamentals (
+    id VARCHAR PRIMARY KEY,
+    symbol VARCHAR NOT NULL,
+    period_end DATE NOT NULL,                  -- fiscal quarter-end or year-end date
+    period_type VARCHAR NOT NULL,              -- 'quarterly' | 'annual' | 'ttm'
+    source VARCHAR NOT NULL,                   -- 'tickertape' | 'yfinance' | 'manual'
+    revenue_cr DECIMAL(18,2),
+    net_profit_cr DECIMAL(18,2),
+    ebitda_cr DECIMAL(18,2),
+    eps DECIMAL(10,4),
+    book_value_per_share DECIMAL(10,4),
+    pe_ratio DECIMAL(10,4),
+    pb_ratio DECIMAL(10,4),
+    roce_pct DECIMAL(8,4),
+    roe_pct DECIMAL(8,4),
+    debt_to_equity DECIMAL(10,4),
+    current_ratio DECIMAL(10,4),
+    promoter_holding_pct DECIMAL(8,4),
+    fii_holding_pct DECIMAL(8,4),
+    raw_data JSON,
+    fetched_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    UNIQUE(symbol, period_end, period_type, source)
+);

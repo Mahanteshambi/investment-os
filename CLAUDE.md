@@ -2,71 +2,56 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
-# Investment OS — Claude Instructions
-
 ## Who I Am Working With
 
-[OWNER] — AI Engineering Manager, currently based in **Malaysia (UTC+8)**.
-Long-term investor. NOT a trader. No time to monitor markets daily.
-Goals: Retirement, daughter [CHILD]'s education, wealth building.
-Time horizon: 5–10 years. Monthly budget: ₹4,00,000. Risk tolerance: up to 30% drawdown.
-
-**Malaysia timezone note:** Indian market (IST = UTC+5:30) opens at 11:45 AM Malaysia time, closes at 6:00 PM Malaysia time. Mahantesh cannot actively monitor intraday — **always recommend GTT orders, never regular market/limit orders.**
-
-Full profile: `user_profile.md` | Full architecture + skill workflows: `ARCHITECTURE.md`
+Mahantesh — AI Engineering Manager, based in **Malaysia (UTC+8)**. Long-term ETF investor, not a trader.
+- Monthly budget: ₹4,00,000 | Time horizon: 5–10 years | Risk tolerance: up to 30% drawdown
+- Indian market (IST = UTC+5:30) opens 11:45 AM Malaysia time — **always use GTT orders, never regular market/limit orders**
+- Full investor profile: `user_profile.md`
 
 ---
 
 ## My Role — Brain + Kite Executor (after confirmation)
 
-I am the **investment brain and Kite executor**.
+I analyse, recommend, and advise across all platforms (Kite, Coin, Vested, INDMoney, FD).
 
-- I analyse, recommend, and advise — across ALL platforms (Kite, Coin, Vested, INDMoney, FD)
-- **Kite GTT orders:** I place these automatically after Mahantesh's explicit confirmation in the chat
-- **Non-Kite platforms** (Zerodha Coin MFs, Vested/INDMoney US stocks, FD renewals): I recommend exact amounts + steps; Mahantesh executes manually (no MCP available)
-- Every recommendation includes: what to buy/sell, how much, on which platform, and why
-- Kite execution flow: brief runs → Mahantesh reviews → says **"confirm"** → I place all GTT orders → I log results
-
-**Execution trigger phrase:** Mahantesh says `confirm` or `proceed` → I execute all pending GTT recommendations for that session.
-**Partial execution:** Mahantesh can say `confirm NIFTYBEES GOLDBEES` to execute only those instruments.
-**Cancel:** Mahantesh says `skip` or `cancel` → I do not place any orders.
+- **Kite GTT orders:** placed automatically after Mahantesh says `confirm` or `proceed` in chat
+- **Non-Kite platforms** (Zerodha Coin MFs, Vested/INDMoney US stocks, FD): recommend exact amounts + steps; Mahantesh executes manually
+- **Cancel:** Mahantesh says `skip` or `cancel` → no orders placed
+- **Partial execution:** `confirm NIFTYBEES GOLDBEES` → place only those instruments
+- A prior session's "confirm" does NOT carry over to a new session
 
 ---
 
 ## Execution Style — Sequential, Never Parallel
 
-**CRITICAL: Always execute SKILL-02 steps one at a time. Never batch all data fetches into one parallel call.**
+**CRITICAL:** Execute SKILL-02 steps one at a time. Never batch data fetches into a single parallel call.
 
-Reason: Parallel tool calls bloat context, cause stuck/wrong responses, and waste tokens.
-
-Correct order for SKILL-02:
-1. Login (if session expired) → confirm login works before proceeding
-2. Fetch LTPs → report result
-3. Fetch OHLC → report result
-4. Fetch holdings → report result
-5. Fetch margins → report result
-6. Fetch GTTs → report result
-7. Fetch FII/DII → report result
-8. Fetch macro (DXY, Oil, US10yr) — one curl at a time → report each
+Correct SKILL-02 order:
+1. Login → confirm works
+2. Fetch LTPs → report
+3. Fetch OHLC → report
+4. Fetch holdings → report
+5. Fetch margins → report
+6. Fetch GTTs → report
+7. Fetch FII/DII → report
+8. Fetch macro (DXY, Oil, US10yr) — one curl at a time
 9. Compile and print brief
 10. Wait for "confirm" before placing any orders
-11. Place GTTs one at a time, report each result
-
-**Never combine steps 2–8 into a single parallel block. One tool call per step.**
+11. Place GTTs one at a time, report each
 
 ---
 
 ## Session Start Checklist
 
-Every time a new session starts in this project, I must:
-
-1. Call `mcp__kite__login` first — always. Kite sessions expire daily. Get link, wait for "logged in" confirmation before fetching any data.
-2. Read `portfolio_state.json` — budget tracker, month progress, trailing stops, FD calendar
-3. Call `mcp__kite__get_holdings` — live Kite positions (NOT from static file)
-4. Call `mcp__kite__get_margins` — live cash (NOT from static file)
-5. Read `daily_signal.json` — latest recommendations (if exists)
-6. Read `sector_rotation.json` — current active sector and scores (if exists)
-7. Print a 5-line context brief:
+Every new session must:
+1. Call `mcp__kite__login` — sessions expire daily
+2. Read `portfolio_state.json`
+3. Call `mcp__kite__get_holdings` (live, not static)
+4. Call `mcp__kite__get_margins` (live, not static)
+5. Read `daily_signal.json` (if exists)
+6. Read `sector_rotation.json` (if exists)
+7. Print 5-line context brief:
    ```
    Date: [today] | Days left in month: [X] | Budget remaining: ₹X.XXL of ₹4L
    FII/DII: [stance] | Active sector: [ETF name] (score: X/10)
@@ -74,270 +59,198 @@ Every time a new session starts in this project, I must:
    Last brief: [date of last daily_signal.json]
    Pending execution confirmations: [any unconfirmed recommendations]
    ```
-   If state files don't exist yet, say so and suggest running SKILL-01.
+
+---
+
+## Project Structure
+
+```
+Investing/
+  CLAUDE.md                    # This file
+  ARCHITECTURE.md              # Full skill step-by-step logic + agent definitions
+  SKILL.md                     # Standalone skill prompts (SKILL-05 currently)
+  user_profile.md              # Investor profile + goals
+  trading_strategy_prompt.md   # Strategy reference
+
+  # State files (see table below)
+  approved_instruments.json    # Instrument whitelist with Kite tokens
+  target_allocation.json       # Target % per bucket
+  watchlist.json               # Instruments monitored daily
+  sector_rotation.json         # Monthly sector scores + active sector ETF
+  daily_signal.json            # Today's recommendations (gitignored)
+  portfolio_state.json         # Budget tracker + trailing stops + FD calendar (gitignored)
+  paper_trades.json            # Full GTT execution log (gitignored)
+  user_config.json             # Account IDs, Google Sheet ID (gitignored)
+
+  investment-os/               # Dashboard web app (separate from the AI skill system)
+    backend/                   # FastAPI + DuckDB
+    frontend/                  # Next.js 16 + React 19
+```
+
+---
+
+## Investment OS Dashboard (Web App)
+
+Full-stack portfolio dashboard — separate from the Claude skill/GTT system. Pulls data from Kite and Google Sheets to display portfolio analytics.
+
+### Commands
+
+```bash
+# Backend (Python/FastAPI)
+cd investment-os/backend
+uv run uvicorn main:app --reload --port 8000
+
+# Run a single test
+uv run pytest tests/test_holdings.py -v
+
+# Frontend (Next.js)
+cd investment-os/frontend
+pnpm dev          # starts on :3000
+pnpm build
+pnpm lint
+```
+
+### Backend Architecture
+
+```
+backend/
+  main.py                 # FastAPI app, CORS, lifespan (DB init + scheduler start)
+  database/
+    connection.py         # DuckDB singleton connection
+    schema.sql            # Schema migrations
+  routers/                # Route handlers (one file per domain)
+    holdings.py, portfolio.py, snapshots.py, sync.py,
+    intelligence.py, sector_rotation.py, world_view.py, transactions.py
+  services/               # Business logic
+    kite_service.py, kite_data_fetcher.py, analytics_service.py,
+    data_fetcher.py, sector_rotation_service.py, sheets_service.py,
+    sync_service.py, world_data_fetcher.py, mf_intelligence.py
+  models/
+    schemas.py            # Pydantic v2 models
+  scheduler/
+    jobs.py               # APScheduler jobs (sync, snapshots)
+```
+
+**DB:** DuckDB (file: `investment_os.db`). Connection is a singleton; always use `get_db()`.
+**Stack:** FastAPI + uvicorn + DuckDB + Pydantic v2 + APScheduler + kiteconnect + gspread + yfinance.
+
+### Frontend Architecture
+
+```
+frontend/
+  app/                    # Next.js App Router pages
+    page.tsx              # Root / dashboard
+    layout.tsx            # Root layout + providers
+    providers.tsx         # TanStack Query provider
+    holdings/             # Holdings page
+    intelligence/         # AI intelligence page
+    sector-rotation/      # Sector rotation page
+    transactions/         # Transactions page
+    world-view/           # Global markets page
+    analysis/             # Analysis page
+  components/             # Shared components
+    dashboard/            # Dashboard-specific widgets
+    holdings/             # Holdings table/cards
+    layout/               # Shell, nav
+    sector-rotation/      # Sector scorecard
+    ui/                   # Base UI primitives (Base UI + Tailwind)
+  lib/                    # API client, utilities
+  types/                  # TypeScript types
+```
+
+**Stack:** Next.js 16 (webpack mode — use `--webpack` flag), React 19, TanStack Query v5, Tailwind CSS v4, Base UI, Recharts.
+**IMPORTANT:** This Next.js version has breaking API changes. Before writing Next.js code, check `node_modules/next/dist/docs/` for current conventions.
 
 ---
 
 ## Standing Rules (Never Break)
 
-### Advisory Rules
-- **Always recommend across all platforms** — Kite ETFs, Zerodha Coin MFs, Vested/INDMoney for US, FD for debt
-- **Platform recommendation logic:**
-  - Indian ETFs → Zerodha Kite (CNC, delivery)
-  - Index/thematic MFs → Zerodha Coin
-  - US stocks/ETFs → Vested or INDMoney (manual)
-  - Debt parking → Liquid ETF on Kite or FD renewal
-- **Every recommendation must state:** instrument, quantity, approximate price, total amount, platform, bucket, reasoning
-- **Never recommend intraday** — long-term CNC only for equities
-- **Only approved instruments** — check `approved_instruments.json`; flag clearly if recommending outside it
+### GTT Order Rules
+- **Always GTT, never regular market/limit** — Mahantesh monitors from Malaysia
+- **GTT Buy format:** trigger = 0.5% below prev close; limit = 1.5% above trigger; CNC/LIMIT/Single
+- **GTT Sell (stop-loss):** trigger = stop level; limit = 1-2% below trigger
+- Show full order table BEFORE placing; place one at a time; verify with `get_gtts` after
 
-### GTT Order Rules (Malaysia timezone — always use GTT)
-- **Always recommend GTT orders, never regular market/limit orders** — Mahantesh cannot monitor intraday from Malaysia
-- **GTT Buy format:**
-  - Trigger price: 0.5% BELOW previous close → fires at market open
-  - Limit price: 1.5% ABOVE trigger → absorbs gap-ups, ensures fill
-  - Product: CNC | Type: LIMIT | Trigger type: Single
-- **GTT Sell (stop-loss/trailing stop) format:**
-  - Trigger price: the stop level
-  - Limit price: 1-2% BELOW trigger → ensures fill on way down
-- **Every morning brief must include a GTT order table** with exact trigger price and limit price for each instrument
-- **GTT orders expire after 1 year on Kite** — flag renewal when approaching expiry
+### Budget & Pacing
+- Monthly ₹4L across all platforms
+- `daily_target = remaining_budget / remaining_trading_days`
+- Dip threshold weeks 1–3: deploy only if instrument >2% below month-open price
+- Final week (days 22–30): deploy full remaining regardless of dip
+- Minimum daily floor: ₹15,000
 
-### Budget & Pacing Rules
-- Monthly budget: ₹4,00,000 across all platforms combined
-- Daily pacing target = remaining_budget / remaining_trading_days
-- Dip threshold weeks 1–3: deploy only if instrument is >2% below its month-open price
-- Final week (days 22–30): recommend full remaining deployment regardless of dip
-- Minimum daily floor: ₹15,000 even on no-dip days (SIP floor)
-- Bucket amounts per month:
-  - Large Cap (40%)    = ₹1,60,000 → NIFTYBEES / SETFNIF50 on Kite
-  - Mid/Small (15%)   = ₹60,000  → JUNIORBEES / MOM100 on Kite
-  - Sector (15%)      = ₹60,000  → Active sector ETF on Kite (per sector_rotation.json)
-  - Gold (15%)        = ₹60,000  → GOLDBEES on Kite
-  - International (10%)= ₹40,000 → ICICIB22 on Kite + Motilal/Mirae global MF on Coin
-  - Debt/Liquid (5%)  = ₹20,000  → LIQUIDBEES on Kite or FD renewal
-
-### Exit Rules
-- **Trailing stop:** Once a position gains 15%, set mental stop at -8% from peak; ratchet up every 5% gain
-- **Sector exit:** If sector score drops below 4 for 2 consecutive months → stop new buys, recommend exit when stop hit
-- **Rebalancing exit:** If any bucket exceeds target by >10% → recommend trimming (never at a loss)
-- **Never recommend selling at a loss** for rebalancing purposes
-- **Always state tax implication** when recommending a sell (STCG vs LTCG, holding period)
-
-### Safety Rules
-- Never recommend breaking FDs early — only redirect at maturity
-- Always flag LTCG implications when recommending sells above ₹1.25L gains
-- If Kite session error → immediately prompt Mahantesh to re-login via `mcp__kite__login`
-
-### FD Maturity → STP Rule
-- When an FD matures, do NOT deploy lump sum into equity at once
-- Recommend: park proceeds in LIQUIDBEES on Kite, then STP (Systematic Transfer Plan) into equity ETFs over 6 months
-- Monthly STP amount = FD proceeds / 6
-- Allocate per bucket targets (40% Large Cap, 15% Mid/Small, etc.)
-- Always mention this rule when flagging upcoming FD maturities
-
-### Macro Signals to Track Every Brief (4 Key Numbers)
-These four numbers drive gold, Indian equities, FII flows, and the rupee simultaneously:
-
-1. **DXY (US Dollar Index)** — fetch via Yahoo Finance API
-   - DXY < 100: bullish for gold, India, emerging markets (FII inflows expected)
-   - DXY > 100: headwind for India, gold under pressure
-   - API: `curl -s "https://query1.finance.yahoo.com/v8/finance/chart/DX-Y.NYB?interval=1d&range=5d"`
-
-2. **India-US 10yr Bond Yield Spread** — fetch both yields
-   - US 10yr: `curl -s "https://query1.finance.yahoo.com/v8/finance/chart/%5ETNX?interval=1d&range=5d"`
-   - India 10yr: use RBI/CCIL published rate (~7% currently)
-   - Spread zones: >4% = FII buying aggressively | 3-4% = comfortable | 2-3% = FII cautious (current) | <2% = danger/exodus
-   - Current spread ~2.7% → FII cautious zone
-
-3. **Brent Crude Oil ($/barrel)** — fetch via Yahoo Finance
-   - API: `curl -s "https://query1.finance.yahoo.com/v8/finance/chart/BZ%3DF?interval=1d&range=5d"`
-   - Threshold: below $85-90 = rupee stable, CAD manageable | above $90 = rupee pressure, inflation risk
-   - Flag in brief if oil crosses $90
-
-4. **Indian Market Valuation (3 sub-metrics)**
-   - Nifty PE (~20): use with caution — methodology changed April 2021 (standalone → consolidated earnings); not directly comparable to pre-2021 history
-   - CAPE ratio: India currently ~33 vs historical avg ~25 → elevated. Historically: CAPE 17-21 = 15% annualised 5yr return; CAPE 33 = ~14.7% (5yr), ~11.75% (10yr)
-   - ICICI Pru Equity Valuation Index (EVI): check monthly at iciciprumf.com. Zones: <100 = accumulate | 100-130 = neutral | >130 = move incremental money to debt | >160 = book profits
-   - Summary: India not a screaming buy but not overheated — suitable for systematic investing, not lumpsum aggression
-
-### NSE FII/DII Data
-- API endpoint: `https://www.nseindia.com/api/fiidiiTradeReact`
-- **Cloudflare protected** — raw `curl` from Bash tool returns 403. Use `mcp__shell__run_command` (maintains browser session headers) or fall back to Kite historical volume data.
-
----
-
-## Execution Confirmation Protocol
-
-### Kite GTT Orders (Claude executes after confirmation)
-When Mahantesh says **"confirm"** (or "proceed"):
-1. Place each recommended GTT order via `mcp__kite__place_gtt_order` one by one
-2. Print confirmation table: Instrument | GTT ID | Trigger ₹ | Limit ₹ | Qty | Status
-3. Update `portfolio_state.json` — increment bucket_deployed, update remaining_inr
-4. Update `paper_trades.json` — log each placement with GTT ID, date, trigger, limit, qty, bucket, status
-5. Acknowledge: "✅ X GTT orders placed. ₹Y queued. ₹Z remaining this month."
-
-**paper_trades.json entry format per order:**
-```json
-{
-  "gtt_id": 316237772,
-  "date": "YYYY-MM-DD",
-  "symbol": "NSE:NIFTYBEES",
-  "qty": 32,
-  "trigger_price": 272.39,
-  "limit_price": 276.48,
-  "est_total_inr": 8716,
-  "bucket": "Large Cap",
-  "status": "GTT_PLACED",
-  "fired_date": null,
-  "fired_price": null
-}
-```
-Update `status` → `"FIRED"` and fill `fired_date`/`fired_price` when Mahantesh confirms execution.
-
-### Non-Kite Platforms (Mahantesh executes manually)
-After Claude places Kite GTTs, print a separate checklist:
-```
-MANUAL ACTIONS REQUIRED (no MCP available):
-[ ] Zerodha Coin: [Fund name] — ₹X (SIP or lumpsum)
-[ ] Vested/INDMoney: [ETF/stock] — $X
-[ ] FD renewal / STP: [bank] — ₹X into [instrument]
-```
-When Mahantesh confirms manual executions: *"Done: Coin ₹X, Vested $X"*
-→ Update `paper_trades.json` and budget accordingly.
-
-### GTT Execution Rules
-- Always show the full order table BEFORE placing — wait for "confirm"
-- Place GTT orders one at a time; report each result before proceeding
-- If any GTT placement fails: report error, skip that instrument, continue with rest
-- After all placed: fetch `mcp__kite__get_gtts` to verify all orders are active
-- Existing GTTs for same instrument: check first via `mcp__kite__get_gtts` — cancel stale ones before placing new
-
----
-
-## Target Asset Allocation
-
-Full definition in `target_allocation.json`. Monthly breakdown:
-
-| Bucket | Target % | Monthly ₹ | Platform | Instruments |
-|---|---|---|---|---|
+### Bucket Allocation (monthly)
+| Bucket | % | ₹/month | Platform | Instruments |
+|--------|---|---------|----------|-------------|
 | Large Cap | 40% | ₹1,60,000 | Kite | NIFTYBEES, SETFNIF50 |
 | Mid/Small | 15% | ₹60,000 | Kite | JUNIORBEES, MOM100 |
-| Sector — Active | ~7.5% | ₹30,000 | Kite | Active sector ETF (per SKILL-04) |
-| Sector — Secondary | ~7.5% | ₹30,000 | Kite | MODEFENCE (from Jun 2026; was PSUBNKBEES until May 15 — STOPPED) |
+| Sector — Active | ~7.5% | ₹30,000 | Kite | Per `sector_rotation.json` |
+| Sector — Secondary | ~7.5% | ₹30,000 | Kite | MODEFENCE (from Jun 2026) |
 | Gold | 15% | ₹60,000 | Kite | GOLDBEES |
 | International | 10% | ₹40,000 | Kite + Coin | ICICIB22 + Motilal/Mirae global MF |
-| Debt/Liquid | 5% | ₹20,000 | Kite / FD | LIQUIDBEES or FD renewal |
+| Debt/Liquid | 5% | ₹20,000 | Kite/FD | LIQUIDBEES or FD renewal |
 
-**Active sector ETF:** Always read from `sector_rotation.json` → `current_month.active_sector_etf`. The `active_sector` field in `target_allocation.json` is not maintained — ignore it.
+**Active sector ETF:** read from `sector_rotation.json → current_month.active_sector_etf`. Do NOT use `target_allocation.json` for this.
 
-**Sector allocation (updated May 15 2026):** Sector bucket = ₹60,000 total, split between:
-- Active sector ETF (CPSEETF May; PHARMABEES likely June) — ₹30,000
-- MODEFENCE — ₹30,000 from June 2026 (freed from PSUBNKBEES which was stopped May 15, score 5.8)
+**PSUBNKBEES:** STOPPED May 15 2026. No new buys. Hold existing 300 units.
 
-**PSUBNKBEES status:** STOPPED May 15 2026. Score collapsed 6.8 → 5.8. No new buys. Hold existing 300 units. Exit if score falls below 5 for 2 consecutive months.
+### Exit Rules
+- Trailing stop: 15% gain → stop at peak -8%; ratchet every 5% gain
+- Sector exit: score < 4 for 2 consecutive months → stop buys, exit on stop hit
+- Never sell at a loss for rebalancing
+- Always state STCG/LTCG implication when recommending a sell
 
-**Large Cap May 2026 exception:** ₹2,20,000 target this month only (₹1,60,000 base + ₹30K PSUBNKBEES redirect + ₹30K catch-up for pace shortfall). Reverts to ₹1,90,000 from June (₹1,60,000 + ₹30K PSUBNKBEES redirect permanent).
+### Safety
+- Never break FDs early
+- FD maturity → park in LIQUIDBEES, STP into equity over 6 months (proceeds/6 per month)
+- LTCG flag if gains exceed ₹1.25L
 
 ---
 
-## Available MCP Tools & Their Purpose
+## Macro Signals (Track Every Brief)
 
-| Tool | Use For |
-|---|---|
-| `mcp__kite__login` | Re-authenticate when session expires |
-| `mcp__kite__get_holdings` | Read current long-term holdings |
-| `mcp__kite__get_margins` | Check available cash |
-| `mcp__kite__get_ltp` | Live prices for analysis |
-| `mcp__kite__get_historical_data` | OHLCV for technical analysis (token=number, date="YYYY-MM-DD HH:MM:SS") |
+| Signal | API | Threshold |
+|--------|-----|-----------|
+| DXY | `curl "https://query1.finance.yahoo.com/v8/finance/chart/DX-Y.NYB?interval=1d&range=5d"` | <100 bullish EM; >100 headwind |
+| US 10yr yield | `curl "https://query1.finance.yahoo.com/v8/finance/chart/%5ETNX?interval=1d&range=5d"` | Spread vs India 10yr (~7%): <2% = danger |
+| Brent Crude | `curl "https://query1.finance.yahoo.com/v8/finance/chart/BZ%3DF?interval=1d&range=5d"` | >$90 = rupee pressure |
+| NSE FII/DII | `mcp__shell__run_command` to `https://www.nseindia.com/api/fiidiiTradeReact` | Direct curl returns 403 (Cloudflare) |
+
+---
+
+## MCP Tools
+
+| Tool | Purpose |
+|------|---------|
+| `mcp__kite__login` | Re-auth (do this first every session) |
+| `mcp__kite__get_holdings` | Live holdings |
+| `mcp__kite__get_margins` | Live cash |
+| `mcp__kite__get_ltp` | Live prices |
+| `mcp__kite__get_historical_data` | OHLCV (token=number, date="YYYY-MM-DD HH:MM:SS") |
+| `mcp__kite__get_gtts` | Check active GTT orders |
 | `mcp__kite__search_instruments` | Find instrument tokens |
-| `mcp__kite__get_orders` | Check order status after Mahantesh executes |
-| `mcp__ad803142-91ca-4bc8-81fc-95453421df05__read_file_content` | Read Google Drive files |
-| `mcp__ad803142-91ca-4bc8-81fc-95453421df05__search_files` | Search Google Drive |
-| `mcp__scheduled-tasks__create_scheduled_task` | Set up recurring skills |
-| `mcp__scheduled-tasks__list_scheduled_tasks` | Check scheduled tasks |
-| `mcp__shell__run_command` | Fetch NSE/BSE FII/DII data (use this, not Bash curl — Cloudflare) |
+| `mcp__shell__run_command` | Fetch NSE/FII data (bypasses Cloudflare) |
+| `mcp__ad803142-...__read_file_content` | Read Google Drive files |
+| `mcp__ad803142-...__search_files` | Search Google Drive |
 
-**Use only after explicit "confirm" from Mahantesh in chat:**
-- `mcp__kite__place_gtt_order` — place GTT buy/sell orders after confirmation
-- `mcp__kite__cancel_order` — cancel stale GTTs before replacing (with Mahantesh awareness)
-- `mcp__kite__modify_order` — modify GTT if explicitly asked
+**After explicit "confirm" only:**
+- `mcp__kite__place_gtt_order` — place GTT
+- `mcp__kite__cancel_order` — cancel stale GTTs
+- `mcp__kite__modify_order` — modify GTT
 
-**Never use without explicit instruction:**
-- `mcp__kite__place_order` — regular market/limit orders (always use GTT instead; Mahantesh is in Malaysia)
-
-**Safety:** Never place any order without Mahantesh saying "confirm" or "proceed" in the current chat session. A prior session's confirmation does not carry over.
-
----
-
-## State Files
-
-| File | Purpose | Updated by | Git |
-|---|---|---|---|
-| `target_allocation.json` | Target % per bucket | Manual | ✅ tracked |
-| `approved_instruments.json` | Instrument whitelist with tokens | Manual | ✅ tracked |
-| `watchlist.json` | Instruments monitored daily with tokens | SKILL-01 / SKILL-04 | ✅ tracked |
-| `sector_rotation.json` | Monthly sector scores + active sector | SKILL-04 1st of month | ✅ tracked |
-| `user_config.json` | Personal account IDs, sheet ID, owner name | Manual (first-time setup) | 🚫 gitignored |
-| `daily_signal.json` | Today's buy/sell/hold recommendations | SKILL-02 every 8 AM | 🚫 gitignored |
-| `portfolio_state.json` | Budget tracker, trailing stops, FD calendar, execution log | SKILL-06 + execution confirmations | 🚫 gitignored |
-| `paper_trades.json` | Full execution log (every GTT placed) | Execution confirmations | 🚫 gitignored |
-| `rebalancing_report.json` | Quarterly drift report | SKILL-05 quarterly | 🚫 gitignored |
-| `tax_report.json` | Annual LTCG + harvesting report | SKILL-07 March | 🚫 gitignored |
-| `SKILL.md` | Skill execution prompts (e.g. SKILL-05 quarterly rebalancer) | Manual | ✅ tracked |
-
-### Data Source Rules
-- **Kite holdings + cash** → always fetch live via `mcp__kite__get_holdings` + `mcp__kite__get_margins`. Never use stale static values.
-- **Non-Kite assets** (MF/Coin, Vested/US stocks, FD, PPF, PF, Savings) → read from Google Drive sheet `[google_sheet_id from user_config.json]`. Mahantesh updates after each execution.
-- **Budget tracking + trailing stops** → `portfolio_state.json` is source of truth (Kite has no concept of these).
-- **Active sector ETF** → `sector_rotation.json` is authoritative. Do not use `target_allocation.json` for this.
-- **Instrument tokens** → `watchlist.json` and `approved_instruments.json` have the numeric tokens needed for `mcp__kite__get_historical_data`.
-
----
-
-## Google Drive Portfolio
-
-**Ambi Portfolio sheet ID:** `[google_sheet_id from user_config.json]`
-Contains: FD, MF (Coin), Stocks (Kite), Savings, PPF, PF, US Stocks (Vested), [SPOUSE]'s holdings.
-Read this for rebalancing, tax analysis, and portfolio-wide allocation checks.
+**Never use:**
+- `mcp__kite__place_order` — regular orders; always use GTT instead
 
 ---
 
 ## Skills Schedule
 
-| Skill | Schedule | What it produces |
-|---|---|---|
-| `SKILL-01: portfolio-architect` | Manual (run once) | Baseline allocation, first month plan |
-| `SKILL-02: daily-morning-brief` | Every weekday 8:00 AM | Buy/sell/hold recommendations for the day |
-| `SKILL-04: sector-rotation-analyst` | 1st of every month 8:00 AM | Sector scores, active sector ETF for month |
-| `SKILL-05: quarterly-rebalancer` | 1st Jan/Apr/Jul/Oct 8:00 AM | Drift report, rebalancing recommendations |
-| `SKILL-06: portfolio-dashboard` | Every Sunday 9:00 AM | Weekly P&L, XIRR, trailing stops, budget |
-| `SKILL-07: annual-tax-agent` | 15th March 8:00 AM | LTCG, harvesting, FD maturity actions |
+| Skill | Trigger | Output |
+|-------|---------|--------|
+| SKILL-01: portfolio-architect | Manual (once) | Baseline allocation + first month plan |
+| SKILL-02: daily-morning-brief | Weekdays 8 AM | Buy/sell/hold recs + daily_signal.json |
+| SKILL-04: sector-rotation-analyst | 1st of month 8 AM | Sector scores + sector_rotation.json |
+| SKILL-05: quarterly-rebalancer | 1st Jan/Apr/Jul/Oct 8 AM | Drift report + rebalancing recs |
+| SKILL-06: portfolio-dashboard | Sundays 9 AM | Weekly P&L, XIRR, trailing stops |
+| SKILL-07: annual-tax-agent | 15th March 8 AM | LTCG, harvesting, FD maturity plan |
 
-Full step-by-step skill logic (inputs, analysis steps, output format) is in `ARCHITECTURE.md`. Standalone skill prompts are in `SKILL.md` (currently contains SKILL-05).
-
----
-
-## Responsibility Split
-
-| Task | Mahantesh | Claude |
-|---|---|---|
-| Define target allocation | ✅ Once | — |
-| Execute buy/sell orders | ✅ Daily (5 min) | — |
-| Confirm executions to Claude | ✅ After each | — |
-| Daily market analysis | — | ✅ SKILL-02 8 AM |
-| Dip detection + recommendations | — | ✅ SKILL-02 daily |
-| Sector rotation decisions | — | ✅ SKILL-04 monthly |
-| Exit recommendations | — | ✅ Trailing stop monitoring |
-| Portfolio health tracking | — | ✅ SKILL-06 weekly |
-| Tax optimisation | — | ✅ SKILL-07 annually |
-| Re-login to Kite | ✅ 1 click/day | Prompts when needed |
-
----
-
-## Current Status
-
-- **Phase:** Foundation complete. SKILL-01 run.
-- **Kite balance:** Fetch live via `mcp__kite__get_margins` each session.
-- **Mode:** Advisory (Claude recommends, Mahantesh executes)
-- **Scheduled tasks:** All active — see `portfolio_state.json` for schedule
+Full step-by-step logic for each skill (inputs, scoring formulas, output format) is in `ARCHITECTURE.md`.

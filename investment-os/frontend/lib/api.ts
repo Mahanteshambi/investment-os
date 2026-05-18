@@ -82,8 +82,12 @@ export async function getDeploymentSeries(): Promise<import("@/types").Deploymen
 
 export async function getTransactionXirr(): Promise<{
   overall_xirr: number | null
+  simple_return_pct: number | null
   per_bucket: Record<string, number | null>
+  per_bucket_simple: Record<string, number | null>
   total_current_value: number
+  total_invested: number
+  days_active: number
 }> {
   return fetchJSON("/api/transactions/xirr")
 }

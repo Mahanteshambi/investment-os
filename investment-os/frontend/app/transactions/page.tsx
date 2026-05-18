@@ -109,49 +109,93 @@ function XirrCards() {
   if (isLoading) return null
   if (!data) return null
 
+  const isYoung = data.days_active < 365
+  const isExtreme = Math.abs(data.overall_xirr ?? 0) > 200
+
   const topBuckets = Object.entries(data.per_bucket)
     .filter(([, v]) => v != null)
     .sort(([, a], [, b]) => (b ?? 0) - (a ?? 0))
     .slice(0, 4)
 
+  function fmtXirr(v: number | null | undefined) {
+    if (v == null) return "—"
+    if (Math.abs(v) > 999) return `${v >= 0 ? "+" : ""}${v.toFixed(0)}%`
+    return `${v >= 0 ? "+" : ""}${v.toFixed(1)}%`
+  }
+
   return (
     <div className="bg-gray-900 rounded-xl border border-gray-800 p-5 mb-6">
-      <div className="flex items-center gap-3 mb-4">
-        <h2 className="text-sm font-medium text-gray-300">Portfolio XIRR</h2>
-        <span className="text-xs text-gray-600">annualised return on invested capital</span>
+      <div className="flex items-center gap-3 mb-1">
+        <h2 className="text-sm font-medium text-gray-300">Returns</h2>
+        <span className="text-xs text-gray-600">
+          XIRR = annualised rate · Simple = actual gain on capital deployed
+        </span>
       </div>
-      <div className="flex flex-wrap gap-6">
-        <div>
-          <p className="text-xs text-gray-500 mb-0.5">Overall XIRR</p>
-          <p className={`text-2xl font-bold ${
-            (data.overall_xirr ?? 0) >= 0 ? "text-emerald-400" : "text-red-400"
-          }`}>
-            {data.overall_xirr != null
-              ? Math.abs(data.overall_xirr) > 500
-                ? `${data.overall_xirr >= 0 ? "+" : ""}${data.overall_xirr.toFixed(0)}%*`
-                : `${data.overall_xirr >= 0 ? "+" : ""}${data.overall_xirr.toFixed(1)}%`
-              : "—"}
-          </p>
-          <p className="text-xs text-gray-600 mt-0.5">
-            {Math.abs(data.overall_xirr ?? 0) > 200
-              ? "* extreme: portfolio < 6 months old"
-              : `current value ${fmtINR(data.total_current_value)}`}
+
+      {isYoung && (
+        <div className="mb-4 mt-2 flex items-start gap-2 bg-amber-950/40 border border-amber-800/40 rounded-lg px-3 py-2">
+          <span className="text-amber-400 text-xs mt-0.5">⚠</span>
+          <p className="text-xs text-amber-300/80">
+            Portfolio is {data.days_active} days old. XIRR annualises short-term gains aggressively —
+            a 10% gain over 4 months appears as ~30%+ XIRR.
+            <span className="font-semibold"> Simple return is more honest until you have 1+ year of data.</span>
           </p>
         </div>
-        <div className="border-l border-gray-800 pl-6 flex gap-6 flex-wrap">
-          {topBuckets.map(([bucket, xirr]) => (
-            <div key={bucket}>
-              <p className="text-xs mb-0.5" style={{ color: BUCKET_COLORS[bucket] || "#9ca3af" }}>
-                {bucket}
-              </p>
-              <p className={`text-lg font-semibold ${
-                (xirr ?? 0) >= 0 ? "text-emerald-400" : "text-red-400"
-              }`}>
-                {xirr != null ? `${xirr >= 0 ? "+" : ""}${xirr.toFixed(1)}%` : "—"}
+      )}
+
+      <div className="flex flex-wrap gap-8">
+        {/* Overall */}
+        <div>
+          <p className="text-xs text-gray-500 mb-1">Overall</p>
+          <div className="flex items-baseline gap-3">
+            <div>
+              <p className="text-[10px] text-gray-600 uppercase tracking-wide mb-0.5">XIRR (annualised)</p>
+              <p className={`text-2xl font-bold ${
+                (data.overall_xirr ?? 0) >= 0 ? "text-emerald-400" : "text-red-400"
+              } ${isExtreme ? "opacity-60" : ""}`}>
+                {fmtXirr(data.overall_xirr)}
               </p>
             </div>
-          ))}
+            <div className="border-l border-gray-800 pl-3">
+              <p className="text-[10px] text-gray-600 uppercase tracking-wide mb-0.5">Simple return</p>
+              <p className={`text-2xl font-bold ${
+                (data.simple_return_pct ?? 0) >= 0 ? "text-emerald-400" : "text-red-400"
+              }`}>
+                {data.simple_return_pct != null ? fmtPct(data.simple_return_pct) : "—"}
+              </p>
+            </div>
+          </div>
+          <p className="text-xs text-gray-600 mt-1">
+            {fmtINR(data.total_invested)} invested · current {fmtINR(data.total_current_value)} · {data.days_active}d
+          </p>
         </div>
+
+        {/* Per bucket */}
+        {topBuckets.length > 0 && (
+          <div className="border-l border-gray-800 pl-6 flex gap-6 flex-wrap items-start">
+            {topBuckets.map(([bucket, xirr]) => {
+              const simple = data.per_bucket_simple?.[bucket]
+              return (
+                <div key={bucket}>
+                  <p className="text-xs mb-1" style={{ color: BUCKET_COLORS[bucket] || "#9ca3af" }}>
+                    {bucket}
+                  </p>
+                  <p className={`text-base font-semibold ${
+                    (xirr ?? 0) >= 0 ? "text-emerald-400" : "text-red-400"
+                  } ${Math.abs(xirr ?? 0) > 200 ? "opacity-60" : ""}`}>
+                    {fmtXirr(xirr)}
+                    <span className="text-[10px] text-gray-600 font-normal ml-1">xirr</span>
+                  </p>
+                  {simple != null && (
+                    <p className={`text-xs ${simple >= 0 ? "text-emerald-500/70" : "text-red-500/70"}`}>
+                      {fmtPct(simple)} simple
+                    </p>
+                  )}
+                </div>
+              )
+            })}
+          </div>
+        )}
       </div>
     </div>
   )

@@ -325,13 +325,45 @@ def get_xirr():
 
     per_bucket = {b: _xirr(cfs) for b, cfs in bucket_cfs.items()}
 
+    # ── Simple money-weighted return (honest for short portfolios) ───────────
+    total_invested = sum(float(a) for _, txn_type, a, _ in txns if txn_type == "buy")
+    total_redeemed = sum(float(a) for _, txn_type, a, _ in txns if txn_type == "sell")
+    simple_return_pct = (
+        round((total_redeemed + total_current - total_invested) / total_invested * 100, 2)
+        if total_invested > 0 else None
+    )
+
+    # Per-bucket simple return
+    bucket_invested: dict[str, float] = {}
+    bucket_redeemed: dict[str, float] = {}
+    for _, txn_type, amount, bucket in txns:
+        if txn_type == "buy":
+            bucket_invested[bucket] = bucket_invested.get(bucket, 0.0) + float(amount)
+        else:
+            bucket_redeemed[bucket] = bucket_redeemed.get(bucket, 0.0) + float(amount)
+
+    per_bucket_simple: dict[str, float | None] = {}
+    for b in set(list(bucket_invested.keys()) + list(bucket_current.keys())):
+        inv = bucket_invested.get(b, 0.0)
+        red = bucket_redeemed.get(b, 0.0)
+        cur = bucket_current.get(b, 0.0)
+        per_bucket_simple[b] = round((red + cur - inv) / inv * 100, 2) if inv > 0 else None
+
+    # Days since first trade — for context
+    dates_only = [cf[0] for cf in all_cfs if cf[1] < 0]
+    days_active = (today - min(dates_only)).days if dates_only else 0
+
     return {
         "overall_xirr": round(overall * 100, 2) if overall is not None else None,
+        "simple_return_pct": simple_return_pct,
         "per_bucket": {
             b: round(v * 100, 2) if v is not None else None
             for b, v in per_bucket.items()
         },
+        "per_bucket_simple": per_bucket_simple,
         "total_current_value": round(total_current, 2),
+        "total_invested": round(total_invested, 2),
+        "days_active": days_active,
     }
 
 
